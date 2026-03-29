@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PhD Pathways in Pharmacy & Biomedical Sciences</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0f0f;
+    --cream: #f5f0e8;
+    --rust: #c0392b;
+    --gold: #d4a017;
+    --slate: #2c3e50;
+    --muted: #7f8c8d;
+    --light-bg: #faf8f4;
+    --border: #d9d0c0;
+    --track1: #1a5276;
+    --track2: #7b241c;
+    --track3: #1e8449;
+    --track4: #784212;
+    --track5: #6c3483;
+    --track6: #1a5276;
+    --track7: #0e6655;
+    --track8: #154360;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -120px; left: -60px;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 50%;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    line-height: 1.1;
+    max-width: 700px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-sub {
+    margin-top: 20px;
+    font-size: 15px;
+    color: rgba(245,240,232,0.6);
+    max-width: 600px;
+  }
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    border-left: 2px solid var(--gold);
+    padding-left: 16px;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+  .stat-label {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: rgba(245,240,232,0.5);
+    text-transform: uppercase;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 0 60px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    background: none;
+    border: none;
+    color: rgba(245,240,232,0.5);
+    padding: 16px 18px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  nav button:hover { color: var(--cream); }
+  nav button.active {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── COMPARE TABLE ── */
+  .compare-intro {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .compare-intro-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 60px;
+  }
+  .cg-header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14px 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+  .cg-header.phd { background: #1a3a5c; }
+  .cg-header.pharmd { background: #5a1a1a; }
+  .cg-cell {
+    background: white;
+    padding: 14px 20px;
+    font-size: 13.5px;
+    vertical-align: top;
+  }
+  .cg-cell.label {
+    background: var(--light-bg);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .cg-cell strong { color: var(--ink); }
+  .cg-row:nth-child(even) .cg-cell { background: #faf8f5; }
+  .cg-row:nth-child(even) .cg-cell.label { background: #f0ece4; }
+
+  /* ── TRACKS ── */
+  .tracks-intro {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .tracks-intro-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .track-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 32px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .track-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px 28px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid transparent;
+    transition: background 0.15s;
+  }
+  .track-header:hover { background: var(--light-bg); }
+  .track-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    opacity: 0.08;
+    line-height: 1;
+    min-width: 56px;
+  }
+  .track-info { flex: 1; }
+  .track-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .track-desc { font-size: 13px; color: var(--muted); margin-top: 4px; }
+  .track-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    color: var(--muted);
+    transition: transform 0.25s;
+  }
+  .track-card.open .track-toggle { transform: rotate(45deg); }
+  .track-card.open .track-header { border-bottom-color: var(--border); }
+
+  .track-body { display: none; padding: 28px; }
+  .track-card.open .track-body { display: block; }
+
+  .prereqs {
+    background: var(--light-bg);
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 24px;
+    border-radius: 0 4px 4px 0;
+  }
+  .prereqs strong { color: var(--ink); }
+
+  .programs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .program-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px;
+    background: var(--light-bg);
+    transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .program-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+  }
+  .program-name {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: var(--ink);
+  }
+  .program-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+  }
+  .tag-dur { background: #e8f0fe; color: #2a5db0; }
+  .tag-fund { background: #e6f4ea; color: #2e7d32; }
+  .salary {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .salary-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .program-focus { font-size: 12px; color: #555; margin-top: 10px; font-style: italic; }
+  .program-careers {
+    margin-top: 8px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .program-careers span {
+    display: inline-block;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2px 6px;
+    margin: 2px 2px 0 0;
+    font-size: 11px;
+  }
+
+  /* ── SALARY CHART ── */
+  .salary-section { margin-bottom: 60px; }
+  .salary-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .salary-section .sub { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
+
+  .salary-chart { display: flex; flex-direction: column; gap: 10px; }
+  .salary-row {
+    display: grid;
+    grid-template-columns: 220px 1fr 100px;
+    align-items: center;
+    gap: 16px;
+  }
+  .salary-row-name { font-size: 13px; font-weight: 500; }
+  .salary-bar-wrap { height: 28px; background: var(--border); border-radius: 4px; overflow: hidden; position: relative; }
+  .salary-bar {
+    height: 100%;
+    border-radius: 4px;
+    position: relative;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+  .salary-bar .bar-lo {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 4px;
+    opacity: 0.35;
+  }
+  .salary-bar .bar-hi {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    border-radius: 4px;
+  }
+  .salary-range-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .salary-chart-header {
+    display: grid;
+    grid-template-columns: 220px 1fr 100px;
+    gap: 16px;
+    margin-bottom: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .axis-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin: 4px 0 20px;
+    padding: 0;
+    grid-column: 2;
+  }
+
+  /* ── DECISION GUIDE ── */
+  .decision-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .decision-sub { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
+
+  .decision-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 680px) { .decision-grid { grid-template-columns: 1fr; } }
+  .decision-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .decision-card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+  .decision-card::before {
+    content: '?';
+    position: absolute;
+    top: -16px; right: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 80px;
+    font-weight: 900;
+    opacity: 0.04;
+    line-height: 1;
+  }
+  .decision-q {
+    font-style: italic;
+    font-size: 15px;
+    color: var(--slate);
+    margin-bottom: 14px;
+    font-family: 'Playfair Display', serif;
+  }
+  .decision-a {
+    font-size: 13px;
+    color: #444;
+  }
+  .decision-tracks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+  .decision-track-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    background: var(--ink);
+    color: var(--cream);
+    letter-spacing: 0.5px;
+  }
+  .decision-jobs {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── POSTDOC SECTION ── */
+  .postdoc-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    margin-bottom: 8px;
+  }
+  .postdoc-sub { color: var(--muted); font-size: 14px; margin-bottom: 40px; }
+
+  .postdoc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 680px) { .postdoc-grid { grid-template-columns: 1fr; } }
+  .postdoc-col {
+    border-radius: 10px;
+    padding: 28px;
+    color: var(--cream);
+  }
+  .postdoc-col.phd { background: #1a3a5c; }
+  .postdoc-col.pharmd { background: #5a1a1a; }
+  .postdoc-col h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+  .postdoc-row {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 0;
+    font-size: 13px;
+  }
+  .postdoc-row:last-child { border-bottom: none; }
+  .postdoc-row .key { opacity: 0.6; font-size: 11px; font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.5px; }
+  .postdoc-row .val { font-weight: 500; text-align: right; max-width: 60%; }
+
+  .bottom-line {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 10px;
+    padding: 28px 32px;
+    font-size: 14.5px;
+    line-height: 1.8;
+  }
+  .bottom-line h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  /* ── UTILITIES ── */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 48px 0;
+  }
+
+  @media (max-width: 768px) {
+    .hero { padding: 50px 24px 40px; }
+    nav { padding: 0 16px; }
+    main { padding: 40px 20px; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .cg-header, .cg-cell { display: block; }
+    .compare-grid { display: block; }
+  }
+
+  /* ── ANIMATED ENTRY ── */
+  .fade-in {
+    animation: fadeIn 0.5s ease forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-label">Academic & Career Advising · February 2026</div>
+  <h1>PhD Pathways in Pharmacy & <em>Biomedical Sciences</em></h1>
+  <p class="hero-sub">A comprehensive guide for students considering doctoral research careers — organized by track, with funding, career outcomes, and salary expectations.</p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">8</div><div class="stat-label">Track Categories</div></div>
+    <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Distinct Programs</div></div>
+    <div class="stat"><div class="stat-num">$0</div><div class="stat-label">Typical Tuition</div></div>
+    <div class="stat"><div class="stat-num">5–6 yrs</div><div class="stat-label">Median Duration</div></div>
+  </div>
+</div>
+
+<nav>
+  <button class="active" onclick="showSection('compare')">PhD vs PharmD</button>
+  <button onclick="showSection('tracks')">8 Tracks</button>
+  <button onclick="showSection('salaries')">Salary Ranges</button>
+  <button onclick="showSection('decision')">Find Your Track</button>
+  <button onclick="showSection('postdoc')">Training Timelines</button>
+</nav>
+
+<main>
+
+<!-- ── SECTION: COMPARE ── -->
+<div class="section active fade-in" id="sec-compare">
+  <div class="compare-intro">PhD vs. PharmD at a Glance</div>
+  <div class="compare-intro-sub">Key factors to consider when choosing between doctoral pathways</div>
+
+  <div class="compare-grid">
+    <div class="cg-header">Factor</div>
+    <div class="cg-header phd">🔬 PhD</div>
+    <div class="cg-header pharmd">💊 PharmD</div>
+
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Primary Goal</div>
+      <div class="cg-cell">Generate new knowledge / advance a field</div>
+      <div class="cg-cell">Deliver optimal drug therapy to patients</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Duration</div>
+      <div class="cg-cell"><strong>~5–6 years</strong> (median 4.9–5.7 yrs biomedical); postdoc adds 1–3 yrs for academic track</div>
+      <div class="cg-cell"><strong>4 years</strong> post-baccalaureate</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Cost to Student</div>
+      <div class="cg-cell"><strong>Typically fully funded:</strong> tuition covered + stipend (~$28,788/yr NIH rate; many programs pay more)</div>
+      <div class="cg-cell"><strong>$100K–$200K+</strong> tuition over 4 years. Residency is stipend-paid (~$45K–$62K/yr)</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Core Activity</div>
+      <div class="cg-cell">Experiments, data analysis, paper writing, grant prep, lab meetings, teaching assistantships</div>
+      <div class="cg-cell">Clinical rotations, patient counseling, board exam prep, case presentations</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Licensure</div>
+      <div class="cg-cell">None required</div>
+      <div class="cg-cell">NAPLEX + MPJE required to practice</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Job Timeline</div>
+      <div class="cg-cell">Postdoc common for academic PI track; optional for many industry roles</div>
+      <div class="cg-cell">Job-ready immediately after licensure. Most specialty roles expect 1–2 years residency</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Typical Employer</div>
+      <div class="cg-cell">Universities, NIH, biotech, pharma R&D, health tech</div>
+      <div class="cg-cell">Hospitals, retail chains, PBMs, ambulatory care</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Salary Range</div>
+      <div class="cg-cell"><strong>$80K–$185K+</strong> depending on track and sector</div>
+      <div class="cg-cell"><strong>Median $137,480</strong> (BLS, May 2024). Staff pharmacist starts ~$110K–$130K immediately</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Key Skill Built</div>
+      <div class="cg-cell">Rigorous scientific reasoning, experimental design, scientific writing</div>
+      <div class="cg-cell">Clinical judgment, patient communication, medication management</div>
+    </div>
+    <div class="cg-row" style="display:contents">
+      <div class="cg-cell label">Dual Degree Options</div>
+      <div class="cg-cell">PharmD/PhD, MD/PhD, MBA/PhD</div>
+      <div class="cg-cell">PharmD/PhD, PharmD/MPH, PharmD/MBA</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION: TRACKS ── -->
+<div class="section fade-in" id="sec-tracks">
+  <div class="tracks-intro">The 8 PhD Track Categories</div>
+  <div class="tracks-intro-sub">Click any track to explore its programs, salaries, and career outcomes</div>
+
+  <!-- Track 1 -->
+  <div class="track-card" style="border-top: 3px solid var(--track1)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track1)">01</div>
+      <div class="track-info">
+        <div class="track-name">Pharmaceutical Sciences</div>
+        <div class="track-desc">Drug discovery, design, formulation, and development — the most direct PhD parallel to the PharmD</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Strong foundation in organic chemistry and biochemistry; physical chemistry and calculus helpful; lab research experience strongly preferred.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Pharmaceutical Sciences (general)</div>
+          <div class="program-meta">
+            <span class="tag tag-dur">4–6 yrs</span>
+            <span class="tag tag-fund">Fully Funded</span>
+          </div>
+          <div class="salary">$90K–$140K</div>
+          <div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Broad drug development pipeline</div>
+          <div class="program-careers"><span>Academia</span><span>Pharma R&D</span><span>FDA</span><span>Biotech</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Pharmacokinetics & Pharmacodynamics (PK/PD)</div>
+          <div class="program-meta">
+            <span class="tag tag-dur">4–5 yrs</span>
+            <span class="tag tag-fund">Fully Funded</span>
+          </div>
+          <div class="salary">$95K–$150K</div>
+          <div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Drug absorption, distribution, metabolism, excretion; dose optimization</div>
+          <div class="program-careers"><span>Clinical Pharmacology</span><span>CROs</span><span>Pharma</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Drug Delivery & Formulation</div>
+          <div class="program-meta">
+            <span class="tag tag-dur">4–6 yrs</span>
+            <span class="tag tag-fund">Fully Funded</span>
+          </div>
+          <div class="salary">$90K–$145K</div>
+          <div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Nanoparticles, liposomes, controlled-release systems, biologics delivery</div>
+          <div class="program-careers"><span>Formulation Scientist</span><span>Biotech</span><span>Academia</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Pharmaceutical / Medicinal Chemistry</div>
+          <div class="program-meta">
+            <span class="tag tag-dur">4–6 yrs</span>
+            <span class="tag tag-fund">Fully Funded</span>
+          </div>
+          <div class="salary">$90K–$135K</div>
+          <div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Synthesis and structure-activity relationships of drug molecules</div>
+          <div class="program-careers"><span>Drug Design</span><span>CROs</span><span>FDA</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Biopharmaceutics</div>
+          <div class="program-meta">
+            <span class="tag tag-dur">4–5 yrs</span>
+            <span class="tag tag-fund">Fully Funded</span>
+          </div>
+          <div class="salary">$85K–$130K</div>
+          <div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Drug absorption and bioavailability; in vitro–in vivo correlation</div>
+          <div class="program-careers"><span>Regulatory Science</span><span>Generic Drug</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Pharmaceutical Nanotechnology</div>
+          <div class="program-meta">
+            <span class="tag tag-dur">4–6 yrs</span>
+            <span class="tag tag-fund">Fully Funded</span>
+          </div>
+          <div class="salary">$90K–$145K</div>
+          <div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Nanoscale drug carriers, targeted delivery, theranostics</div>
+          <div class="program-careers"><span>Biotech R&D</span><span>Medical Devices</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 2 -->
+  <div class="track-card" style="border-top: 3px solid var(--track2)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track2)">02</div>
+      <div class="track-info">
+        <div class="track-name">Pharmacology & Toxicology</div>
+        <div class="track-desc">How drugs interact with biological systems; harmful effects of chemicals — wide industry demand</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Biology, chemistry (general and organic), and biochemistry; cell biology and physiology coursework; prior undergraduate research experience highly valued.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Pharmacology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$130K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Receptor biology, signal transduction, drug mechanisms of action</div>
+          <div class="program-careers"><span>Academia</span><span>NIH</span><span>Pharma R&D</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Toxicology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$140K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Dose-response, organ toxicity, chemical risk assessment</div>
+          <div class="program-careers"><span>EPA</span><span>FDA</span><span>Industry Safety</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Molecular Pharmacology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$140K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Molecular targets, gene expression changes, CRISPR drug screens</div>
+          <div class="program-careers"><span>Biotech</span><span>Gene Therapy</span><span>Academia</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Neuropharmacology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$145K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">CNS drug targets, neurological/psychiatric disease mechanisms</div>
+          <div class="program-careers"><span>CNS Pharma</span><span>Academic Neuroscience</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Cardiovascular Pharmacology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$135K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Cardiac ion channels, anti-hypertensives, antithrombotics</div>
+          <div class="program-careers"><span>Cardiovascular Pharma</span><span>Clinical Pharmacology</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Immunopharmacology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$145K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Immunomodulators, biologics, autoimmune drug targets</div>
+          <div class="program-careers"><span>Immunology Biotech</span><span>mAb Development</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Environmental Toxicology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$75K–$120K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Heavy metals, pesticides, endocrine disruptors in ecosystems</div>
+          <div class="program-careers"><span>EPA</span><span>Environmental Consulting</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 3 -->
+  <div class="track-card" style="border-top: 3px solid var(--track3)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track3)">03</div>
+      <div class="track-info">
+        <div class="track-name">Genomics, Genetics & Precision Medicine</div>
+        <div class="track-desc">Rapidly expanding — molecular biology meets computational science and clinical pharmacology</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Genetics, molecular biology, and cell biology core courses; statistics or biostatistics recommended; programming experience (Python/R) increasingly expected for bioinformatics tracks.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Pharmacogenomics</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$150K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Genetic variants affecting drug response, adverse effects, dosing</div>
+          <div class="program-careers"><span>Clinical Genomics</span><span>Pharma</span><span>Academic Medical Centers</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Human Genetics & Genomics</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$155K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Disease-linked variants, GWAS, population genetics</div>
+          <div class="program-careers"><span>Genomics Companies</span><span>Biobanks</span><span>NIH</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Computational Biology / Bioinformatics</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px">$110K–$175K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Algorithm development, multi-omics, single-cell sequencing analysis</div>
+          <div class="program-careers"><span>Health Tech</span><span>Pharma Data Science</span><span>Biotech</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Molecular & Cellular Biology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$80K–$130K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Gene regulation, cell signaling, protein biology</div>
+          <div class="program-careers"><span>Academia</span><span>Biotech</span><span>NIH Intramural</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Epigenetics</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$145K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">DNA methylation, chromatin remodeling, gene expression control</div>
+          <div class="program-careers"><span>Epigenetics Biotech</span><span>Cancer Research Centers</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 4 -->
+  <div class="track-card" style="border-top: 3px solid var(--track4)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track4)">04</div>
+      <div class="track-info">
+        <div class="track-name">Clinical Pharmacy & Health Outcomes</div>
+        <div class="track-desc">Bridges practice and research — evidence generation, health economics, and policy</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> PharmD, MS, or BS in pharmacy/health sciences preferred; epidemiology or statistics coursework valuable; prior clinical or research experience expected for shorter-track programs. Note: 3–5 yr durations typically assume prior clinical training.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Clinical Pharmacy / Clinical Pharmaceutical Sciences</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$140K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Pragmatic clinical trials, drug utilization, patient-centered outcomes</div>
+          <div class="program-careers"><span>Academic Medical Centers</span><span>VA</span><span>Health Systems Research</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Health Outcomes & Pharmacoeconomics</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$100K–$160K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Cost-effectiveness, HEOR, real-world evidence, drug policy</div>
+          <div class="program-careers"><span>Pharma HEOR</span><span>CMS</span><span>Insurance</span><span>Consulting</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Pharmaceutical Policy & Regulatory Science</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$150K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">FDA pathways, drug approval policy, global regulatory frameworks</div>
+          <div class="program-careers"><span>FDA/EMA</span><span>Pharma Regulatory</span><span>Think Tanks</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Translational Research / Drug Development</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$155K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Bench-to-bedside science, IND applications, Phase I/II trial design</div>
+          <div class="program-careers"><span>Academic Med Centers</span><span>Biotech</span><span>CROs</span><span>NCI</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Implementation Science</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$130K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Closing evidence-to-practice gaps, guideline adoption</div>
+          <div class="program-careers"><span>AHRQ</span><span>VA</span><span>Academic Health Systems</span><span>CDC</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 5 -->
+  <div class="track-card" style="border-top: 3px solid var(--track5)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track5)">05</div>
+      <div class="track-info">
+        <div class="track-name">Public Health, Epidemiology & Biostatistics</div>
+        <div class="track-desc">Population-level programs — drug safety at scale, pandemic prep, quantitative methods</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Biology or health sciences background; statistics or calculus required for epidemiology; calculus, linear algebra, and probability/statistics required for Biostatistics; public health or research experience valued.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Epidemiology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$135K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Disease causation, pharmacoepidemiology, observational study design</div>
+          <div class="program-careers"><span>CDC</span><span>WHO</span><span>NIH</span><span>Academic Epi Depts.</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Pharmacoepidemiology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$150K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Drug safety surveillance, EHR-based studies, adverse event signals</div>
+          <div class="program-careers"><span>FDA</span><span>Pharma Drug Safety</span><span>Health Insurers</span><span>AHRQ</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Biostatistics</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px">$110K–$175K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Clinical trial design, adaptive trials, causal inference, Bayesian methods</div>
+          <div class="program-careers"><span>Pharma Stats Teams</span><span>FDA</span><span>Academia</span><span>CROs</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Health Policy & Management</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$145K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Drug coverage policy, formulary design, access and equity</div>
+          <div class="program-careers"><span>Policy Think Tanks</span><span>CMS</span><span>State Health Depts.</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Global Health / International Health</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$75K–$125K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Access to medicines in LMICs, neglected tropical diseases, supply chains</div>
+          <div class="program-careers"><span>WHO</span><span>Gates Foundation</span><span>USAID</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 6 -->
+  <div class="track-card" style="border-top: 3px solid var(--track6)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track6)">06</div>
+      <div class="track-info">
+        <div class="track-name">Biomedical Sciences & Basic Research</div>
+        <div class="track-desc">Broad umbrella programs — lab rotation-based, cross-disciplinary, highly versatile researchers</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Biology, chemistry, biochemistry, and cell biology core courses; GRE scores may be required; meaningful undergraduate research experience is the single most important factor for admission.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Biomedical Sciences (umbrella)</div>
+          <div class="program-meta"><span class="tag tag-dur">5–7 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$80K–$130K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Rotation-based; biochemistry, cell bio, immunology, microbiology</div>
+          <div class="program-careers"><span>Academia</span><span>Biotechnology</span><span>NIH Intramural</span><span>Consulting</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Biochemistry & Structural Biology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$135K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Protein structure-function, enzyme mechanisms, cryo-EM, drug targets</div>
+          <div class="program-careers"><span>Structure-guided Drug Design</span><span>Biotech</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Immunology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$150K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Innate/adaptive immunity, checkpoint therapy, mAb biology</div>
+          <div class="program-careers"><span>Immunotherapy Biotech</span><span>Cancer Centers</span><span>Academia</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Cancer Biology (Oncology)</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$150K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Tumor biology, oncogenes, targeted therapies, drug resistance</div>
+          <div class="program-careers"><span>NCI</span><span>Cancer Biotech</span><span>Pharma Oncology</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Neuroscience</div>
+          <div class="program-meta"><span class="tag tag-dur">5–7 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$85K–$140K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Neural circuits, synaptic pharmacology, neurodegenerative disease</div>
+          <div class="program-careers"><span>CNS Pharma</span><span>Brain-Computer Interface</span><span>Academia</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Regenerative Medicine & Stem Cell Biology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$90K–$145K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">iPSCs, organoids, cell therapy, tissue engineering</div>
+          <div class="program-careers"><span>Cell Therapy Companies</span><span>Gene Editing Firms</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 7 -->
+  <div class="track-card" style="border-top: 3px solid var(--track7)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track7)">07</div>
+      <div class="track-info">
+        <div class="track-name">Data Science, AI & Computational Drug Discovery</div>
+        <div class="track-desc">Fastest-growing area — among the most highly recruited graduates in both tech and life sciences</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Programming proficiency (Python and/or R essential); statistics and linear algebra required; biology or chemistry background needed; machine learning coursework advantageous.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Biomedical Informatics</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px">$110K–$170K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">EHR analysis, NLP in clinical data, clinical decision support</div>
+          <div class="program-careers"><span>Health Tech</span><span>Pharma Data Science</span><span>Health AI Startups</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Cheminformatics / Computational Chemistry</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px">$110K–$165K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Molecular docking, QSAR, generative drug design, virtual screening</div>
+          <div class="program-careers"><span>AI Drug Design Startups</span><span>Pharma Computational Teams</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Systems Biology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$100K–$160K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Network models, multi-omics integration, drug target prediction</div>
+          <div class="program-careers"><span>Systems Pharmacology</span><span>Biotech</span><span>Academic Consortia</span></div>
+        </div>
+        <div class="program-card" style="border: 2px solid var(--gold)">
+          <div class="program-name">Machine Learning for Drug Discovery ⭐</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px; color: var(--rust)">$120K–$185K</div><div class="salary-label">highest salary track</div>
+          <div class="program-focus">Deep learning for ADMET prediction, protein folding, hit generation</div>
+          <div class="program-careers"><span>AI-driven Pharma/Biotech</span><span>Big Pharma Data Science</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Health Data Science</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px">$110K–$165K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Real-world data, federated learning, patient cohort analysis</div>
+          <div class="program-careers"><span>Health Tech Companies</span><span>Payers</span><span>Pharma RWE Teams</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Track 8 -->
+  <div class="track-card" style="border-top: 3px solid var(--track8)">
+    <div class="track-header" onclick="toggleTrack(this)">
+      <div class="track-num" style="color:var(--track8)">08</div>
+      <div class="track-info">
+        <div class="track-name">Clinical Investigation & Translational Medicine</div>
+        <div class="track-desc">Hybrid PhD programs for clinicians — part of CTSA networks, often paired with MD/PharmD</div>
+      </div>
+      <div class="track-toggle">+</div>
+    </div>
+    <div class="track-body">
+      <div class="prereqs"><strong>Prerequisites:</strong> Clinical degree (MD, PharmD, NP, PA) or MS in health sciences typically expected; biostatistics and epidemiology background strongly preferred; prior clinical or translational research experience required by most programs.</div>
+      <div class="programs-grid">
+        <div class="program-card">
+          <div class="program-name">Clinical Investigation / CTSI PhD</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$160K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Clinical trial methodology, biomarker development, patient-oriented research</div>
+          <div class="program-careers"><span>Academic Medical Center PI</span><span>NIH-funded Clinical Research</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Translational Biomedical Science</div>
+          <div class="program-meta"><span class="tag tag-dur">4–6 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary">$95K–$155K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Applying basic science discoveries to clinical problems, biomarkers, IND</div>
+          <div class="program-careers"><span>Translational Research Institutes</span><span>CROs</span><span>Pharma Medical Affairs</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Regulatory Science</div>
+          <div class="program-meta"><span class="tag tag-dur">3–5 yrs</span><span class="tag tag-fund">Varies</span></div>
+          <div class="salary">$95K–$155K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">FDA/EMA regulatory strategy, drug approval standards, post-market surveillance</div>
+          <div class="program-careers"><span>FDA</span><span>EMA</span><span>Pharma Regulatory Affairs</span></div>
+        </div>
+        <div class="program-card">
+          <div class="program-name">Pharmacometrics / Quantitative Pharmacology</div>
+          <div class="program-meta"><span class="tag tag-dur">4–5 yrs</span><span class="tag tag-fund">Fully Funded</span></div>
+          <div class="salary" style="font-size:17px">$110K–$175K</div><div class="salary-label">avg. salary range</div>
+          <div class="program-focus">Population PK/PD modeling, simulation, adaptive dose strategies</div>
+          <div class="program-careers"><span>Pharma M&S Teams</span><span>FDA Pharmacometrics</span><span>CROs</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION: SALARIES ── -->
+<div class="section fade-in" id="sec-salaries">
+  <div class="salary-section">
+    <h2>Salary Ranges by Track & Program</h2>
+    <p class="sub">All figures reflect typical U.S. market compensation. Bars show low (lighter) to high (darker) of each range. Sorted by upper ceiling.</p>
+
+    <div class="salary-chart">
+      <div class="salary-chart-header">
+        <div>Program</div>
+        <div>$75K ← → $185K</div>
+        <div>Range</div>
+      </div>
+      <hr style="border:none;border-top:1px solid var(--border);grid-column:1/-1;margin:4px 0">
+
+      <!-- bars: lo% = (lo-75)/(185-75)*100, hi% = (hi-75)/(185-75)*100 -->
+      <!-- ML Drug Discovery: 120-185 -->
+      <div class="salary-row">
+        <div class="salary-row-name" style="font-weight:700">ML for Drug Discovery</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:0;top:0;bottom:0;right:0">
+            <div style="position:absolute;left:41%;right:0%;top:0;bottom:0;background:#0e6655;opacity:0.25;border-radius:4px"></div>
+            <div style="position:absolute;left:41%;right:0%;top:0;bottom:0;background:#0e6655;border-radius:4px"></div>
+          </div>
+        </div>
+        <div class="salary-range-label">$120K–$185K</div>
+      </div>
+
+      <!-- Biostatistics: 110-175 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Biostatistics</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:32%;right:9%;top:0;bottom:0;background:#6c3483;opacity:0.35;border-radius:4px"></div>
+          <div style="position:absolute;left:32%;right:9%;top:0;bottom:0;background:#6c3483;border-radius:4px"></div>
+        </div>
+        <div class="salary-range-label">$110K–$175K</div>
+      </div>
+
+      <!-- Biomedical Informatics: 110-170 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Biomedical Informatics</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:32%;right:14%;top:0;bottom:0;background:#0e6655;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$110K–$170K</div>
+      </div>
+
+      <!-- Computational Biology: 110-175 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Computational Biology</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:32%;right:9%;top:0;bottom:0;background:#1e8449;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$110K–$175K</div>
+      </div>
+
+      <!-- Pharmacometrics: 110-175 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Pharmacometrics</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:32%;right:9%;top:0;bottom:0;background:#154360;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$110K–$175K</div>
+      </div>
+
+      <!-- Systems Biology: 100-160 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Systems Biology</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:23%;right:23%;top:0;bottom:0;background:#0e6655;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$100K–$160K</div>
+      </div>
+
+      <!-- Health Outcomes & Pharmacoeconomics: 100-160 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Health Outcomes & Pharmacoeconomics</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:23%;right:23%;top:0;bottom:0;background:#784212;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$100K–$160K</div>
+      </div>
+
+      <!-- PK/PD: 95-150 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Pharmacokinetics & PD</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:18%;right:32%;top:0;bottom:0;background:#1a5276;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$95K–$150K</div>
+      </div>
+
+      <!-- Pharmacogenomics: 95-150 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Pharmacogenomics</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:18%;right:32%;top:0;bottom:0;background:#1e8449;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$95K–$150K</div>
+      </div>
+
+      <!-- Neuropharmacology: 90-145 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Neuropharmacology</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:14%;right:36%;top:0;bottom:0;background:#7b241c;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$90K–$145K</div>
+      </div>
+
+      <!-- Immunology: 90-150 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Immunology</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:14%;right:32%;top:0;bottom:0;background:#1a5276;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$90K–$150K</div>
+      </div>
+
+      <!-- Pharmaceutical Sciences (general): 90-140 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Pharmaceutical Sciences</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:14%;right:41%;top:0;bottom:0;background:#1a5276;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$90K–$140K</div>
+      </div>
+
+      <!-- Pharmacology: 85-130 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Pharmacology</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:9%;right:50%;top:0;bottom:0;background:#7b241c;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$85K–$130K</div>
+      </div>
+
+      <!-- Environmental Tox: 75-120 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Environmental Toxicology</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:0%;right:59%;top:0;bottom:0;background:#7b241c;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$75K–$120K</div>
+      </div>
+
+      <!-- Global Health: 75-125 -->
+      <div class="salary-row">
+        <div class="salary-row-name">Global Health</div>
+        <div class="salary-bar-wrap">
+          <div style="position:absolute;left:0%;right:55%;top:0;bottom:0;background:#6c3483;border-radius:4px;opacity:0.7"></div>
+        </div>
+        <div class="salary-range-label">$75K–$125K</div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px;background:var(--light-bg);border:1px solid var(--border);border-radius:8px;padding:20px;font-size:13px;color:var(--muted)">
+      <strong style="color:var(--ink)">Advisory note:</strong> All salary figures reflect typical U.S. market compensation and vary by geographic location, sector (academia vs. industry), career seniority, and whether figures represent base pay or total compensation. Ranges are approximate and should be verified against current market data.
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION: DECISION ── -->
+<div class="section fade-in" id="sec-decision">
+  <div class="decision-title">Find Your Track</div>
+  <div class="decision-sub">Answer a few questions to identify which PhD pathway aligns with your interests and goals</div>
+
+  <div class="decision-grid">
+    <div class="decision-card">
+      <div class="decision-q">"Do you want to directly improve patient care?"</div>
+      <div class="decision-a">Consider programs that bridge clinical practice and research, focusing on real-world outcomes and drug policy.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 4 — Clinical Pharmacy & Health Outcomes</span>
+        <span class="decision-track-tag">PharmD/PhD Dual</span>
+      </div>
+      <div class="decision-jobs">→ HEOR scientist, clinical pharmacy researcher, outcomes research director</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Are you excited by molecules and drug mechanisms?"</div>
+      <div class="decision-a">Strong fits in programs focused on drug chemistry, receptor biology, and drug development pipelines.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 1 — Pharmaceutical Sciences</span>
+        <span class="decision-track-tag">Track 2 — Pharmacology & Tox</span>
+        <span class="decision-track-tag">Track 6 — Biomedical Sciences</span>
+      </div>
+      <div class="decision-jobs">→ Pharmacologist, medicinal chemist, drug metabolism scientist</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Do you enjoy coding, statistics, or machine learning?"</div>
+      <div class="decision-a">The highest-salary tracks in this guide — combining quantitative methods with biomedical domain knowledge.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 7 — Data Science & AI ⭐</span>
+        <span class="decision-track-tag">Track 5 — Biostatistics</span>
+      </div>
+      <div class="decision-jobs">→ Computational chemist, biostatistician, health data scientist, clinical pharmacometrician</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Are you concerned about drug policy, access, or public health?"</div>
+      <div class="decision-a">Population-level research programs focused on drug safety at scale, health equity, and policy design.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 5 — Public Health & Epi</span>
+        <span class="decision-track-tag">Track 4 — Pharma Policy</span>
+      </div>
+      <div class="decision-jobs">→ Pharmacoepidemiologist, health policy analyst, global health researcher</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Do you want to work at the FDA or in regulatory affairs?"</div>
+      <div class="decision-a">Programs emphasizing regulatory pathways, drug approval frameworks, and safety surveillance.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 8 — Regulatory Science</span>
+        <span class="decision-track-tag">Track 1 — with Policy Emphasis</span>
+      </div>
+      <div class="decision-jobs">→ Regulatory affairs scientist, FDA pharmacologist, drug reviewer, regulatory strategist</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Are you a PharmD student already?"</div>
+      <div class="decision-a">Post-PharmD PhD fellowships are common entry points, building on your clinical foundation for research careers.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Clinical Pharmacology Fellowship</span>
+        <span class="decision-track-tag">Pharmacoeconomics</span>
+        <span class="decision-track-tag">Translational Science</span>
+      </div>
+      <div class="decision-jobs">→ Clinical pharmacometrician, medical science liaison (PhD), HEOR director</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Are you drawn to precision medicine and genomics?"</div>
+      <div class="decision-a">The fastest-growing sector in pharma-adjacent PhD programs, driven by personalized medicine and gene therapies.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 3 — Genomics & Precision Medicine ⭐</span>
+      </div>
+      <div class="decision-jobs">→ Pharmacogenomicist, genomic data scientist, precision medicine researcher, variant scientist</div>
+    </div>
+
+    <div class="decision-card">
+      <div class="decision-q">"Do you want to run your own lab at a university?"</div>
+      <div class="decision-a">Traditional academic placement pipelines are strongest in basic research programs, typically requiring a postdoc.</div>
+      <div class="decision-tracks">
+        <span class="decision-track-tag">Track 2 — Pharmacology</span>
+        <span class="decision-track-tag">Track 6 — Biomedical Sciences</span>
+        <span class="decision-track-tag">Tracks 1–6 generally</span>
+      </div>
+      <div class="decision-jobs">→ Tenure-track assistant professor, principal investigator, research scientist (R01-funded)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SECTION: POSTDOC ── -->
+<div class="section fade-in" id="sec-postdoc">
+  <div class="postdoc-title">Training Timelines: The Parallel Delay</div>
+  <div class="postdoc-sub">Both PhD and PharmD paths commonly involve a below-ceiling training period before full independent earning. Understanding this parallel is critical for financial planning.</div>
+
+  <div class="postdoc-grid">
+    <div class="postdoc-col phd">
+      <h3>PhD → Postdoc (Academic Track)</h3>
+      <div class="postdoc-row">
+        <span class="key">Required?</span>
+        <span class="val">Effectively required for tenure-track faculty. Optional for most industry roles.</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Duration</span>
+        <span class="val">2–4 years (academic). 1–2 years (industry-facing)</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Pay During Training</span>
+        <span class="val">~$50K–$65K/yr (NIH NRSA FY2025 postdoc rate ~$61,008)</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Opportunity Cost</span>
+        <span class="val">Industry PhD grads who skip postdoc enter at ~$100K–$140K. 2–4 yr postdoc = ~$150K–$300K in foregone earnings</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Payoff</span>
+        <span class="val">Tenure-track faculty, independent research career, R01 grant funding — career-defining for academic scientists</span>
+      </div>
+    </div>
+
+    <div class="postdoc-col pharmd">
+      <h3>PharmD → Residency (Clinical Track)</h3>
+      <div class="postdoc-row">
+        <span class="key">Required?</span>
+        <span class="val">Technically optional. Effectively expected for specialty clinical roles (oncology, ID, cardiology, critical care).</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Duration</span>
+        <span class="val">PGY1: 1 year. PGY1 + PGY2: 2 years total</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Pay During Training</span>
+        <span class="val">PGY1: ~$45K–$58K/yr. PGY2: ~$48K–$62K/yr. Health benefits included. No tuition.</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Opportunity Cost</span>
+        <span class="val">Staff pharmacist starts ~$110K–$130K without residency. PGY1+2 at ~$50K–$55K = ~$120K–$150K foregone</span>
+      </div>
+      <div class="postdoc-row">
+        <span class="key">Payoff</span>
+        <span class="val">Access to specialty roles (oncology, ID, cardiology), health-system leadership, academic pharmacy faculty. Payoff is back-loaded: years 5–15</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-line">
+    <h3>The Bottom Line for Financial Planning</h3>
+    <p>The <strong style="color:var(--gold)">PhD is fully funded</strong> (no tuition debt) with a modest stipend during the program, followed by a 2–4 year postdoc at ~$55K–$65K for those targeting academic careers. Total time from undergrad to independent researcher: <strong>~9–11 years</strong>.</p>
+    <br>
+    <p>The <strong style="color:#e88;">PharmD carries $100K–$200K+ tuition debt</strong>, followed by optional 1–2 years of residency at ~$45K–$62K. Total time from undergrad to specialist pharmacist: <strong>~6–7 years</strong>.</p>
+    <br>
+    <p style="color:rgba(245,240,232,0.7)">Neither path has a clear financial advantage in the first decade — they have different debt profiles, different training delay structures, and different salary ceilings. The PhD wins on no tuition debt; the PharmD wins on shorter total training time. <strong style="color:var(--cream)">Plan accordingly.</strong></p>
+  </div>
+</div>
+
+</main>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  const sec = document.getElementById('sec-' + id);
+  sec.classList.add('active');
+  sec.classList.remove('fade-in');
+  void sec.offsetWidth;
+  sec.classList.add('fade-in');
+  event.target.classList.add('active');
+}
+
+function toggleTrack(header) {
+  const card = header.closest('.track-card');
+  card.classList.toggle('open');
+  if (card.classList.contains('open')) {
+    header.style.borderBottomColor = 'var(--border)';
+  }
+}
+</script>
+</body>
+</html>

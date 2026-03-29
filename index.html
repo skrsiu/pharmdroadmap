@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>PharmD Planning Portal v5</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #080e1a;
+    --surface: #0f1929;
+    --surface2: #162035;
+    --border: rgba(255,255,255,0.09);
+    --accent: #3b82f6;
+    --text: rgba(255,255,255,0.92);
+    --muted: rgba(255,255,255,0.5);
+    --radius: 14px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 36px 20px 60px;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(59,130,246,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 80% 80%, rgba(99,102,241,0.06) 0%, transparent 70%);
+  }
+
+  .portal {
+    width: 100%;
+    max-width: 1060px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .portal-header { text-align: center; margin-bottom: 4px; }
+  .portal-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    letter-spacing: 0.01em;
+  }
+  .portal-header p { font-size: 13px; color: var(--muted); margin-top: 5px; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  /* Featured grid */
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 860px) { .featured-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .featured-grid { grid-template-columns: 1fr; } }
+
+  a.feat-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  }
+  a.feat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.45), 0 0 0 1px var(--accent);
+    border-color: var(--accent);
+  }
+  a.feat-card img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.85) saturate(0.9);
+    transition: filter 0.18s ease;
+  }
+  a.feat-card:hover img { filter: brightness(0.95) saturate(1); }
+  .feat-body { padding: 11px 12px 13px; flex: 1; display: flex; flex-direction: column; gap: 4px; }
+  .feat-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    opacity: 0.85;
+  }
+  .feat-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .feat-desc {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.4;
+    margin-top: auto;
+    padding-top: 3px;
+  }
+
+  /* All docs - 2 column grid */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  @media (max-width: 580px) { .docs-grid { grid-template-columns: 1fr; } }
+
+  a.doc-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 10px 13px;
+    border-radius: 10px;
+    font-size: 13px;
+    transition: background 0.14s ease, border-color 0.14s ease;
+  }
+  a.doc-link:hover { background: var(--surface2); border-color: rgba(255,255,255,0.18); }
+  .doc-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 13px;
+  }
+
+  /* Footer */
+  .footer-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .last-doc { font-size: 13px; color: var(--muted); }
+  .last-doc a { color: rgba(255,255,255,0.8); text-decoration: underline; text-underline-offset: 3px; }
+  .footer-actions { display: flex; gap: 8px; }
+
+  .btn {
+    border: none;
+    padding: 9px 16px;
+    border-radius: 9px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.14s ease, transform 0.1s ease;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn-ghost {
+    background: rgba(255,255,255,0.08);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.14); }
+
+  .tip { font-size: 12px; color: var(--muted); text-align: center; }
+</style>
+</head>
+<body>
+<div class="portal">
+
+  <div class="portal-header">
+    <h1>PharmD Planning Guides &amp; Pathway Analyses</h1>
+    <p>Personalized Roadmap</p>
+  </div>
+
+  <!-- Featured -->
+  <div>
+    <div class="section-label">Featured</div>
+    <div class="featured-grid">
+      <a class="feat-card" href="08_Implementation_Guide_Year2_Student_v14.html">
+        <img alt="Year 2 Roadmap" loading="lazy" src="img/08_Implementation_Guide_Year2_Student_v14.png"/>
+        <div class="feat-body">
+          <span class="feat-tag">Implementation</span>
+          <div class="feat-title">Implementation Guide (Year 2 Student) v14</div>
+          <div class="feat-desc">Quarter-by-quarter execution plan, prerequisites, and checkpoints.</div>
+        </div>
+      </a>
+      <a class="feat-card" href="01_West_Coast_Pharmacy_Guide_2027-2028_v4.html">
+        <img alt="West Coast Pharmacy Guide" loading="lazy" src="img/01_West_Coast_Pharmacy_Guide_2027-2028_v4.png"/>
+        <div class="feat-body">
+          <span class="feat-tag">School Guide</span>
+          <div class="feat-title">West Coast Pharmacy Guide 2027–2028 (v4)</div>
+          <div class="feat-desc">Program comparisons, timelines, and strategy for West Coast schools.</div>
+        </div>
+      </a>
+      <a class="feat-card" href="12_PharmD_Experience_Strategy_Guide_2028.html">
+        <img alt="PharmD Experience Strategy Guide" loading="lazy" src="img/12_PharmD_Experience.png" onerror="this.style.display='none'"/>
+        <div class="feat-body">
+          <span class="feat-tag">Experience</span>
+          <div class="feat-title">PharmD Experience Strategy Guide 2028</div>
+          <div class="feat-desc">Volunteering, pharmacy hours, research, and hour allocation.</div>
+        </div>
+      </a>
+      <a class="feat-card" href="10A_10F_Pathways_General_v20.html">
+        <img alt="PharmD Pathways" loading="lazy" src="img/10A_10F_Pathways_General_v20.png"/>
+        <div class="feat-body">
+          <span class="feat-tag">Pathways</span>
+          <div class="feat-title">Pathways General (10A–10F) v20</div>
+          <div class="feat-desc">Big-picture pathway map across PharmD and alternatives.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- All Documents -->
+  <div style="width:100%; display:block;">
+    <div class="section-label">All Documents</div>
+    <div class="docs-grid" style="display:grid; grid-template-columns:repeat(2,1fr); gap:6px; width:100%;">
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="01_West_Coast_Pharmacy_Guide_2027-2028_v4.html"><span class="doc-icon">🏫</span>West Coast Pharmacy Guide 2027–2028 (v4)</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="08_Implementation_Guide_Year2_Student_v14.html"><span class="doc-icon">📋</span>Implementation Guide (Year 2 Student) (v14)</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="12_PharmD_Experience_Strategy_Guide_2028.html"><span class="doc-icon">🏥</span>PharmD Experience Strategy Guide 2028</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="09_10A_pharmd_pathways.html"><span class="doc-icon">💊</span>PharmD Pathways (09/10A)</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10A_10F_Pathways_General_v20.html"><span class="doc-icon">🗺️</span>Pathways General (10A–10F) (v20)</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10A_PharmD_MD_Pathways.html"><span class="doc-icon">⚕️</span>PharmD vs MD Pathways</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10B_PharmD_MEPN_Pathways.html"><span class="doc-icon">🩺</span>PharmD vs MEPN Pathways</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10C_PharmD_MS_Pathways.html"><span class="doc-icon">🔬</span>PharmD vs MS Pathways</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10D_PharmD_PhD_Pathways.html"><span class="doc-icon">🎓</span>PharmD vs PhD Pathways</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10E_PharmD_PA_PhD.html"><span class="doc-icon">📊</span>PharmD vs PA vs PhD</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="10F_NPB_Healthcare_BS.html"><span class="doc-icon">🧬</span>NPB + Healthcare BS Options</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="11A_NPB_Pathways_Strategic_Advice.html"><span class="doc-icon">💡</span>NPB Pathways: Strategic Advice</a>
+      <a class="doc-link" style="display:flex; visibility:visible; opacity:1; color:rgba(255,255,255,0.92);" href="11B_11C_NPB_Pathways.html"><span class="doc-icon">📌</span>NPB Pathways (11B–11C)</a>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-bar">
+    <div class="last-doc">Last opened: <a href="#" id="lastLink">None</a></div>
+    <div class="footer-actions">
+      <button class="btn btn-ghost" onclick="goLast()">Open Last</button>
+    </div>
+  </div>
+
+  <p class="tip">Tip: bookmark any document URL directly for quick access.</p>
+</div>
+
+<script>
+  document.querySelectorAll("a.feat-card, a.doc-link").forEach(a => {
+    a.addEventListener("click", () => {
+      try { localStorage.setItem("lastDoc", a.getAttribute("href")); } catch(e) {}
+      updateLastUI();
+    });
+  });
+
+  function updateLastUI() {
+    let href = null;
+    try { href = localStorage.getItem("lastDoc"); } catch(e) {}
+    const link = document.getElementById("lastLink");
+    if (!link) return;
+    if (!href) {
+      link.textContent = "None";
+      link.setAttribute("href", "#");
+      link.onclick = e => e.preventDefault();
+      return;
+    }
+    link.textContent = href.replace(/^\//, "");
+    link.setAttribute("href", href);
+    link.onclick = null;
+  }
+
+  function goLast() {
+    let href = null;
+    try { href = localStorage.getItem("lastDoc"); } catch(e) {}
+    window.location.href = href || "08_Implementation_Guide_Year2_Student_v14.html";
+  }
+
+  updateLastUI();
+</script>
+</body>
+</html>

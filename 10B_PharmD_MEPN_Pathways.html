@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PharmD + MEPN Dual-Path Evaluation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Mono:wght@300;400;500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --parchment: #f5f0e8;
+    --cream: #faf7f2;
+    --pharmacy: #1b4d3e;
+    --nursing: #4a1942;
+    --gold: #c9a84c;
+    --rust: #b84c1b;
+    --sage: #5a7a5a;
+    --divider: rgba(26,20,16,0.15);
+    --warning-bg: #fdf0e0;
+    --warning-border: #d4860a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Libre Baskerville', Georgia, serif;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    min-height: 100vh;
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 60% 40% at 20% 30%, rgba(27,77,62,0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 60% at 80% 70%, rgba(74,25,66,0.4) 0%, transparent 70%);
+  }
+  .cover-inner { position: relative; z-index: 1; max-width: 800px; }
+  .cover-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    margin-bottom: 48px;
+  }
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 6vw, 72px);
+    font-weight: 900;
+    color: var(--parchment);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+  .cover h1 em { font-style: italic; color: var(--gold); }
+  .cover-subtitle {
+    font-family: 'DM Mono', monospace;
+    color: rgba(245,240,232,0.6);
+    font-size: 13px;
+    letter-spacing: 1px;
+    margin-bottom: 60px;
+  }
+  .cover-paths {
+    display: flex;
+    gap: 2px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .cover-path {
+    padding: 14px 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+  }
+  .cover-path.pharmd { background: var(--pharmacy); color: #a8d5c2; }
+  .cover-path.nursing { background: var(--nursing); color: #d4b8d0; }
+  .cover-path.plus {
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    font-style: normal;
+    font-family: 'DM Mono', monospace;
+    font-size: 24px;
+    display: flex; align-items: center;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-header {
+    border-top: 3px solid var(--ink);
+    padding-top: 40px;
+    margin: 80px 0 40px;
+  }
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* ── CORE QUESTION ── */
+  .core-question {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 48px;
+    margin: 40px 0;
+    position: relative;
+  }
+  .core-question::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 180px;
+    color: rgba(201,168,76,0.15);
+    position: absolute;
+    top: -20px; left: 20px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .core-question p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(16px, 2.5vw, 22px);
+    font-style: italic;
+    line-height: 1.6;
+    position: relative;
+  }
+  .core-question .answer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-top: 24px;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ── TWO-COLUMN COMPARE ── */
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin: 32px 0;
+  }
+  .compare-col {
+    padding: 32px;
+  }
+  .compare-col.pharmd { background: var(--pharmacy); color: #daf0ea; }
+  .compare-col.nursing { background: var(--nursing); color: #ead8e8; }
+  .compare-col h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+  .compare-col .col-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .compare-col ul {
+    list-style: none;
+  }
+  .compare-col ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 13.5px;
+    line-height: 1.5;
+  }
+  .compare-col ul li:last-child { border-bottom: none; }
+  .compare-col .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    opacity: 0.6;
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  /* ── SCENARIO CARDS ── */
+  .scenario-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .scenario-card {
+    border: 2px solid;
+    padding: 28px;
+  }
+  .scenario-card.a { border-color: var(--pharmacy); }
+  .scenario-card.b { border-color: var(--nursing); }
+  .scenario-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .scenario-card.a .scenario-label { color: var(--pharmacy); }
+  .scenario-card.b .scenario-label { color: var(--nursing); }
+  .scenario-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+  .scenario-card p { font-size: 13.5px; line-height: 1.6; }
+
+  /* ── TIMELINE ── */
+  .timeline { margin: 40px 0; }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 140px 1fr 1fr;
+    gap: 0;
+    margin-bottom: 2px;
+  }
+  .tl-period {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 16px 14px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+  }
+  .tl-pharmd {
+    background: rgba(27,77,62,0.12);
+    border-left: 3px solid var(--pharmacy);
+    padding: 16px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .tl-nursing {
+    background: rgba(74,25,66,0.08);
+    border-left: 3px solid var(--nursing);
+    padding: 16px 16px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .tl-pharmd strong { color: var(--pharmacy); }
+  .tl-nursing strong { color: var(--nursing); }
+  .tl-header .tl-period {
+    background: transparent;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .tl-header .tl-pharmd {
+    background: var(--pharmacy);
+    color: #daf0ea;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+  }
+  .tl-header .tl-nursing {
+    background: var(--nursing);
+    color: #ead8e8;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+  }
+  .tl-critical .tl-period { background: var(--rust); }
+  .tl-milestone .tl-period { background: var(--gold); color: var(--ink); }
+
+  /* ── PREREQ TABLE ── */
+  .prereq-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13.5px; }
+  .prereq-table th {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 12px 14px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .prereq-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--divider);
+    vertical-align: top;
+  }
+  .prereq-table tr:nth-child(even) td { background: rgba(0,0,0,0.025); }
+  .prereq-table .req { color: var(--pharmacy); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; }
+  .prereq-table .rec { color: #888; font-family: 'DM Mono', monospace; font-size: 11px; }
+  .prereq-table .na { color: #bbb; font-family: 'DM Mono', monospace; font-size: 11px; }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    padding: 28px 32px;
+    margin: 24px 0;
+    border-left: 4px solid;
+  }
+  .callout.warning {
+    background: var(--warning-bg);
+    border-color: var(--warning-border);
+  }
+  .callout.insight {
+    background: rgba(27,77,62,0.07);
+    border-color: var(--pharmacy);
+  }
+  .callout.principle {
+    background: rgba(74,25,66,0.06);
+    border-color: var(--nursing);
+  }
+  .callout.danger {
+    background: rgba(184,76,27,0.08);
+    border-color: var(--rust);
+  }
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .callout.warning .callout-label { color: var(--warning-border); }
+  .callout.insight .callout-label { color: var(--pharmacy); }
+  .callout.principle .callout-label { color: var(--nursing); }
+  .callout.danger .callout-label { color: var(--rust); }
+  .callout h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .callout p, .callout li { font-size: 13.5px; line-height: 1.65; }
+  .callout ol { padding-left: 20px; }
+  .callout ol li { margin-bottom: 8px; }
+
+  /* ── PROGRAMME CARDS ── */
+  .prog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+    margin: 24px 0;
+  }
+  .prog-card {
+    border: 1px solid var(--divider);
+    padding: 20px;
+    background: white;
+  }
+  .prog-card.primary { border-color: var(--nursing); border-width: 2px; }
+  .prog-card.paused { opacity: 0.6; position: relative; overflow: hidden; }
+  .prog-card.paused::after {
+    content: 'PAUSED';
+    position: absolute;
+    top: 12px; right: -20px;
+    background: var(--rust);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 28px;
+    transform: rotate(15deg);
+  }
+  .prog-card.discontinued { opacity: 0.45; position: relative; overflow: hidden; }
+  .prog-card.discontinued::after {
+    content: 'DISCONTINUED';
+    position: absolute;
+    top: 12px; right: -20px;
+    background: var(--ink);
+    color: white;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 3px 28px;
+    transform: rotate(15deg);
+  }
+  .prog-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .prog-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--nursing);
+    margin-bottom: 12px;
+  }
+  .prog-detail {
+    font-size: 12.5px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .prog-gpa {
+    font-family: 'DM Mono', monospace;
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 10px 0 4px;
+  }
+  .prog-gpa-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: #888;
+    text-transform: uppercase;
+  }
+
+  /* ── OUTCOME MATRIX ── */
+  .outcome-matrix { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+  .outcome-matrix th {
+    padding: 12px 14px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+    border-bottom: 2px solid var(--ink);
+  }
+  .outcome-matrix td { padding: 14px; border-bottom: 1px solid var(--divider); vertical-align: top; line-height: 1.55; }
+  .outcome-matrix .admitted-both td:first-child { border-left: 3px solid var(--gold); }
+  .outcome-matrix .outcome-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-bottom: 6px;
+  }
+  .tag-best { background: rgba(201,168,76,0.2); color: #8a6c10; }
+  .tag-strong { background: rgba(27,77,62,0.15); color: var(--pharmacy); }
+  .tag-viable { background: rgba(90,122,90,0.15); color: var(--sage); }
+  .tag-gap { background: rgba(184,76,27,0.15); color: var(--rust); }
+
+  /* ── SALARY BARS ── */
+  .salary-section { margin: 32px 0; }
+  .salary-row { margin-bottom: 16px; }
+  .salary-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .salary-bar-wrap { display: flex; align-items: center; gap: 12px; }
+  .salary-bar {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: white;
+    white-space: nowrap;
+    min-width: 80px;
+  }
+  .bar-pharmd { background: var(--pharmacy); }
+  .bar-nursing { background: var(--nursing); }
+  .bar-rn { background: rgba(74,25,66,0.4); }
+  .bar-np { background: rgba(74,25,66,0.7); }
+
+  /* ── QUESTION SETS ── */
+  .q-set { margin: 24px 0; }
+  .q-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .q-q { padding: 16px 16px 16px 0; font-style: italic; font-size: 13.5px; }
+  .q-a { padding: 16px; background: rgba(0,0,0,0.025); font-size: 13px; line-height: 1.55; }
+  .q-a strong { color: var(--pharmacy); }
+
+  /* ── ACTION ITEMS ── */
+  .actions { margin: 32px 0; }
+  .action-item {
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--divider);
+    align-items: start;
+  }
+  .action-num {
+    width: 32px; height: 32px;
+    background: var(--ink);
+    color: var(--parchment);
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .action-text { font-size: 13.5px; line-height: 1.6; }
+  .action-badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+  .badge-both { background: var(--gold); color: white; }
+  .badge-b { background: var(--nursing); color: white; }
+
+  /* ── RESIDENCY TABLE ── */
+  .residency-table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 13px; }
+  .residency-table th {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 11px 14px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .residency-table td { padding: 13px 14px; border-bottom: 1px solid var(--divider); vertical-align: top; line-height: 1.55; }
+  .risk-low { color: var(--pharmacy); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; }
+  .risk-mod { color: var(--rust); font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; }
+
+  /* ── SUMMARY TABLE ── */
+  .summary-table { width: 100%; border-collapse: collapse; margin: 24px 0; }
+  .summary-table td { padding: 14px; border-bottom: 1px solid var(--divider); font-size: 13.5px; line-height: 1.6; vertical-align: top; }
+  .summary-table tr td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #888;
+    width: 30%;
+    padding-right: 20px;
+  }
+
+  /* ── FOOTER ── */
+  .doc-footer {
+    background: var(--ink);
+    color: rgba(245,240,232,0.5);
+    padding: 40px;
+    text-align: center;
+    margin-top: 80px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--parchment);
+    padding: 40px;
+    margin: 0 0 60px;
+    border-top: 3px solid var(--ink);
+  }
+  .toc h2 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    color: #888;
+  }
+  .toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 8px;
+  }
+  .toc-item {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 8px 0;
+    border-bottom: 1px solid var(--divider);
+  }
+  .toc-item:hover { color: var(--pharmacy); }
+  .toc-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .toc-text { font-size: 13px; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .compare-grid, .scenario-pair { grid-template-columns: 1fr; }
+    .timeline-item { grid-template-columns: 1fr; }
+    .tl-period { font-size: 10px; padding: 10px 12px; }
+    .q-item { grid-template-columns: 1fr; }
+    .q-a { background: rgba(0,0,0,0.04); }
+    .core-question { padding: 32px 24px; }
+    .core-question::before { font-size: 100px; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .cover-inner > * {
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+  .cover-inner > *:nth-child(1) { animation-delay: 0.1s; }
+  .cover-inner > *:nth-child(2) { animation-delay: 0.3s; }
+  .cover-inner > *:nth-child(3) { animation-delay: 0.5s; }
+  .cover-inner > *:nth-child(4) { animation-delay: 0.7s; }
+
+  .divider { height: 1px; background: var(--divider); margin: 48px 0; }
+  prose { display: block; margin-bottom: 16px; font-size: 14px; line-height: 1.75; }
+  p.body { margin-bottom: 16px; font-size: 14px; line-height: 1.75; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-badge">Dual-Path Evaluation Report · February 2026</div>
+    <h1>PharmD + <em>Nursing</em><br>Strategic Analysis</h1>
+    <p class="cover-subtitle">UC Davis Year 2 Student · NPB Major</p>
+    <div class="cover-paths">
+      <div class="cover-path pharmd">Doctor of Pharmacy (PharmD)</div>
+      <div class="cover-path plus">+</div>
+      <div class="cover-path nursing">Master's Entry Program in Nursing (MEPN)</div>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="page">
+
+  <!-- TOC -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <div class="toc-grid">
+      <a href="#s1" class="toc-item"><span class="toc-num">01</span><span class="toc-text">The Core Question</span></a>
+      <a href="#s2" class="toc-item"><span class="toc-num">02</span><span class="toc-text">Option A Compatibility</span></a>
+      <a href="#s3" class="toc-item"><span class="toc-num">03</span><span class="toc-text">Dual-Path Timeline</span></a>
+      <a href="#s4" class="toc-item"><span class="toc-num">04</span><span class="toc-text">MEPN Admissions</span></a>
+      <a href="#s5" class="toc-item"><span class="toc-num">05</span><span class="toc-text">Decision Framework</span></a>
+      <a href="#s6" class="toc-item"><span class="toc-num">06</span><span class="toc-text">What Not To Do</span></a>
+      <a href="#s7" class="toc-item"><span class="toc-num">07</span><span class="toc-text">Spring 2028 Outcomes</span></a>
+      <a href="#s8" class="toc-item"><span class="toc-num">08</span><span class="toc-text">Summary & Actions</span></a>
+      <a href="#s9" class="toc-item"><span class="toc-num">09</span><span class="toc-text">PharmD Residency</span></a>
+    </div>
+  </div>
+
+  <!-- PURPOSE -->
+  <p class="body" style="font-size:15px; line-height:1.8; margin-bottom: 20px;">This report provides a structured framework for evaluating whether to pursue both a PharmD pathway and the MEPN (Master's Entry Program in Nursing) pathway simultaneously. Unlike the MD, MEPN requires no MCAT, but it does require distinct prerequisites, clinical experience, and a separate application process.</p>
+
+  <!-- S1: CORE QUESTION -->
+  <div id="s1" class="section-header">
+    <span class="section-num">Section 01</span>
+    <h2>The Core Question You Must Answer First</h2>
+  </div>
+
+  <p class="body">Before any timeline or course plan is relevant, you need to answer one question honestly:</p>
+
+  <div class="core-question">
+    <p>"If you were guaranteed admission to a solid, respected PharmD program tomorrow — not UCSF, just a good program — would you still feel a genuine pull toward becoming a registered nurse and then an advanced practice nurse?"</p>
+    <p class="answer-note">Your honest answer determines everything that follows. The dual-path framework only makes sense if the answer is genuinely yes.</p>
+  </div>
+
+  <!-- PATH COMPARISON -->
+  <div class="compare-grid">
+    <div class="compare-col pharmd">
+      <h3>Path One</h3>
+      <div class="col-title">Doctor of Pharmacy (PharmD)</div>
+      <ul>
+        <li><span class="metric-label">Time to practice</span>~5.5–6.5 years (PharmD + residency)</li>
+        <li><span class="metric-label">Primary role</span>Medication expert, clinical pharmacy, drug therapy optimisation</li>
+        <li><span class="metric-label">Starting salary (CA)</span>$120,000–$162,000 (median ~$157k)</li>
+        <li><span class="metric-label">Training after grad</span>1–2 year residency (~$45K–$58K stipend, no tuition)</li>
+        <li><span class="metric-label">Lifestyle</span>Generally predictable; clinical or industry settings</li>
+        <li><span class="metric-label">Research path</span>PhD or post-doc possible</li>
+      </ul>
+    </div>
+    <div class="compare-col nursing">
+      <h3>Path Two</h3>
+      <div class="col-title">MEPN → RN → NP/DNP</div>
+      <ul>
+        <li><span class="metric-label">Time to practice</span>~4–5 years to RN; ~6–8 years to NP/DNP</li>
+        <li><span class="metric-label">Primary role</span>Patient assessment, care coordination, holistic patient care</li>
+        <li><span class="metric-label">Starting salary (CA)</span>RN: $80K–$120K; NP: $120K–$160K; DNP: $140K–$180K+</li>
+        <li><span class="metric-label">Training after grad</span>NCLEX exam immediately; NP requires additional 2–3 years</li>
+        <li><span class="metric-label">Lifestyle</span>Shift-based as RN; NP/DNP offers more autonomy</li>
+        <li><span class="metric-label">Research path</span>PhD in Nursing Science or DNP-focused research</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="body">Neither path is objectively better. They represent meaningfully different clinical roles, training timelines, and career trajectories. The question is which life you want.</p>
+
+  <!-- SCENARIOS -->
+  <div class="scenario-pair">
+    <div class="scenario-card a">
+      <div class="scenario-label">Scenario A</div>
+      <h3>90%+ PharmD Committed</h3>
+      <p>Do <strong>not</strong> pursue MEPN. It adds prerequisite courses, clinical hours, a separate application, and admission risk with no strategic benefit to the pharmacy path. Stop at Section 2 and execute the pharmacy plan fully.</p>
+    </div>
+    <div class="scenario-card b">
+      <div class="scenario-label">Scenario B</div>
+      <h3>Genuinely Open to Nursing</h3>
+      <p>A structured dual-path is viable. MEPN prerequisites overlap substantially with PharmD prerequisites under Option A. Continue to Section 3 for the full dual-path framework.</p>
+    </div>
+  </div>
+
+  <!-- S2: OPTION A COMPATIBILITY -->
+  <div id="s2" class="section-header">
+    <span class="section-num">Section 02</span>
+    <h2>Why Option A Is the Compatible Path</h2>
+  </div>
+
+  <p class="body">Option A (NPB + selective pharmaceutical chemistry electives) is not just compatible with MEPN — it is the ideal preparation for it. The MEPN does not require a separate high-stakes exam like the MCAT. The admissions leverage comes entirely from GPA, prerequisites, and clinical experience.</p>
+
+  <div class="callout insight">
+    <span class="callout-label">Key Structural Insight</span>
+    <p>Every required MEPN prerequisite is already part of Option A or can be added as a low-risk elective. NPB 101 (Physiology), EXB 106/106L (Anatomy), and MMG 102 (Microbiology) are required by <em>both</em> PharmD and MEPN programs. The overlap is near-total — unlike the MD path, which requires MCAT prep as a separate sustained effort.</p>
+  </div>
+
+  <p class="body" style="margin-bottom: 12px;"><strong>MEPN Prerequisite Alignment with Option A</strong></p>
+
+  <table class="prereq-table">
+    <thead>
+      <tr>
+        <th>Prerequisite</th>
+        <th>Option A Course</th>
+        <th>UC Davis MEPN</th>
+        <th>UCI MEPN</th>
+        <th>Samuel Merritt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Human Physiology w/ Lab</td><td>NPB 101 + NPB 101L</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Human Anatomy w/ Lab</td><td>EXB 106 + EXB 106L</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Microbiology w/ Lab</td><td>MMG 102 + lab</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>General Chemistry</td><td>CHE 002A/B/C</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Organic Chemistry</td><td>CHE 8AB or CHE 118A/B</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Statistics</td><td>STA 13 or STA 100</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Nutrition</td><td>NUT 10 or NUT 11</td><td class="req">REQUIRED</td><td class="rec">Recommended</td><td class="rec">Recommended</td></tr>
+      <tr><td>Psychology</td><td>PSC 1</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Oral Communication</td><td>CMN 1, CMN 5, or CMN 120</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+      <tr><td>Biochemistry</td><td>BIS 103</td><td class="na">Not required</td><td class="rec">Recommended</td><td class="rec">Recommended</td></tr>
+      <tr><td>Lifespan Development</td><td>HDE 100A/B/C</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td><td class="req">REQUIRED</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <span class="callout-label">UCSF MEPN Status — February 2026</span>
+    <h3>Currently Paused</h3>
+    <p>UCSF School of Nursing began formal reassessment in Fall 2025 and has not announced a timeline for resumption. For a student applying in 2027–2028, UCSF MEPN should be treated as an uncertain target until an official reopening is announced. USC entry MSN is no longer accepting new cohorts as of 2024–2025 and should be removed from your target list. Monitor: <em>nursing.ucsf.edu/admissions</em></p>
+  </div>
+
+  <p class="body" style="margin-bottom: 12px;"><strong>Three Additional Prerequisites Option A Does Not Fully Cover</strong></p>
+  <p class="body">None are GPA risks; all are manageable in light quarters:</p>
+
+  <table class="prereq-table">
+    <thead>
+      <tr><th>Missing Prerequisite</th><th>UC Davis Course</th><th>When to Take</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Statistics</td><td>STA 13 or STA 100</td><td>Summer 2026 or as a light-quarter filler. Low difficulty. Does not compete with PharmD GPA.</td></tr>
+      <tr><td>Nutrition</td><td>NUT 10 or NUT 11</td><td>Any quarter with available units (2–3 units). Highly compatible with NPB coursework.</td></tr>
+      <tr><td>Lifespan Human Development</td><td>HDE 100A/B/C (one required)</td><td>Any quarter with available units. Non-science GPA booster.</td></tr>
+      <tr><td>Oral Communication</td><td>CMN 1, CMN 5, or CMN 120</td><td>Usually completed in Year 1–2. Confirm already completed; if not, add to any light quarter.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- S3: TIMELINE -->
+  <div id="s3" class="section-header">
+    <span class="section-num">Section 03</span>
+    <h2>Dual-Path Strategic Timeline (Scenario B Only)</h2>
+  </div>
+
+  <div class="callout principle">
+    <span class="callout-label">Foundational Principle</span>
+    <p>Do not frame this as: <em>"If I fail top PharmD programmes, I'll try nursing."</em></p>
+    <p style="margin-top: 12px;">Frame this as: <em>"If nursing genuinely interests me as a clinical path, I will structure my timeline now so both applications are strong — and I will make a fully informed decision in Spring 2028 with both pharmacy results and nursing admissions outcomes in hand."</em></p>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline-item tl-header">
+      <div class="tl-period">Period</div>
+      <div class="tl-pharmd">PharmD Track</div>
+      <div class="tl-nursing">MEPN / Nursing Track</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Spring 2026<br><small>(Now)</small></div>
+      <div class="tl-pharmd">PHY 007A, CHE 118C, Econ. Secure pharmacy tech position by April. Begin Franz Research Group lab work.</div>
+      <div class="tl-nursing">Begin healthcare volunteer hours (hospital, clinic). Target 2–4 hrs/wk. Apply to UC Davis Medical Center volunteer programme.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Summer 2026</div>
+      <div class="tl-pharmd">Begin pharmacy tech hours (15–20 hrs/wk). Franz lab (6–8 hrs/wk). Add STA 13 or NUT 10 if units available.</div>
+      <div class="tl-nursing">Increase clinical volunteer hours (6–8 hrs/wk). Explore CNA certification (weekend course, ~4 weeks). Strong MEPN differentiator.</div>
+    </div>
+
+    <div class="timeline-item tl-critical">
+      <div class="tl-period">Fall 2026<br>⚠ CRITICAL GPA</div>
+      <div class="tl-pharmd"><strong>NPB 101, BIS 103, CHE 124A, PHY 007B.</strong> Register for Winter Anatomy. Franz lab (4–6 hrs/wk max).</div>
+      <div class="tl-nursing">Maintain 2–4 hrs/wk clinical volunteer hours only. Do NOT start new MEPN application prep this quarter. GPA is the priority.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Winter 2027</div>
+      <div class="tl-pharmd">Anatomy (EXB 106/106L) — light quarter. Continue pharmacy tech hours.</div>
+      <div class="tl-nursing">Add HDE 100A or CMN course if not completed. Resume 6–8 hrs/wk clinical volunteering. Begin nursing personal statement brainstorming.</div>
+    </div>
+
+    <div class="timeline-item tl-milestone">
+      <div class="tl-period">Spring 2027<br>★ DUAL ACTIVE</div>
+      <div class="tl-pharmd"><strong>MMG 102 (Microbiology). ALL PREREQS COMPLETE</strong> for PharmD. Begin PharmD personal statement drafts.</div>
+      <div class="tl-nursing"><strong>ALL MEPN prerequisites complete.</strong> Begin MEPN personal statement drafts in parallel. Target 150+ nursing clinical hours by now.</div>
+    </div>
+
+    <div class="timeline-item tl-critical">
+      <div class="tl-period">Summer 2027<br>⚡ HIGHEST ACTIVITY</div>
+      <div class="tl-pharmd"><strong>Submit PharmCAS by early July.</strong> Finalise personal statement, letters, pharmacy experience (target 150–200 hrs).</div>
+      <div class="tl-nursing">NursingCAS application opens August. Prepare nursing personal statement, nursing-specific letters (RN/NP letter essential). Target 200+ clinical hours total.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Fall 2027</div>
+      <div class="tl-pharmd">Interview season. Light course load. Interview prep Oct–Dec.</div>
+      <div class="tl-nursing"><strong>Submit NursingCAS by November 1</strong> (UC Davis, UCI). Nursing interviews are behavioural/values-based.</div>
+    </div>
+
+    <div class="timeline-item">
+      <div class="tl-period">Winter–Spring 2028</div>
+      <div class="tl-pharmd">Continue PharmD interviews. Await pharmacy decisions (March–May 2028).</div>
+      <div class="tl-nursing">Await MEPN decisions (typically March–April 2028). MEPN programmes often notify before PharmD programmes.</div>
+    </div>
+
+    <div class="timeline-item tl-milestone">
+      <div class="tl-period">Spring–Summer 2028<br>★ DECISION</div>
+      <div class="tl-pharmd">Accept PharmD offer or pursue reapplication based on outcomes.</div>
+      <div class="tl-nursing">Accept MEPN offer or pursue reapplication. MEPN programmes begin in June for UC Davis.</div>
+    </div>
+  </div>
+
+  <!-- S4: MEPN ADMISSIONS -->
+  <div id="s4" class="section-header">
+    <span class="section-num">Section 04</span>
+    <h2>MEPN Admissions Requirements &amp; Programme Overview</h2>
+  </div>
+
+  <div class="prog-grid">
+    <div class="prog-card primary">
+      <div class="prog-name">UC Davis MEPN</div>
+      <div class="prog-tag">Primary Target — Home Institution</div>
+      <div class="prog-gpa">3.0+</div>
+      <div class="prog-gpa-label">Min GPA (overall AND science prereq)</div>
+      <p class="prog-detail" style="margin-top: 12px;">Deadline: <strong>Nov 1</strong> (NursingCAS). Home institution advantage. 5-year rule for Anatomy/Physiology. Strong fit for NPB background.</p>
+    </div>
+    <div class="prog-card primary">
+      <div class="prog-name">UCI MEPN</div>
+      <div class="prog-tag">Primary Target</div>
+      <div class="prog-gpa">3.0+</div>
+      <div class="prog-gpa-label">Min GPA (competitive ~3.5+)</div>
+      <p class="prog-detail" style="margin-top: 12px;">Deadline: <strong>Oct–Dec</strong> (NursingCAS + UCI Graduate Application). Requires both application systems.</p>
+    </div>
+    <div class="prog-card">
+      <div class="prog-name">Samuel Merritt</div>
+      <div class="prog-tag">Safety Option — Oakland</div>
+      <div class="prog-gpa">2.75+</div>
+      <div class="prog-gpa-label">Min GPA</div>
+      <p class="prog-detail" style="margin-top: 12px;">Rolling admissions. Strong Bay Area clinical network. More accessible than UC programmes. Good safety option.</p>
+    </div>
+    <div class="prog-card paused">
+      <div class="prog-name">UCSF MEPN</div>
+      <div class="prog-tag">Do Not Plan Around</div>
+      <div class="prog-gpa">—</div>
+      <div class="prog-gpa-label">Paused as of 2023</div>
+      <p class="prog-detail" style="margin-top: 12px;">Reassessment underway Fall 2025. Do not include in plans until officially reopened. Monitor nursing.ucsf.edu.</p>
+    </div>
+    <div class="prog-card discontinued">
+      <div class="prog-name">USC Entry MSN</div>
+      <div class="prog-tag">No longer accepting</div>
+      <div class="prog-gpa">—</div>
+      <div class="prog-gpa-label">Discontinued 2024–2025</div>
+      <p class="prog-detail" style="margin-top: 12px;">Remove from target list. No longer accepting new cohorts as of 2024–2025.</p>
+    </div>
+  </div>
+
+  <p class="body" style="margin-bottom: 12px;"><strong>Competitive Applicant Profile for UC Davis and UCI MEPN</strong></p>
+  <table class="prereq-table">
+    <thead>
+      <tr><th>Component</th><th>Competitive Target</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Overall GPA</td><td>3.5–3.7+ (minimum 3.0; UC Davis average admitted class ~3.5–3.6)</td></tr>
+      <tr><td>Science Prerequisite GPA</td><td>3.5+ (Anatomy, Physiology, Chemistry, Microbiology labs; calculated separately at UC Davis)</td></tr>
+      <tr><td>Healthcare clinical hours</td><td>150–300 hours minimum; mix of direct patient care (hospital/clinic) and healthcare volunteering</td></tr>
+      <tr><td>Nursing-specific exposure</td><td>At minimum: shadowing of RN or NP, ideally in 2+ settings (acute care + primary care or specialty)</td></tr>
+      <tr><td>Letters of recommendation</td><td>2–3 letters; at least one from a registered nurse or nurse practitioner; one from science faculty (Franz lab ideal)</td></tr>
+      <tr><td>Personal statement</td><td>Must articulate specific nursing identity — why nurse, not just "healthcare." Patient care experiences must anchor the narrative.</td></tr>
+      <tr><td>GRE</td><td>Not required at UC Davis or UCI MEPN. No exam prep burden.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout insight">
+    <span class="callout-label">Franz Research Group — MEPN Differentiator</span>
+    <h3>How Lab Experience Strengthens the Application</h3>
+    <p>Most MEPN applicants have solid prerequisite GPAs but no research experience. An NPB student with 1–2 years in a named faculty research lab (organic synthesis, medicinal chemistry, NMR, HPLC, mRNA delivery chemistry) stands out in a pool where research experience is rare.</p>
+    <p style="margin-top: 10px;"><strong>Important caveat:</strong> MEPN committees weight clinical readiness, patient care identity, and service orientation more heavily than research. Franz lab experience is a meaningful differentiator — not a primary driver. Strong nursing clinical hours and a patient-centered personal statement remain the core of a competitive application.</p>
+    <p style="margin-top: 10px;">Prof. Franz's role as Associate Dean for Undergraduate Education also makes her an institutional reference with name recognition at UC Davis — a meaningful advantage for the home institution application.</p>
+  </div>
+
+  <!-- S5: DECISION FRAMEWORK -->
+  <div id="s5" class="section-header">
+    <span class="section-num">Section 05</span>
+    <h2>Decision Framework — Is the Dual Path Right for You?</h2>
+  </div>
+
+  <p class="body" style="margin-bottom: 4px;"><strong>Question Set A: Career Motivation</strong></p>
+  <div class="q-set">
+    <div class="q-item">
+      <div class="q-q">If guaranteed PharmD admission tomorrow, would you still want to pursue nursing?</div>
+      <div class="q-a"><strong>YES</strong> → Dual path may be appropriate. <strong>NO</strong> → MEPN is not in your plan.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">Can you name specific aspects of nursing — not salary, not schedule — that genuinely interest you?</div>
+      <div class="q-a"><strong>YES</strong> → Proceed to Question Set B. <strong>NO</strong> → Reconsider whether nursing interest is genuine.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">Have you shadowed or observed both pharmacists and nurses day-to-day?</div>
+      <div class="q-a">Shadowing both is strongly recommended before committing to the dual-path. You need lived exposure, not abstract descriptions.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">Is your interest in nursing primarily driven by fear of not getting into top pharmacy programmes?</div>
+      <div class="q-a"><strong>YES</strong> → Stop here. Reactive nursing application produces weak personal statements. <strong>NO</strong> → Continue.</div>
+    </div>
+  </div>
+
+  <p class="body" style="margin-bottom: 4px; margin-top: 24px;"><strong>Question Set B: Practical Readiness</strong></p>
+  <div class="q-set">
+    <div class="q-item">
+      <div class="q-q">Can you accumulate pharmacy tech hours (150–200) AND nursing clinical/volunteer hours (150–300) by Summer 2027 alongside full-time coursework and Franz lab?</div>
+      <div class="q-a">Pharmacy tech hours and nursing volunteer hours are not interchangeable. Both must be accumulated. Total clinical time commitment is significant.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">Are you willing to draft two separate, fully distinct personal statements for two professional identities?</div>
+      <div class="q-a">MEPN personal statements that read like pharmacy statements are screened out. Each must have its own authentic narrative grounded in that clinical experience.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">Financially: Can you manage two application fees, two sets of letters of recommendation, and two interview cycles?</div>
+      <div class="q-a">Dual applications add $500–$1,500 in fees and significant logistical complexity. Be honest about bandwidth.</div>
+    </div>
+  </div>
+
+  <p class="body" style="margin-bottom: 4px; margin-top: 24px;"><strong>Question Set C: Risk Tolerance</strong></p>
+  <div class="q-set">
+    <div class="q-item">
+      <div class="q-q">If admitted to PharmD but not MEPN, is PharmD a fully satisfying outcome — not a consolation?</div>
+      <div class="q-a">If pharmacy feels like settling, that is important information about your true preference.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">If admitted to MEPN but not PharmD, is MEPN a fully satisfying outcome?</div>
+      <div class="q-a">This scenario is equally possible. Work through it now before you apply.</div>
+    </div>
+    <div class="q-item">
+      <div class="q-q">If admitted to both, which do you choose?</div>
+      <div class="q-a">Working through this hypothetical now prevents panicked decision-making in Spring 2028. The careers are different enough that the answer should be clear.</div>
+    </div>
+  </div>
+
+  <!-- S6: REACTIVE FAILURE -->
+  <div id="s6" class="section-header">
+    <span class="section-num">Section 06</span>
+    <h2>The Reactive Plan — What Not To Do</h2>
+  </div>
+
+  <div class="callout danger">
+    <span class="callout-label">Reactive Failure Pattern — Recognise and Avoid</span>
+    <ol>
+      <li>Spring 2028: Receive pharmacy rejections from top programmes (UCSF, UCSD).</li>
+      <li>Panic. Decide impulsively to "try nursing."</li>
+      <li>Zero nursing clinical hours on record. No RN shadowing. No nursing-specific personal statement.</li>
+      <li>Submit NursingCAS in August 2028 with a generic healthcare narrative and pharmacy hours framed as "clinical experience."</li>
+      <li>MEPN admissions committees see a last-minute pivot with no nursing identity or nursing-specific exposure.</li>
+      <li>Rejection from UC Davis and UCI MEPN.</li>
+      <li>Now 2+ years behind with neither path secured.</li>
+    </ol>
+    <p style="margin-top: 16px;">This is the predictable outcome of treating MEPN as a consolation application. The antidote is the proactive framing in Section 3: decide early, build the nursing clinical portfolio in parallel, and draft a nursing personal statement grounded in actual patient care experiences.</p>
+  </div>
+
+  <p class="body">The most common mistake is assuming that pharmacy technician hours satisfy MEPN clinical hour requirements. <strong>They do not.</strong> MEPN programmes want evidence of direct patient care — hospital volunteering, CNA work, clinical shadowing of RNs in acute care settings. Pharmacy experience demonstrates healthcare exposure but not the bedside care orientation that nursing school screens for.</p>
+
+  <!-- S7: OUTCOMES -->
+  <div id="s7" class="section-header">
+    <span class="section-num">Section 07</span>
+    <h2>Spring 2028 Outcome Scenarios &amp; Decision Logic</h2>
+  </div>
+
+  <p class="body">If you pursue the dual path correctly, you will arrive in Spring 2028 with PharmD and MEPN admissions decisions arriving in roughly the same window. Work through the hypothetical scenarios now so the decision is not made under time pressure.</p>
+
+  <table class="outcome-matrix">
+    <thead>
+      <tr>
+        <th>PharmD Outcome</th>
+        <th>MEPN Outcome</th>
+        <th>Recommended Decision Logic</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="admitted-both">
+        <td><span class="outcome-tag tag-best">Best Case</span><br>Admitted to target PharmD</td>
+        <td>Admitted to MEPN</td>
+        <td>Choose based on which clinical role genuinely fits. This is the decision you prepared for.</td>
+      </tr>
+      <tr>
+        <td><span class="outcome-tag tag-strong">Strong</span><br>Admitted to target PharmD</td>
+        <td>Not admitted to MEPN</td>
+        <td>Accept PharmD. Strong outcome. MEPN reapplication possible after PharmD if interest persists, or NP pathway via PharmD is viable.</td>
+      </tr>
+      <tr>
+        <td><span class="outcome-tag tag-viable">Viable</span><br>Admitted to lower-tier PharmD only</td>
+        <td>Admitted to MEPN</td>
+        <td>Genuine decision point. Evaluate programme quality and career alignment. Both are viable professional degrees.</td>
+      </tr>
+      <tr>
+        <td><span class="outcome-tag tag-viable">Viable</span><br>Admitted to lower-tier PharmD only</td>
+        <td>Not admitted to MEPN</td>
+        <td>Accept best PharmD if solid programme. Reapply to MEPN with stronger clinical hours if nursing interest remains.</td>
+      </tr>
+      <tr>
+        <td><span class="outcome-tag tag-viable">Viable</span><br>Not admitted to PharmD</td>
+        <td>Admitted to MEPN</td>
+        <td>Accept MEPN. This is not a consolation — it is a professional doctorate pathway with significantly expanded prescribing and practice authority at the NP/DNP level in California under AB 890.</td>
+      </tr>
+      <tr>
+        <td><span class="outcome-tag tag-gap">Gap Year</span><br>Not admitted to PharmD</td>
+        <td>Not admitted to MEPN</td>
+        <td>Gap year for simultaneous reapplication. Strengthen clinical hours, GPA if possible, and personal statements. Both paths remain viable with stronger profiles.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout insight">
+    <span class="callout-label">Long-Term Career Convergence — California AB 890</span>
+    <h3>Advanced Practice Nursing: Prescriptive Authority</h3>
+    <p>In California, AB 890 (signed 2020, implementation began 2023) created expanded autonomy pathways for qualified NPs and DNP-prepared nurses to diagnose, prescribe, and manage patients under defined regulatory requirements — including a supervised transition period and board approval.</p>
+    <p style="margin-top: 10px;">The PharmD + NP/DNP combination — achieved by completing MEPN then pursuing a DNP — creates a uniquely powerful dual credential in areas like oncology, palliative care, and clinical pharmacology that relatively few practitioners hold.</p>
+  </div>
+
+  <!-- S8: SUMMARY -->
+  <div id="s8" class="section-header">
+    <span class="section-num">Section 08</span>
+    <h2>Summary &amp; Immediate Action Items</h2>
+  </div>
+
+  <table class="summary-table">
+    <tbody>
+      <tr><td>Is the dual path possible?</td><td>Yes. MEPN prerequisites overlap almost entirely with Option A. No separate exam required.</td></tr>
+      <tr><td>Is it advisable?</td><td>Only if nursing is a genuine clinical calling, not insurance against pharmacy rejection.</td></tr>
+      <tr><td>What does MEPN require beyond PharmD?</td><td>Direct patient care clinical hours (nursing-specific), a separate nursing personal statement, Statistics, Nutrition, HDE/CMN courses, and an RN/NP letter of recommendation.</td></tr>
+      <tr><td>Best application timing?</td><td>PharmCAS by early July 2027. NursingCAS by November 1, 2027. The stagger makes simultaneous applications manageable.</td></tr>
+      <tr><td>When does prep start?</td><td>Clinical nursing volunteer hours begin Spring 2026. Missing prerequisites (Stats, Nutrition, HDE) added in light quarters 2026–2027.</td></tr>
+      <tr><td>Decision point?</td><td>Spring 2028, when both PharmD and MEPN decisions arrive. Full information, no reactive pressure.</td></tr>
+      <tr><td>Does UCSF MEPN factor in?</td><td>Not currently. UCSF MEPN is paused as of February 2026. UC Davis and UCI are the primary targets.</td></tr>
+      <tr><td>Does Franz lab help?</td><td>Yes — significantly. Research experience is rare in MEPN applicant pools and Prof. Franz's profile is an institutional advantage at UC Davis specifically.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="body" style="margin-bottom: 16px;"><strong>Immediate Action Items — This Week (February 2026)</strong></p>
+  <div class="actions">
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <div class="action-text"><span class="action-badge badge-both">Both</span> Answer the core question honestly: Is nursing a genuine clinical interest, or primarily fear of pharmacy rejection? Write down your answer.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <div class="action-text"><span class="action-badge badge-both">Both</span> Commit to Option A: Schedule NPB advisor meeting and HPA appointment. Request critical course timing moves (EXB 106/106L → Winter 2027; MMG 102 → Spring 2027).</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <div class="action-text"><span class="action-badge badge-both">Both</span> Confirm Franz Research Group role: Establish start date, weekly hours (6–8 hrs/wk standard; 4–6 hrs/wk in Fall 2026 GPA-critical quarter), and project assignment.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">4</div>
+      <div class="action-text"><span class="action-badge badge-both">Both</span> Begin pharmacy experience immediately: Prioritize clinical and hospital settings — Kaiser Permanente Fremont, UC Davis Health pharmacy, hospital inpatient pharmacies. Target position by April 2026. Begin California Pharmacy Technician License application.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">5</div>
+      <div class="action-text"><span class="action-badge badge-b">Scenario B</span> Register as a volunteer at UC Davis Medical Center or a Fremont-area hospital or clinic. Even 2–4 hrs/wk now builds the nursing clinical portfolio in parallel with pharmacy hours. Target at least 150 nursing-specific hours by Summer 2027.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">6</div>
+      <div class="action-text"><span class="action-badge badge-b">Scenario B</span> Audit MEPN prerequisite checklist now. Confirm Statistics, Nutrition, HDE, and CMN status. Schedule any missing courses in Summer 2026 or Winter 2027 light quarters.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">7</div>
+      <div class="action-text"><span class="action-badge badge-b">Scenario B</span> Attend a UC Davis MEPN information session (typically offered each Fall and Spring). Get the programme-specific letter of recommendation guidance and confirm the science prerequisite GPA calculation method.</div>
+    </div>
+  </div>
+
+  <div class="callout principle">
+    <span class="callout-label">The Key Difference from the MD Dual-Path</span>
+    <p style="font-size: 16px; font-family: 'Playfair Display', serif; font-style: italic; line-height: 1.6;">The nursing path requires no extra exam. It requires extra clinical identity.</p>
+    <p style="margin-top: 12px;">You can build that identity starting this week by walking into a hospital as a volunteer and learning what nurses actually do. No MCAT prep course needed. Just time, presence, and honest self-reflection about whether that is the clinical life you want.</p>
+  </div>
+
+  <!-- S9: RESIDENCY -->
+  <div id="s9" class="section-header">
+    <span class="section-num">Section 09</span>
+    <h2>PharmD Residency Realities</h2>
+  </div>
+
+  <p class="body">This section provides context on what PharmD residency actually costs, what residents earn, whether not finding a job after residency is a real risk, and how the major specialty tracks compare.</p>
+
+  <p class="body" style="margin-bottom: 12px;"><strong>Residency Financing: Stipend-Paid, Not Tuition-Paying</strong></p>
+
+  <table class="prereq-table">
+    <thead>
+      <tr><th>Factor</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>PGY1 Stipend</td><td>~$45,000–$58,000/year. Health benefits included. No tuition. Academic medical centers in high-COL areas (UCSF, UCSD affiliated programs) trend higher.</td></tr>
+      <tr><td>PGY2 Stipend</td><td>~$48,000–$62,000/year. Same structure: employed position, benefits included, no tuition.</td></tr>
+      <tr><td>Opportunity Cost (real financial cost)</td><td>A PharmD graduate who skips residency earns ~$110,000–$130,000 from day one. Over a PGY1+PGY2 sequence, the resident earns ~$50,000–$55,000/yr instead. The gap — approximately $120,000–$150,000 in foregone earnings — is the true financial cost. The payoff is back-loaded in specialty positions and leadership tracks.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="body" style="margin-bottom: 12px; margin-top: 24px;"><strong>Specialty Track Comparison</strong></p>
+
+  <table class="residency-table">
+    <thead>
+      <tr><th>Specialty</th><th>Job Market Risk</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Infectious Disease</strong></td>
+        <td class="risk-low">LOW — Most Promising</td>
+        <td>Antibiotic stewardship is federally mandated. Demand is broad and geographically distributed across community hospitals, academic centres, and outpatient clinics. Best combination of availability, geographic flexibility, and intellectual depth.</td>
+      </tr>
+      <tr>
+        <td><strong>Oncology</strong></td>
+        <td class="risk-mod">MODERATE — Geographic Risk</td>
+        <td>Highest intellectual ceiling; excellent salaries at cancer centres. But jobs concentrate at NCI-designated and academic medical centres. Geographic inflexibility significantly raises underemployment risk. Strong fit for NPB + medicinal chemistry research profile; requires willingness to relocate.</td>
+      </tr>
+      <tr>
+        <td><strong>Cardiology</strong></td>
+        <td class="risk-low">LOW — Stable Demand</td>
+        <td>Needed at any hospital with a cardiac unit. Consistent high-volume demand across geographies. NPB cardiovascular physiology and pharmacology background is a natural fit.</td>
+      </tr>
+      <tr>
+        <td><strong>Critical Care</strong></td>
+        <td class="risk-low">LOW — Broad Availability</td>
+        <td>ICU pharmacists needed everywhere. Safest employment outlook. Trade-off: intense pace, frequent nights and weekends, notable burnout rates.</td>
+      </tr>
+      <tr>
+        <td><strong>Ambulatory Care</strong></td>
+        <td class="risk-low">LOW — Growing</td>
+        <td>Growing with value-based care and chronic disease management. More predictable hours and lifestyle than inpatient specialties. Good geographic distribution across integrated health systems, FQHCs, and large group practices.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout danger">
+    <span class="callout-label">The Real Risk</span>
+    <h3>Underemployment, Not Unemployment</h3>
+    <p>PGY1 graduates almost always find work. The real risk is completing both PGY1 and PGY2 — two years of stipend pay with ~$120K–$150K in foregone earnings — and ending up in a general clinical staff role that did not require either residency. This happens when graduates are geographically rigid or choose a narrow specialty with concentrated demand.</p>
+    <p style="margin-top: 10px;"><strong>Mitigation:</strong> Choose ID, cardiology, critical care, or ambulatory care for maximum geographic flexibility, or be genuinely willing to relocate for oncology. Do not commit to a PGY2 specialty before PharmD Year 2–3; most pharmacists discover their specialty fit during clinical rotations.</p>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <p>Dual-Path Evaluation Report · PharmD + Nursing (MEPN)</p>
+  <p>UC Davis Year 2 Student · NPB Major · Prepared February 2026</p>
+  <p style="margin-top: 8px; opacity: 0.4;">Updated February 2026: Section 9 (PharmD Residency Realities) added</p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>West Coast PharmD Guide 2027–2028 · v4</title>
+<style>/* System font fallbacks replacing Google Fonts */</style>
+<style>
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1f2933;--border:#2d3748;--accent:#4ecdc4;--accent2:#f7c948;--accent3:#ff6b6b;--text:#e6edf3;--muted:#8b949e;--green:#56d364;--red:#f85149;--yellow:#f7c948;--tier1:#4ecdc4;--tier2:#a78bfa;--tier3:#fb923c;--national:#f7c948;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
+header{position:relative;padding:52px 40px 40px;border-bottom:1px solid var(--border);overflow:hidden;}
+header::before{content:'';position:absolute;top:-80px;left:-80px;width:400px;height:400px;background:radial-gradient(circle,rgba(78,205,196,.12) 0%,transparent 70%);pointer-events:none;}
+.htag{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,5vw,58px);line-height:1.1;margin-bottom:12px;}
+h1 em{color:var(--accent);font-style:italic;}
+.hsub{font-size:14px;color:var(--muted);max-width:660px;margin-bottom:12px;}
+.hbadge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.3);border-radius:20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:1px;margin-right:8px;}
+.vbadge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;background:rgba(248,81,73,.1);border:1px solid rgba(248,81,73,.3);border-radius:20px;font-family:'DM Mono',monospace;font-size:11px;color:var(--red);letter-spacing:1px;}
+nav.tabs{display:flex;gap:4px;padding:16px 40px;border-bottom:1px solid var(--border);flex-wrap:wrap;}
+.tab{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;padding:7px 15px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;border-radius:4px;transition:all .2s;text-transform:uppercase;}
+.tab:hover{border-color:var(--accent);color:var(--accent);}
+.tab.active{background:var(--accent);color:var(--bg);border-color:var(--accent);font-weight:600;}
+main{padding:32px 40px;max-width:1440px;margin:0 auto;}
+.panel{display:none;animation:fadeIn .3s ease;}
+.panel.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.sec-title{font-family:'DM Serif Display',serif;font-size:26px;margin-bottom:4px;}
+.sec-sub{font-size:12px;color:var(--muted);margin-bottom:22px;font-family:'DM Mono',monospace;letter-spacing:.5px;}
+.info-box{background:rgba(78,205,196,.07);border:1px solid rgba(78,205,196,.2);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:22px;}
+.info-box strong{color:var(--accent);}
+.warn-box{background:rgba(247,201,72,.07);border:1px solid rgba(247,201,72,.2);border-radius:8px;padding:14px 18px;font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:22px;}
+.warn-box strong{color:var(--yellow);}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px;align-items:center;}
+.filter-btn{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:1px;padding:5px 12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;border-radius:3px;transition:all .2s;text-transform:uppercase;}
+.filter-btn:hover,.filter-btn.active{border-color:var(--accent2);color:var(--accent2);}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.leg-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+.group-hdr{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin:26px 0 14px;display:flex;align-items:center;gap:12px;grid-column:1/-1;}
+.group-hdr::after{content:'';flex:1;height:1px;background:var(--border);}
+.schools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(355px,1fr));gap:18px;}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;transition:border-color .2s,transform .15s;overflow:hidden;}
+.card:hover{border-color:var(--accent);transform:translateY(-2px);}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.card.t1::before{background:var(--tier1);}
+.card.t2::before{background:var(--tier2);}
+.card.t3::before{background:var(--tier3);}
+.card.tn::before{background:var(--national);}
+.tier-badge{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;border-radius:3px;margin-bottom:10px;display:inline-block;}
+.t1 .tier-badge{background:rgba(78,205,196,.15);color:var(--tier1);}
+.t2 .tier-badge{background:rgba(167,139,250,.15);color:var(--tier2);}
+.t3 .tier-badge{background:rgba(251,146,60,.15);color:var(--tier3);}
+.tn .tier-badge{background:rgba(247,201,72,.15);color:var(--national);}
+.school-name{font-family:'DM Serif Display',serif;font-size:19px;margin-bottom:3px;line-height:1.2;}
+.school-loc{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:14px;}
+.status-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-family:'DM Mono',monospace;font-size:11px;font-weight:500;margin-bottom:10px;letter-spacing:.5px;}
+.status-badge.green{background:rgba(86,211,100,.12);color:var(--green);border:1px solid rgba(86,211,100,.3);}
+.status-badge.yellow{background:rgba(247,201,72,.12);color:var(--yellow);border:1px solid rgba(247,201,72,.3);}
+.status-badge.red{background:rgba(248,81,73,.12);color:var(--red);border:1px solid rgba(248,81,73,.3);}
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:12px;}
+.stat-box{background:var(--surface2);border-radius:7px;padding:8px;text-align:center;}
+.stat-val{font-family:'DM Serif Display',serif;font-size:16px;color:var(--accent2);display:block;}
+.stat-lbl{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.5px;margin-top:2px;display:block;}
+.naplex-bar{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--muted);margin-bottom:12px;}
+.naplex-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.naplex-fill{height:100%;border-radius:2px;background:var(--green);}
+.card-desc{font-size:12px;color:var(--muted);line-height:1.65;border-top:1px solid var(--border);padding-top:12px;margin-bottom:12px;}
+.prereq-status{border-top:1px solid var(--border);padding-top:10px;}
+.prereq-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+.pills{display:flex;flex-wrap:wrap;gap:5px;}
+.pill{font-family:'DM Mono',monospace;font-size:10px;padding:3px 7px;border-radius:10px;letter-spacing:.3px;}
+.pill.done{background:rgba(86,211,100,.1);color:var(--green);border:1px solid rgba(86,211,100,.25);}
+.pill.planned{background:rgba(247,201,72,.1);color:var(--yellow);border:1px solid rgba(247,201,72,.25);}
+.pill.missing{background:rgba(248,81,73,.1);color:var(--red);border:1px solid rgba(248,81,73,.25);}
+.pill.na{background:rgba(139,148,158,.08);color:var(--muted);border:1px solid rgba(139,148,158,.18);}
+.card-note{font-size:11px;color:var(--muted);line-height:1.55;padding:8px 10px;background:var(--surface2);border-radius:5px;margin-top:9px;font-family:'DM Mono',monospace;}
+.card-bottom{margin-top:10px;border-top:1px solid var(--border);padding-top:9px;}
+.card-bottom .lbl{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px;}
+.card-bottom .val{font-size:12px;font-family:'DM Mono',monospace;color:var(--accent2);}
+.card-bottom .sub{font-size:11px;color:var(--muted);margin-top:3px;}
+.matrix-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+thead th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:9px 7px;text-align:center;border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;background:var(--bg);z-index:2;}
+thead th:first-child{text-align:left;min-width:190px;}
+tbody tr{border-bottom:1px solid rgba(45,55,72,.4);transition:background .15s;}
+tbody tr:hover{background:var(--surface);}
+tbody td{padding:8px 7px;text-align:center;vertical-align:middle;}
+tbody td:first-child{text-align:left;font-weight:500;white-space:nowrap;}
+.ck{color:var(--green);font-size:13px;}
+.dash{color:var(--border);font-size:13px;}
+.rec{color:var(--accent2);font-size:9px;font-family:'DM Mono',monospace;}
+.cell-done{background:rgba(86,211,100,.06);}
+.cell-planned{background:rgba(247,201,72,.06);}
+.cell-missing{background:rgba(248,81,73,.05);}
+th.stu{background:rgba(78,205,196,.08);color:var(--accent)!important;border-bottom:2px solid var(--accent)!important;}
+.salary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
+.sal-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:22px;}
+.sal-region{font-family:'DM Serif Display',serif;font-size:20px;margin-bottom:4px;}
+.sal-range{font-family:'DM Mono',monospace;font-size:24px;color:var(--accent2);margin:12px 0 6px;}
+.sal-bar-wrap{margin-top:14px;}
+.sal-bar-lbl{display:flex;justify-content:space-between;font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);margin-bottom:5px;}
+.sal-bar-track{height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.sal-bar-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+.sal-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-top:12px;}
+.sal-schools{margin-top:10px;font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);}
+.finance-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:18px;margin-bottom:28px;}
+.fin-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.fin-card h3{font-family:'DM Serif Display',serif;font-size:16px;margin-bottom:12px;color:var(--accent2);}
+.cost-row{display:flex;justify-content:space-between;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(45,55,72,.35);font-size:12px;gap:12px;}
+.cost-row:last-child{border-bottom:none;}
+.cost-lbl{color:var(--muted);flex:1;}
+.cost-val{font-family:'DM Mono',monospace;color:var(--accent2);font-weight:500;white-space:nowrap;}
+.cost-note{font-size:11px;color:var(--muted);margin-top:2px;}
+.sch-table{width:100%;border-collapse:collapse;font-size:12px;}
+.sch-table th{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);padding:8px 10px;text-align:left;border-bottom:1px solid var(--border);}
+.sch-table td{padding:9px 10px;border-bottom:1px solid rgba(45,55,72,.3);vertical-align:top;color:var(--muted);line-height:1.55;}
+.sch-table td:first-child{color:var(--text);font-weight:500;}
+.merit-list{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;}
+.merit-row{display:flex;gap:12px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--border);}
+.merit-row:last-child{border-bottom:none;}
+.merit-dot{min-width:9px;width:9px;height:9px;border-radius:2px;margin-top:4px;flex-shrink:0;}
+.merit-tier{font-weight:600;font-size:13px;margin-bottom:3px;}
+.merit-schools{font-size:12px;color:var(--muted);}
+.checklist{max-width:740px;}
+.check-item{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--border);}
+.check-num{font-family:'DM Serif Display',serif;font-size:28px;color:var(--accent);line-height:1;min-width:36px;}
+.check-content h3{font-size:14px;margin-bottom:5px;font-weight:600;}
+.check-content p{font-size:13px;color:var(--muted);line-height:1.65;}
+.ns-grid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;}
+.ns-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.ns-card h4{font-family:'DM Serif Display',serif;font-size:15px;margin-bottom:5px;}
+.ns-card .ns-schools{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);margin-bottom:6px;}
+.ns-card p{font-size:12px;color:var(--muted);line-height:1.55;}
+/* GLOSSARY */
+.gloss-search{width:100%;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:13px;margin-bottom:20px;outline:none;transition:border-color .2s;}
+.gloss-search:focus{border-color:var(--accent);}
+.gloss-search::placeholder{color:var(--muted);}
+.gloss-alpha-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.alpha-btn{font-family:'DM Mono',monospace;font-size:11px;padding:4px 9px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;border-radius:3px;transition:all .15s;}
+.alpha-btn:hover,.alpha-btn.active-letter{border-color:var(--accent);color:var(--accent);}
+.gloss-section{margin-bottom:28px;}
+.gloss-letter{font-family:'DM Serif Display',serif;font-size:24px;color:var(--accent);margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+.gloss-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;}
+.gloss-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s;}
+.gloss-item:hover{border-color:var(--accent);}
+.gloss-item.hidden{display:none;}
+.gloss-term{font-family:'DM Mono',monospace;font-size:13px;font-weight:500;color:var(--accent2);margin-bottom:6px;}
+.gloss-def{font-size:13px;color:var(--muted);line-height:1.62;}
+.gloss-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:2px 7px;border-radius:3px;margin-top:7px;}
+.gloss-tag.process{background:rgba(78,205,196,.12);color:var(--accent);}
+.gloss-tag.metric{background:rgba(247,201,72,.12);color:var(--yellow);}
+.gloss-tag.financial{background:rgba(167,139,250,.12);color:var(--tier2);}
+.gloss-tag.program{background:rgba(251,146,60,.12);color:var(--tier3);}
+.gloss-tag.clinical{background:rgba(86,211,100,.12);color:var(--green);}
+.gloss-tag.regulatory{background:rgba(248,81,73,.12);color:var(--red);}
+.disclaimer{margin-top:44px;padding:14px 18px;background:rgba(247,201,72,.06);border:1px solid rgba(247,201,72,.2);border-radius:8px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.65;}
+.disclaimer strong{color:var(--yellow);}
+@media(max-width:600px){header,.tabs,main{padding-left:18px;padding-right:18px;}.schools-grid,.gloss-grid,.finance-grid,.salary-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="htag">West Coast + National · PharmD Guide · 2027–2028 Cycle</div>
+  <h1>Your Path to <em>PharmD</em></h1>
+  <p class="hsub">25+ ACPE-accredited programs across CA · AZ · OR · WA · National — verified prerequisites, financial analysis, personalized schedule tracking, and a full pharmacy glossary.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;">
+    <span class="hbadge">🎓 UC Davis · NPB Option A · Target Fall 2028</span>
+    <span class="vbadge">✓ v4 — UCSF verified from official page Feb 2026</span>
+  </div>
+</header>
+<nav class="tabs">
+  <button class="tab active" onclick="showPanel('schools',this)">Schools</button>
+  <button class="tab" onclick="showPanel('prereqs',this)">Prerequisites</button>
+  <button class="tab" onclick="showPanel('mystatus',this)">My Status</button>
+  <button class="tab" onclick="showPanel('financial',this)">Financial</button>
+  <button class="tab" onclick="showPanel('salary',this)">Salaries</button>
+  <button class="tab" onclick="showPanel('strategy',this)">Strategy</button>
+  <button class="tab" onclick="showPanel('glossary',this)">Glossary</button>
+</nav>
+<main>
+<!-- SCHOOLS -->
+<div class="panel active" id="panel-schools">
+  <div class="sec-title">Programs Overview</div>
+  <div class="sec-sub">25+ programs · CA · AZ · OR · WA · National · All ACPE-accredited</div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:var(--tier1)"></div>Tier 1 · Elite</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--tier2)"></div>Tier 2 · Solid Regional</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--tier3)"></div>Tier 3 · Accessible</div>
+    <div class="leg-item"><div class="leg-dot" style="background:var(--national)"></div>National Notable</div>
+  </div>
+  <div class="filter-row">
+    <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-right:4px;">Filter:</span>
+    <button class="filter-btn active" onclick="filterSchools('all',this)">All</button>
+    <button class="filter-btn" onclick="filterSchools('CA',this)">California</button>
+    <button class="filter-btn" onclick="filterSchools('AZ',this)">Arizona</button>
+    <button class="filter-btn" onclick="filterSchools('OR',this)">Oregon</button>
+    <button class="filter-btn" onclick="filterSchools('WA',this)">Washington</button>
+    <button class="filter-btn" onclick="filterSchools('national',this)">National</button>
+  </div>
+  <div class="schools-grid" id="schools-grid"></div>
+</div>
+<!-- PREREQS -->
+<div class="panel" id="panel-prereqs">
+  <div class="sec-title">Prerequisites Matrix</div>
+  <div class="sec-sub">Official requirements verified against PharmCAS + individual program websites · Feb 2026</div>
+  <div class="warn-box"><strong>⚠ v4 Corrections Applied (UCSF verified from official page Feb 2026):</strong> UCSF physics = NOT REQUIRED (removed entirely) · UCSF calculus = 1 course only (not 2) · UCSF microbiology = NOW REQUIRED (4 quarter units, lab required) · UCSF statistics = REQUIRED · UCSF anatomy = NOT required · UCSF biochem = NOT required · UCSF biology = must include cell/mol bio AND whole-animal content — physiology, botany, and micro do NOT count toward bio slot · UCSF humanities block = 28 quarter units total (ECN+PSC+CMN+SOC+ASA = ~20 units — need ~8 more) · UCSD physics = 1 course (confirmed) · UCSD anatomy = flexible (Anatomy OR Micro OR Biochem — pick one) · USC anatomy = NOT required · UOP anatomy = NOT required · UCI statistics = REQUIRED · UCI psychology = REQUIRED. Always verify directly with each program before applying.</div>
+  <div class="info-box"><strong>Legend:</strong> ✓ = Required · Rec = Recommended, not required · — = Not required · The "You" column shows your Option A status. Green = complete. Yellow = scheduled/in progress. Red = not in current plan.</div>
+  <div class="matrix-wrap"><table id="prereq-table"></table></div>
+  <div style="margin-top:30px;">
+    <div class="sec-title" style="font-size:20px;">Non-Science Requirements by School</div>
+    <div class="ns-grid" id="ns-grid"></div>
+  </div>
+</div>
+<!-- MY STATUS -->
+<div class="panel" id="panel-mystatus">
+  <div class="sec-title">My Prerequisite Status</div>
+  <div class="sec-sub">Personalized to UC Davis Option A (NPB Major) · Target completion Spring 2027</div>
+  <div class="info-box"><strong>Your schedule summary:</strong> Gen Chem ✅ · Org Chem ✅ · Biology ✅ (verify BIS 002B/C = 12 quarter units AND covers cell/mol bio + organismal content for UCSF) · Physics ✅ (PHY 007A — satisfies UCSD, UOP, Purdue; NOT required at UCSF) · Biochem ✅ (BIS 103, Winter 27) · Physiology ✅ (NPB 101, Fall 26) · Micro ✅ (MMG 102, Spring 27 — NOW REQUIRED at UCSF) · Stats ✅ (STA 100 — REQUIRED at UCSF &amp; UCI) · Calculus ✅ (1 course sufficient for UCSF — v4 correction) · English ✅ · Anatomy ⚠️ (EXB 106/L → Winter 27) · Speech ⚠️ (CMN 001 → Spring 27) · Economics ⚠️ (ECN 001A → Spring 26) · Psychology ⚠️ (PSC 001 → Fall 26) · <strong>UCSF Humanities gap:</strong> current plan ~20 quarter units — need ~8 more humanities/social science GE units before July 2028.</div>
+  <div id="status-cards"></div>
+</div>
+<!-- FINANCIAL -->
+<div class="panel" id="panel-financial">
+  <div class="sec-title">Financial Analysis</div>
+  <div class="sec-sub">Total cost of attendance · Scholarships · Loan repayment · Merit aid rankings</div>
+  <div class="info-box"><strong>Key principle:</strong> Sticker price ≠ net cost. UC schools are need-based only — no merit. Many private schools offer substantial merit that can bring net cost below UC sticker. Always calculate net price after all aid.</div>
+  <div class="group-hdr" style="grid-column:unset;margin-top:4px;">Program Cost Estimates</div>
+  <div class="finance-grid" id="finance-grid"></div>
+  <div class="group-hdr" style="grid-column:unset;margin-top:4px;">Scholarship & Funding Sources</div>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:28px;overflow-x:auto;"><table class="sch-table" id="sch-table"></table></div>
+  <div class="group-hdr" style="grid-column:unset;">Loan Repayment & Forgiveness</div>
+  <div class="finance-grid" id="loan-grid"></div>
+  <div class="group-hdr" style="grid-column:unset;margin-top:4px;">Merit Aid Rankings</div>
+  <div class="merit-list" id="merit-list"></div>
+</div>
+<!-- SALARY -->
+<div class="panel" id="panel-salary">
+  <div class="sec-title">Regional Market Analysis</div>
+  <div class="sec-sub">Median pharmacist compensation by region · 2025–2026 BLS data estimates</div>
+  <div class="salary-grid" id="salary-grid"></div>
+</div>
+<!-- STRATEGY -->
+<div class="panel" id="panel-strategy">
+  <div class="sec-title">Strategic Application Checklist</div>
+  <div class="sec-sub">Priority actions · UC Davis NPB Option A · Fall 2028 target</div>
+  <div class="checklist" id="checklist"></div>
+</div>
+<!-- GLOSSARY -->
+<div class="panel" id="panel-glossary">
+  <div class="sec-title">Pharmacy School Glossary</div>
+  <div class="sec-sub">Key terms, acronyms, and concepts every pre-pharmacy student should know</div>
+  <input class="gloss-search" id="gloss-search" type="text" placeholder="Search terms… (e.g. NAPLEX, PharmCAS, APPE, PSLF)" oninput="filterGloss(this.value)">
+  <div class="gloss-alpha-nav" id="alpha-nav"></div>
+  <div id="gloss-container"></div>
+</div>
+<div class="disclaimer"><strong>⚠ Disclaimer:</strong> This guide reflects data available as of February 2026. v4 UCSF prerequisites were verified directly from the official pharmd.ucsf.edu/admissions/reqs/academic page (Feb 2026) — physics is NOT required, calculus is 1 course only, and microbiology and statistics are now required standalone prerequisites. UCSD prerequisites were verified directly from pharmacy.ucsd.edu/admissions/admissions-requirements (Feb 2026). All other school data reflects best available information — always re-verify every requirement on PharmCAS.org and each school's official admissions website during your actual application year (2027). NAPLEX pass rates shown are estimates from secondary sources; per-school official data is not universally published. PCAT was retired January 2024 — it is not required anywhere. Samuel Merritt University has NO PharmD program.</div>
+</main>
+<script>
+// ── STUDENT STATUS ─────────────────────────────────
+const S={genChem:'done',orgChem:'done',biochem:'done',biology:'done',micro:'planned',anatomy:'planned',physiology:'done',calculus:'done',stats:'done',physics:'done',english:'done',speech:'missing',economics:'missing',psychology:'missing',humanBehavior:'missing'};
+const ico=s=>s==='done'?'✅':s==='planned'?'⚠️':s==='missing'?'❌':'—';
+const cls=s=>s==='done'?'done':s==='planned'?'planned':s==='missing'?'missing':'na';
+
+// ── SCHOOL DATA (v3 accuracy-corrected) ────────────
+const schools=[
+{name:"UC San Francisco",short:"UCSF",tier:1,state:"CA",loc:"San Francisco, CA",gpa:"2.8 min / ~3.5 avg",tuition:"~$45k",years:3,naplex:95,totalCost:"~$135k (3yr)",merit:"None — need-based FAFSA/CADAA only",desc:"#1-ranked nationally. 3-year accelerated year-round. NIH funding leader 45+ consecutive years. Strongest pipeline to pharma R&D, biotech, academic medicine. Priority deadline Oct 1, final Dec 1.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0},biology:{r:1,n:"Cell/Mol+Organismal"},micro:{r:1,n:"1 course+lab"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:1,n:"REQUIRED"},physics:{r:0},english:{r:1,n:"2 courses"},speech:{r:1,n:"1 course"},economics:{r:1,n:"1 course"},psychology:{r:1,n:"1 course"},humanBehavior:{r:1,n:"1 course"}},
+note:"Physics NOT required (v4 correction). Calculus = 1 course only (v4 correction). Micro REQUIRED — MMG 102 ✅ Spring 27. Stats REQUIRED — STA 100 ✅. Biology must include cell/mol bio AND whole-animal content — verify BIS 002B/C covers both. Speech, Econ, Psych, Human Behavior all required — add CMN001, ECN001A, PSC001. Humanities block = 28 quarter units total — current plan ~20 units, need ~8 more GE electives. Final deadline Jan 5 (not Dec 1 — Dec 1 is priority deadline only).",overall:"yellow"},
+
+{name:"UC San Diego — Skaggs",short:"UCSD",tier:1,state:"CA",loc:"La Jolla, CA",gpa:"3.0 min / ~3.5 avg",tuition:"~$45k",years:4,naplex:93,totalCost:"~$180k (4yr)",merit:"None — need-based only",desc:"Top-10 nationally. PharmD/PhD and PharmD/MPH available. First-year pharmacy students take courses alongside medical students. Priority deadline Oct 1, final Jan 5.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course+lab†"},biology:{r:1,n:"Cell/Mol+lab"},micro:{r:1,n:"1 course+lab†"},anatomy:{r:1,n:"1 course+lab†"},physiology:{r:1,n:"1 course+lab"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:1,n:"1 course ✓"},english:{r:1,n:"2 courses"},speech:{r:1,n:"1 course"},economics:{r:1,n:"1 course"},psychology:{r:0},humanBehavior:{r:1,n:"1 course"}},
+note:"† Flexible: UCSD requires Anatomy OR Micro OR Biochem — only ONE needed. BIS 103 (biochem) already satisfies this. Physics = 1 course only (PHY 007A ✅). Speech, Econ, Human Behavior required — add to electives.",overall:"yellow"},
+
+{name:"University of Southern California",short:"USC",tier:1,state:"CA",loc:"Los Angeles, CA",gpa:"3.0 min / ~3.4 avg",tuition:"~$59k",years:4,naplex:88,totalCost:"~$236k (4yr sticker)",merit:"Dean's Scholarship — merit awards available",desc:"Founded world's first PharmD program. Strong alumni network, dual-degree options (MBA, MPH, JD, MS). Extensive LA clinical network. Rolling admissions — submit early.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 upper-div‡"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0,n:"Rec."},english:{r:1,n:"2 courses"},speech:{r:0},economics:{r:0},psychology:{r:0,n:"Rec."},humanBehavior:{r:0,n:"Rec."}},
+note:"‡ Biochem must be upper-division at a 4-year institution — community college biochem does NOT satisfy. Anatomy NOT required. No econ or speech required. Rolling admissions — aim for Aug 1 submission.",overall:"green"},
+
+{name:"UC Irvine — School of Pharmacy",short:"UCI",tier:1,state:"CA",loc:"Irvine, CA",gpa:"~3.0 preferred",tuition:"~$45k",years:4,naplex:80,totalCost:"~$180k (4yr)",merit:"None — need-based only",desc:"Full ACPE accreditation June 2025. First public pharmacy school in LA/OC. Rolling admissions with Dec 1 priority deadline. Interprofessional with UCI medicine, nursing, public health.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:0},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:1,n:"REQUIRED"},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:1,n:"1 course"},economics:{r:1,n:"REQUIRED"},psychology:{r:1,n:"REQUIRED"},humanBehavior:{r:0}},
+note:"Stats REQUIRED (STA100 ✅). Psychology REQUIRED (add PSC001). Economics REQUIRED (add ECN001A — top priority). Speech required (add CMN001). Rolling — apply by Aug 1 for max seat availability.",overall:"yellow"},
+
+{name:"University of the Pacific",short:"UOP",tier:2,state:"CA",loc:"Stockton, CA",gpa:"2.7 min / ~3.4 avg",tuition:"~$74k",years:3,naplex:90,totalCost:"~$222k (3yr sticker)",merit:"Auto merit consideration — $5k–$20k+/yr",desc:"First US 3-yr accelerated PharmD. Free NAPLEX/CPJE prep for all graduates. No bachelor's degree required. Rolling admissions — apply early in cycle.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course+lab"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:1,n:"1 course+lab"},english:{r:1,n:"2 courses"},speech:{r:1,n:"1 course"},economics:{r:1,n:"1 course"},psychology:{r:1,n:"1 course"},humanBehavior:{r:0}},
+note:"Anatomy NOT required (v3 correction). Physics 1 course+lab (PHY 007A ✅). Speech, Econ, Psychology all required — add CMN001, ECN001A, PSC001. Micro required (Spring 27 ⚠). 3yr saves one full year of living costs.",overall:"yellow"},
+
+{name:"Western University",short:"WesternU",tier:2,state:"CA",loc:"Pomona, CA",gpa:"2.75 min",tuition:"~$51k",years:4,naplex:84,totalCost:"~$204k (4yr)",merit:"WesternU Foundation scholarships",desc:"Largest clinical rotation network in CA (350+ sites spanning Southern CA, AZ, nationally). Multi-professional health sciences campus with strong IPE. More accessible admissions.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0,n:"Rec."},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0,n:"Rec."},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Strong match — most prereqs on track by Fall 26. Micro required (Spring 27 ⚠). Good target/safety option.",overall:"yellow"},
+
+{name:"California Northstate University",short:"CNU",tier:2,state:"CA",loc:"Elk Grove (Sacramento), CA",gpa:"2.7 min",tuition:"~$47k",years:3,naplex:88,totalCost:"~$141k (3yr)",merit:"CNU Foundation — limited",desc:"Sacramento-area, 3-year accelerated. First in the nation to launch PharmD/MD and PharmD/DMD dual pathways (Fall 2026). #4 CA NAPLEX. Team-based learning. Strong geographic alignment with UC Davis.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Strong match. No anatomy required. Biochem ✅ Fall 26. Micro required (Spring 27 ⚠). UC Davis → CNU is a natural geographic pipeline. NHSC loan repayment eligible.",overall:"yellow"},
+
+{name:"Touro University California",short:"Touro",tier:2,state:"CA",loc:"Vallejo, CA",gpa:"2.75 min",tuition:"~$46k",years:4,naplex:85,totalCost:"~$183k (4yr)",merit:"Touro Foundation — limited",desc:"Bay Area/NorCal clinical network. Chronic disease management certification built in at no extra cost. Closest private school geographically to UC Davis.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0,n:"Rec."},physiology:{r:1,n:"1 course"},calculus:{r:0},stats:{r:1,n:"1 course"},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Stats required (STA100 ✅). Micro required (Spring 27 ⚠). Close to Davis geographically. Good target.",overall:"yellow"},
+
+{name:"Loma Linda University",short:"LLU",tier:2,state:"CA",loc:"Loma Linda, CA",gpa:"2.75 min",tuition:"~$46k",years:4,naplex:87,totalCost:"~$184k (4yr)",merit:"LLU Foundation + Adventist discount",desc:"Affiliated with Loma Linda University Health — top West Coast health system. Exceptional clinical training depth. Strong geriatrics and specialty pharmacy.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0,n:"Rec."},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Strong match. All required prereqs on track. Micro required (Spring 27 ⚠). Affiliated health system offers exceptional rotation depth.",overall:"yellow"},
+
+{name:"Chapman University School of Pharmacy",short:"Chapman",tier:2,state:"CA",loc:"Irvine, CA",gpa:"~3.0",tuition:"~$65k",years:3,naplex:82,totalCost:"~$195k (33-month program)",merit:"Chapman Dean's Scholarship — can be generous",desc:"33-month accelerated program (8 trimesters). Small cohorts. OC biotech/pharma proximity. Tuition ~$65k/yr by trimester equivalent (corrected from earlier guide versions).",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. Micro required (Spring 27 ⚠). 33 months = effectively 3 years. Merit scholarships worth pursuing. Verify current trimester tuition directly.",overall:"yellow"},
+
+{name:"Keck Graduate Institute",short:"KGI",tier:2,state:"CA",loc:"Claremont, CA",gpa:"2.8 min",tuition:"~$47k",years:4,naplex:83,totalCost:"~$188k (4yr)",merit:"KGI Foundation scholarships",desc:"Claremont Colleges consortium. Innovative blend of pharmacy and bioscience/management. Best for pharma industry or regulatory science tracks. Translational research focus.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. Franz lab research background is an asset — KGI values industry/research orientation. Micro required (Spring 27 ⚠).",overall:"yellow"},
+
+{name:"Marshall B. Ketchum University",short:"Ketchum",tier:2,state:"CA",loc:"Fullerton, CA",gpa:"2.8 min",tuition:"~$46k",years:4,naplex:83,totalCost:"~$184k (4yr)",merit:"Ketchum Foundation scholarships",desc:"Health sciences university (optometry + pharmacy). Strongest community pharmacy emphasis of CA private schools. Orange County clinical network. Fewest hard prerequisites listed.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0,n:"Rec."},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:0},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Excellent match — lightest hard prereq burden of listed CA schools. Micro required (Spring 27 ⚠). Best safety option in CA.",overall:"yellow"},
+
+{name:"California Health Sciences Univ.",short:"CHSU",tier:2,state:"CA",loc:"Clovis (Fresno), CA",gpa:"2.7 min",tuition:"~$46k",years:4,naplex:81,totalCost:"~$184k (4yr)",merit:"NHSC commitment scholarships",desc:"Mission: serve medically underserved Central Valley. NHSC Loan Repayment eligible post-graduation. Strong community pharmacy focus. Close to UC Davis geography.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:0},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. Micro required (Spring 27 ⚠). NHSC loan repayment can dramatically reduce debt for underserved practice commitment.",overall:"yellow"},
+
+{name:"American Univ. of Health Sciences",short:"AUHS",tier:3,state:"CA",loc:"Signal Hill, CA",gpa:"2.7 min",tuition:"~$60k",years:3,naplex:75,totalCost:"~$180k (3yr sticker)",merit:"Limited — primarily loans",desc:"ACPE-accredited. 3-year accelerated. More accessible admissions. Evaluate ROI carefully given high tuition relative to program size and reputation. Safety use only.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0,n:"Rec."},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:0},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Meets requirements. Safety use only — high tuition vs program reputation warrants careful ROI analysis. Micro required (Spring 27 ⚠).",overall:"yellow"},
+
+{name:"Charles R. Drew University",short:"CDU",tier:3,state:"CA",loc:"Los Angeles, CA",gpa:"2.7 min",tuition:"~$47k",years:4,naplex:78,totalCost:"~$188k (4yr)",merit:"HBCU grants + minority pharmacy scholarships",desc:"HBCU-affiliated. Mission: serve underrepresented communities in South LA. Access to federal HBCU grants and ASHP/NABP minority scholarships. Community health focus.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0,n:"Rec."},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:0},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Meets requirements. Micro required (Spring 27 ⚠). Unique scholarship access for qualifying applicants.",overall:"yellow"},
+
+{name:"University of Arizona",short:"UA",tier:1,state:"AZ",loc:"Tucson + Phoenix, AZ",gpa:"2.5 min",tuition:"~$35k",years:4,naplex:87,totalCost:"~$140k in-state",merit:"UA Foundation — competitive merit awards",desc:"Flagship AZ program since 1947. One of the lowest in-state tuitions in this guide. Strong clinical pharmacy and geriatrics. Both Tucson and Phoenix campuses. AZ residency possible after 1 year.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:0},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:1,n:"1 course"},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:1,n:"1 course"},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:1,n:"1 course"},psychology:{r:0},humanBehavior:{r:0}},
+note:"Anatomy required (EXB 106/L → Winter 27 ⚠ critical move). Econ required (add ECN001A). Physics ✅ (PHY 007A). OOS tuition ~$50k — evaluate AZ residency option after 1yr.",overall:"yellow"},
+
+{name:"Midwestern University — Glendale",short:"MWU",tier:2,state:"AZ",loc:"Glendale, AZ",gpa:"2.8 min",tuition:"~$50k",years:4,naplex:85,totalCost:"~$200k (4yr)",merit:"MWU Foundation scholarships",desc:"Large health sciences campus, strong IPE. More accessible for OOS applicants than UA. Good Southwest option for CA students broadening their list.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. No anatomy required. Biochem ✅ Fall 26. Micro required (Spring 27 ⚠). Good target for expanding beyond CA.",overall:"yellow"},
+
+{name:"Creighton University — Phoenix",short:"Creighton",tier:2,state:"AZ",loc:"Phoenix, AZ",gpa:"3.0 min",tuition:"~$52k",years:4,naplex:88,totalCost:"~$208k (4yr)",merit:"Presidential Scholarship + Jesuit Mission awards",desc:"Phoenix campus of nationally respected Jesuit institution. Mission-driven, service-oriented. Strong national residency placement. Seek merit scholarships early.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0,n:"Rec."},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. Biochem ✅ Fall 26. Micro required (Spring 27 ⚠). Presidential Scholarship — apply priority deadline.",overall:"yellow"},
+
+{name:"Oregon State / OHSU",short:"OSU/OHSU",tier:1,state:"OR",loc:"Portland + Corvallis, OR",gpa:"2.75 min",tuition:"~$35k",years:4,naplex:91,totalCost:"~$140k in-state",merit:"OSU COP Foundation scholarships",desc:"Oregon flagship joint program with OHSU. Dual-campus clinical access. Consistently high NAPLEX rates. Interprofessional with OHSU Medicine, Nursing, Dentistry.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:1,n:"1 course"},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:1,n:"1 course"},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Anatomy required (Winter 27 ⚠ critical). Speech required (add CMN001). Micro required (Spring 27 ⚠). Strong PNW option.",overall:"yellow"},
+
+{name:"Pacific University Oregon",short:"PacU OR",tier:2,state:"OR",loc:"Hillsboro, OR",gpa:"2.8 min",tuition:"~$48k",years:4,naplex:82,totalCost:"~$192k (4yr)",merit:"Pacific University pharmacy scholarships",desc:"ACPE-accredited. Smaller cohorts. Portland west suburbs (tech corridor). Primary care and interprofessional emphasis.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0,n:"Rec."},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. Micro required (Spring 27 ⚠). Compare net cost vs OSU in-state. Rolling admissions advantage.",overall:"yellow"},
+
+{name:"University of Washington",short:"UW",tier:1,state:"WA",loc:"Seattle, WA",gpa:"3.0 min",tuition:"~$40k",years:4,naplex:92,totalCost:"~$160k in-state / ~$260k OOS",merit:"UW Pharmacy Alumni + Foundation awards",desc:"Pacific Northwest flagship. Nationally ranked. Deep UW Medicine and VA Puget Sound clinical ties. Strong residency match. OOS tuition very high — evaluate carefully.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:1,n:"1 course"},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:1,n:"1 course"},economics:{r:1,n:"1 course"},psychology:{r:0},humanBehavior:{r:0}},
+note:"Anatomy required (Winter 27 ⚠). Speech + Econ needed — add CMN001, ECN001A. OOS tuition ~$65k/yr — evaluate total cost carefully.",overall:"yellow"},
+
+{name:"Washington State University",short:"WSU",tier:2,state:"WA",loc:"Pullman + Spokane, WA",gpa:"2.7 min",tuition:"~$27k",years:4,naplex:85,totalCost:"~$108k in-state",merit:"WSU COP Foundation + Eastern WA assoc.",desc:"Second WA ACPE-accredited program. Land-grant, rural/community mission. LOWEST in-state tuition of any program in this guide. Spokane campus offers urban clinical experience.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Strong match. No anatomy required. Biochem ✅ Fall 26. Micro required (Spring 27 ⚠). Lowest tuition of any listed program for in-state.",overall:"yellow"},
+
+{name:"UNC Eshelman School of Pharmacy",short:"UNC",tier:1,state:"national",loc:"Chapel Hill, NC",gpa:"3.2 min",tuition:"~$50k OOS",years:4,naplex:96,totalCost:"~$200k OOS",merit:"Fellowships + stipends for PharmD/PhD",desc:"Ranked #1–2 nationally. Extraordinary research curriculum. Largest PharmD/PhD pipeline in the country. Best for pharmaceutical sciences or clinical research careers.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good prereq match. Franz lab research background is a major asset here. OOS cost offset by research stipend on PharmD/PhD track. Apply if targeting research-focused pharmacy.",overall:"yellow"},
+
+{name:"University of Michigan",short:"U Mich",tier:1,state:"national",loc:"Ann Arbor, MI",gpa:"3.2 min",tuition:"~$55k OOS",years:4,naplex:94,totalCost:"~$220k OOS",merit:"Robust grad funding for PharmD/PhD",desc:"Consistently top-5 nationally. Research powerhouse. Strong pharma industry pipeline to Midwest companies. Best for PharmD/PhD or industrial pharmacy.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. OOS costs high — best ROI on PharmD/PhD track with stipend. Franz lab background is an asset.",overall:"yellow"},
+
+{name:"University of Minnesota",short:"UMinn",tier:1,state:"national",loc:"Minneapolis, MN",gpa:"3.0 min",tuition:"~$42k OOS",years:4,naplex:93,totalCost:"~$168k OOS",merit:"Competitive merit scholarships",desc:"Top-10 nationally. Pioneered outcomes-based pharmacy practice. Outstanding health outcomes research and health policy programs. Most affordable OOS tuition among top-10.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. Most affordable OOS tuition among top-10 programs. Worth considering if open to the Midwest.",overall:"yellow"},
+
+{name:"Purdue University",short:"Purdue",tier:1,state:"national",loc:"West Lafayette, IN",gpa:"3.0 min",tuition:"~$47k OOS",years:4,naplex:93,totalCost:"~$188k OOS",merit:"Purdue Foundation + pharma industry scholarships",desc:"Top-10 nationally. #1 for pharmaceutical sciences/industry pipeline. Eli Lilly HQ nearby. Industry-sponsored scholarships from pharma companies. Research background highly valued.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:1,n:"1 course"},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Strong match. Physics (PHY 007A ✅). Franz lab background aligns perfectly with Purdue's pharma sciences emphasis. Industry scholarships often generous.",overall:"yellow"},
+
+{name:"UT Austin College of Pharmacy",short:"UT Austin",tier:1,state:"national",loc:"Austin, TX",gpa:"3.0 min",tuition:"~$42k OOS",years:4,naplex:94,totalCost:"~$168k OOS",merit:"UT Austin Foundation scholarships",desc:"Among highest NAPLEX rates nationally. Austin's growing biotech/healthcare scene. Competitive merit scholarships. Affordable OOS tuition relative to program quality.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Strong match. Very high NAPLEX rates. Affordable OOS. Strong option if open to Texas.",overall:"yellow"},
+
+{name:"Rutgers Ernest Mario School",short:"Rutgers",tier:2,state:"national",loc:"Piscataway, NJ",gpa:"2.9 min",tuition:"~$48k OOS",years:4,naplex:89,totalCost:"~$192k OOS",merit:"Ernest Mario Foundation + pharma industry partnerships",desc:"Heart of NJ pharma corridor (Pfizer, J&J, Merck, Novartis). Exceptional industry externship pipelines. Best for pharmaceutical industry or regulatory affairs careers.",
+prereqs:{genChem:{r:1,n:"1yr+lab"},orgChem:{r:1,n:"1yr+lab"},biochem:{r:1,n:"1 course"},biology:{r:1,n:"1yr+lab"},micro:{r:1,n:"1 course"},anatomy:{r:0},physiology:{r:1,n:"1 course"},calculus:{r:1,n:"1 course"},stats:{r:0},physics:{r:0},english:{r:1,n:"1yr"},speech:{r:0},economics:{r:0},psychology:{r:0},humanBehavior:{r:0}},
+note:"Good match. NJ pharma corridor aligns with research background. Industry scholarships via Pfizer/J&J/Merck partnerships.",overall:"yellow"},
+];
+// ── PREREQ MATRIX ─────────────────────────────────
+const mCols=[{k:"UCSF",i:0},{k:"UCSD",i:1},{k:"USC",i:2},{k:"UCI",i:3},{k:"UOP",i:4},{k:"CNU",i:6},{k:"UA",i:15},{k:"OSU",i:18},{k:"UW",i:20},{k:"UNC",i:22},{k:"Purdue",i:25}];
+const mRows=[
+  {l:"Gen Chemistry (1yr+lab)",k:"genChem"},
+  {l:"Organic Chemistry (1yr+lab)",k:"orgChem"},
+  {l:"Biochemistry",k:"biochem"},
+  {l:"General Biology (1yr+lab)",k:"biology"},
+  {l:"Microbiology",k:"micro"},
+  {l:"Human Anatomy",k:"anatomy"},
+  {l:"Human Physiology",k:"physiology"},
+  {l:"Calculus",k:"calculus"},
+  {l:"Statistics",k:"stats"},
+  {l:"Physics",k:"physics"},
+  {l:"English / Writing",k:"english"},
+  {l:"Public Speaking / Speech",k:"speech"},
+  {l:"Economics",k:"economics"},
+  {l:"Psychology",k:"psychology"},
+  {l:"Human Behavior / Soc.",k:"humanBehavior"},
+];
+const nsData=[
+  {s:"English / Writing",sc:"All programs",n:"2 courses at all major programs. ENL 003 + UWP 104F satisfies all listed schools."},
+  {s:"Public Speaking",sc:"UCSF, UCSD, UOP, OSU/OHSU, UW",n:"Dedicated public speaking required. CMN 001 or CMN 003 at Davis. Interpersonal comm courses do NOT satisfy — must be explicitly public speaking."},
+  {s:"Economics",sc:"UCSF, UCSD, UCI (required), UA, UW, UOP",n:"Micro or macro acceptable at most. UCI requires this — add ECN 001A immediately. UCSF, UCSD, UW, UA all require it. UOP requires it."},
+  {s:"Psychology",sc:"UCSF, UCI, UOP (required); USC, UCSD (recommended)",n:"PSC 001 at UC Davis. Required at UCSF, UCI, UOP. Recommended at USC and UCSD. Use one elective slot."},
+  {s:"Human Behavior / Sociology",sc:"UCSF, UCSD",n:"Psych OR Sociology OR Cultural Anthropology. Both UCSF and UCSD require this as part of their humanities/social science block."},
+];
+
+// ── FINANCIAL DATA ─────────────────────────────────
+const finGroups=[
+  {grp:"California Public (Need-Based Aid Only)",items:[
+    {n:"UCSF",yr:"~$45k/yr",tot:"~$135k (3yr)",m:"None",nt:"SF COL very high. Need-based only."},
+    {n:"UCSD",yr:"~$45k/yr",tot:"~$180k (4yr)",m:"None",nt:"SD COL lower than SF."},
+    {n:"UC Irvine",yr:"~$45k/yr",tot:"~$180k (4yr)",m:"None",nt:"Newest UC. Same aid model."},
+  ]},
+  {grp:"California Private — Best Value",items:[
+    {n:"CNU (3yr)",yr:"~$47k/yr",tot:"~$141k",m:"Limited institutional",nt:"3yr saves 1yr living expenses. UC Davis geography."},
+    {n:"WesternU",yr:"~$51k/yr",tot:"~$204k",m:"WesternU Foundation",nt:"350+ rotation sites."},
+    {n:"Touro",yr:"~$46k/yr",tot:"~$183k",m:"Limited",nt:"Free chronic disease cert."},
+    {n:"LLU",yr:"~$46k/yr",tot:"~$184k",m:"LLU + Adventist discount",nt:"Top-tier affiliated health system."},
+    {n:"KGI",yr:"~$47k/yr",tot:"~$188k",m:"KGI Foundation",nt:"Industry-focused. Claremont."},
+    {n:"Ketchum",yr:"~$46k/yr",tot:"~$184k",m:"Ketchum Foundation",nt:"Lightest prereq burden in CA."},
+    {n:"CHSU",yr:"~$46k/yr",tot:"~$184k",m:"NHSC commitment awards",nt:"NHSC loan repayment eligible."},
+  ]},
+  {grp:"California Private — High Sticker (Merit Can Offset Significantly)",items:[
+    {n:"USC",yr:"~$59k/yr",tot:"~$236k",m:"Dean's Scholarship — apply",nt:"Rolling. Net cost can drop substantially."},
+    {n:"UOP (3yr)",yr:"~$74k/yr",tot:"~$222k",m:"Auto merit $5k–$20k+/yr",nt:"3yr. No bachelor's required."},
+    {n:"Chapman (33mo)",yr:"~$65k/yr",tot:"~$195k",m:"Chapman Dean's",nt:"33 months. Verify trimester billing."},
+  ]},
+  {grp:"AZ / OR / WA Public (In-State Tuition)",items:[
+    {n:"UA (AZ)",yr:"~$35k/yr",tot:"~$140k",m:"UA Foundation awards",nt:"Low in-state tuition for Southwest."},
+    {n:"OSU/OHSU (OR)",yr:"~$35k/yr",tot:"~$140k",m:"OSU COP Foundation",nt:"OR flagship. Strong NAPLEX."},
+    {n:"WSU (WA)",yr:"~$27k/yr",tot:"~$108k",m:"WSU COP + local assoc.",nt:"LOWEST tuition in this guide."},
+    {n:"UW (WA)",yr:"~$40k/yr",tot:"~$160k",m:"UW Pharmacy Alumni",nt:"PNW flagship. OOS expensive."},
+  ]},
+  {grp:"National Programs (Out-of-State)",items:[
+    {n:"UNC Eshelman",yr:"~$50k OOS",tot:"~$200k",m:"PharmD/PhD fellowships",nt:"#1-2 nationally. Research stipend offsets OOS cost."},
+    {n:"U Michigan",yr:"~$55k OOS",tot:"~$220k",m:"Grad funding (PhD track)",nt:"Top-5. Best via PhD track stipend."},
+    {n:"U Minnesota",yr:"~$42k OOS",tot:"~$168k",m:"Competitive scholarships",nt:"Most affordable OOS among top-10."},
+    {n:"Purdue",yr:"~$47k OOS",tot:"~$188k",m:"Industry pharma scholarships",nt:"Eli Lilly nearby. Best pharma pipeline."},
+    {n:"UT Austin",yr:"~$42k OOS",tot:"~$168k",m:"UT Foundation",nt:"Very high NAPLEX. Competitive value."},
+    {n:"Rutgers",yr:"~$48k OOS",tot:"~$192k",m:"Industry partnership awards",nt:"NJ pharma corridor."},
+  ]},
+];
+const scholarships=[
+  {n:"CPhA Foundation",amt:"Varies",el:"CA residents",nt:"Multiple annual awards. Key for CA applicants."},
+  {n:"ASHP Foundation",amt:"$3k–$7k",el:"National",nt:"Multiple pharmacy student categories."},
+  {n:"AFPE — American Foundation for Pharmaceutical Education",amt:"$7.5k–$15k",el:"PharmD/PhD research track",nt:"Highly relevant — Franz lab research background qualifies you."},
+  {n:"NABP + State Assoc. (CPhA, WSPA, OPA, AzPA)",amt:"Varies",el:"State-specific",nt:"Research associations for every state you apply to."},
+  {n:"NHSC Loan Repayment Program",amt:"Up to $50k/2yr",el:"Underserved site practice",nt:"Tax-free. Massive debt relief. CHSU, CDU, CNU graduates especially."},
+  {n:"IHS (Indian Health Service) Loan Repayment",amt:"Up to $50k/2yr",el:"Native American health service practice",nt:"Tax-advantaged. Renewable 2-year terms."},
+  {n:"Pharma Industry Scholarships",amt:"Varies",el:"Program-specific (Purdue, Rutgers, KGI)",nt:"Eli Lilly, Pfizer, J&J, Merck sponsor directly at partner schools."},
+  {n:"Federal Direct Unsubsidized Loans",amt:"$20.5k/yr max",el:"All PharmD students",nt:"File FAFSA by March 1 every year."},
+  {n:"Grad PLUS Loans",amt:"Remaining COA",el:"All PharmD (credit check)",nt:"Covers COA gap above Unsubsidized limit. Interest accrues immediately."},
+];
+const loans=[
+  {n:"NHSC Loan Repayment",d:"National Health Service Corps",amt:"Up to $50k/2yr, renewable",el:"NHSC-designated underserved site",fit:"CHSU, CDU, CNU, or any grad practicing in underserved area"},
+  {n:"IHS Loan Repayment",d:"Indian Health Service",amt:"Up to $50k/2yr",el:"IHS-designated facilities",fit:"Any program graduate committed to Native American health service"},
+  {n:"PSLF — Public Service Loan Forgiveness",d:"Federal, 10yr public service",amt:"Remaining balance after 120 payments",el:"Government or 501(c)(3) employer",fit:"VA pharmacists, nonprofit hospital systems, academic medical centers"},
+  {n:"State Loan Repayment",d:"CA, WA, OR state programs",amt:"Varies by state",el:"Underserved practice in that state",fit:"Graduating and practicing in CA, WA, or OR underserved areas"},
+];
+const merits=[
+  {t:"Most Generous Merit Aid",s:"USC, UOP, Chapman, Creighton, Midwestern, Pacific Univ OR",c:"var(--green)"},
+  {t:"Moderate Merit Availability",s:"WesternU, Touro, KGI, Ketchum, LLU, CNU, CHSU, CDU, WSU, UMinn, UT Austin, Purdue, Rutgers",c:"var(--yellow)"},
+  {t:"Need-Based Only (No Merit)",s:"UCSF, UCSD, UC Irvine",c:"var(--red)"},
+  {t:"Research Fellowship / PhD Track Aid",s:"UNC Eshelman, U Michigan, AFPE (national), Purdue",c:"var(--tier2)"},
+];
+
+// ── SALARY DATA ────────────────────────────────────
+const salaries=[
+  {r:"California",st:"CA",range:"$157k–$162k",bar:97,d:"Highest median nationally. Strong biotech and pharma industry. Factor in very high COL — SF and LA among most expensive US markets. Central Valley and Inland Empire offer better COL ratios. Pharmacy technician background gives you a head start in these competitive markets.",sc:"UCSF · UCSD · USC · UCI · UOP · WesternU · CNU · Touro · LLU · Chapman · KGI · Ketchum · CHSU · CDU"},
+  {r:"Pacific Northwest",st:"WA / OR",range:"$149k–$156k",bar:88,d:"Favorable salary-to-COL ratio vs California. Seattle growing with tech industry adjacency driving demand. Portland market solid. WSU graduates well-positioned in Eastern WA/Inland Northwest rural markets with NHSC-eligible underserved areas.",sc:"UW · WSU · OSU/OHSU · PacU OR"},
+  {r:"Arizona",st:"AZ",range:"$136k–$142k",bar:75,d:"Lower median substantially offset by much lower housing/COL. Phoenix is one of the fastest-growing pharmacy markets nationally. Geriatrics and ambulatory care demand strong. AZ residency allows in-state tuition after 1 year at UA.",sc:"UA · MWU · Creighton Phoenix"},
+  {r:"National Program Markets",st:"IN · MN · NC · NJ · MI · TX",range:"$145k–$158k",bar:82,d:"Competitive salaries with substantially lower COL than California. Pharma industry roles (NJ, IN) often pay significant premiums over clinical roles. Academic medical center roles (NC, MI, MN) strong and growing. Austin TX market expanding rapidly.",sc:"Purdue · UMinn · UNC · Rutgers · U Mich · UT Austin"},
+];
+
+// ── STRATEGY CHECKLIST ────────────────────────────
+const checks=[
+  {n:"01",t:"Move Anatomy and Micro — Non-Negotiable",p:"EXB 106/106L (Anatomy) must move to Winter 2027, and MMG 102 (Microbiology) to Spring 2027. These two moves are the single most critical actions in your entire application prep. EXB 106 has intense enrollment competition at Davis — register the moment your window opens. If you can't get in, have a community college backup plan ready."},
+  {n:"02",t:"Add ECN 001A (Economics) ASAP",p:"Economics is REQUIRED at UCI, UCSF, UCSD, UA, UW, and UOP. UCI specifically lists this as a hard requirement. Put ECN 001A in your next available elective slot — Fall 2025 or Winter 2026. This is one of the most commonly missed requirements for UC Davis applicants."},
+  {n:"03",t:"Add CMN 001 (Speech) and PSC 001 (Psychology)",p:"Public Speaking is required at UCSF, UCSD, UOP, OSU/OHSU, and UW. Psychology is required at UCSF, UCI, and UOP, and recommended at USC and UCSD. These can occupy two elective slots across Fall 25–Spring 26. Taking them early is strategic — you'll have them done well before applications open."},
+  {n:"04b",t:"UCSF Humanities Block — You Need ~8 More Quarter Units",p:"UCSF requires 28 quarter units of humanities and/or social sciences total (including econ, speech, and psych). Your current plan — ECN 001A (4 units) + PSC 001 (4 units) + CMN 001 (4 units) + SOC 001 (4 units) + ASA 002 (4 units) — totals approximately 20 quarter units. You are roughly 8 units short (2 additional GE courses). Add one or two humanities or social science courses in any lighter quarter before July 2028 matriculation. History, anthropology, political science, communications, literature — any GE in this category counts. This is an easy fix but must be explicitly planned."},
+{n:"04c",t:"Microbiology Is Now Required at UCSF (v4 Correction)",p:"UCSF now lists microbiology (4 quarter units, lab required in most cases) as a standalone prerequisite. This was NOT on the list in older versions of this guide. MMG 102 in Spring 2027 satisfies this requirement. Your schedule already includes MMG 102, so this is covered — but be aware that microbiology is now a hard UCSF requirement, not just a UCSD/UOP/USC requirement. This also means UCSF's flexible slot logic from earlier guides no longer applies — UCSF doesn't have a flexible slot, each prerequisite is standalone."},
+  {n:"04d",t:"Calculus — Only 1 Course Required at UCSF (v4 Correction)",p:"UCSF requires only 1 course of calculus (v4 correction from official page — earlier versions of this guide incorrectly stated 2 courses). MAT 021A alone satisfies UCSF, UCSD, USC, UOP, and all other programs on your list. No second calculus course needed unless you want it for other academic reasons. This item is resolved."},
+  {n:"05",t:"Physics — NOT Required at UCSF (v4 Correction)",p:"Physics is NOT on UCSF's current prerequisite list (verified from their official admissions page, Feb 2026). Earlier versions of this guide were wrong about this. PHY 007A (already in your Spring 2026 schedule) satisfies physics requirements at UCSD (1 course), UOP (1 course+lab — verify PHY 007AL), UA, and Purdue. But you do not need to add PHY 007B for any program on your list. Physics is completed and covered."},
+  {n:"06",t:"Apply Early — August 1 for Rolling Schools",p:"PharmCAS opens July 10, 2027. UCI and USC are rolling — seats fill continuously. Submit by August 1, 2027 to maximize seat availability, scholarship priority, and earlier interview scheduling. UCSF priority Oct 1 (final Dec 1). UCSD priority Oct 1 (final Jan 5). Even non-rolling schools heavily favor early applicants."},
+  {n:"07",t:"Leverage Your Research Experience (Franz Lab)",p:"Lab research is a major differentiator for competitive programs and essentially mandatory for PharmD/PhD tracks. Highlight Franz lab work explicitly in your personal statement. For UNC, Purdue, and Michigan, research background is a primary admission signal. Document your contributions, any presentations, and your PI's name."},
+  {n:"08",t:"Maximize Pharmacy Technician Hours",p:"Your tech experience is your biggest competitive asset alongside GPA. Keep accumulating hours through Summer 2026. Target 150–200+ total hours by application time. Hospital + retail mix is ideal. Your existing tech license puts you well ahead of most applicants on the experiential dimension."},
+  {n:"09",t:"Build a Balanced School List of 8–12 Programs",p:"Suggested: 2–3 reaches (UCSF, UCSD, plus UNC or Purdue if pursuing research track), 4–5 targets (USC, UCI, UOP, LLU, WesternU, CNU), 2–3 safeties (Ketchum, MWU, WSU if open to WA). CNU is a particularly strong target given UC Davis geographic alignment and the new PharmD/MD pathway."},
+  {n:"10",t:"Lock In Strong Letters — Start Building Relationships Now",p:"You need: a pharmacist letter (current supervisor), a science faculty letter (NPB 101 or BIS 103 professor), and ideally a research supervisor letter (Franz lab PI — extremely valuable for research-heavy programs). Attend office hours starting now. You need these relationships solid by Winter 2027."},
+  {n:"11",t:"Verify Everything Annually on PharmCAS",p:"Every requirement, deadline, and tuition figure in this guide reflects 2025–2026 cycle data. Programs update annually. Before applying in 2027, re-verify UCI Economics requirement, UCSF calculus (2 courses) and physics (1yr), and USC biochemistry (upper-division, 4-yr institution only). PharmCAS.org is the authoritative source."},
+];
+
+// ── GLOSSARY DATA ──────────────────────────────────
+const glossary=[
+{term:"ACPE",def:"Accreditation Council for Pharmacy Education — the national agency that accredits all U.S. PharmD programs. A school must have full ACPE accreditation for its graduates to sit for NAPLEX. Candidacy status (pre-candidate) does not yet confer this right. Always verify accreditation status before applying.",tag:"regulatory"},
+{term:"APPE (Advanced Pharmacy Practice Experience)",def:"Fourth-year clinical rotations in the PharmD program (~40 hrs/week). Students rotate through different settings — hospital, community pharmacy, ambulatory care, specialty — applying didactic training to real patient care under supervising licensed pharmacists.",tag:"clinical"},
+{term:"Articulation Agreement",def:"A formal agreement between an undergraduate institution and a pharmacy school specifying which courses satisfy each prerequisite. UOP and UCSF maintain published agreements for UC Davis courses. Use ASSIST.org to confirm course equivalencies for any CA pharmacy school.",tag:"process"},
+{term:"Board of Pharmacy",def:"State-level regulatory agency licensing pharmacists. In California: California Board of Pharmacy (CBP). After graduating and passing NAPLEX and MPJE, you apply to the Board for licensure. As a pharmacy technician, you already have a working relationship with this body.",tag:"regulatory"},
+{term:"CADAA",def:"California DREAM Act Application — California's financial aid application for AB540-eligible and DACA students. Functions like FAFSA for CA state-based aid at UC programs. If you're eligible, file CADAA by the same deadlines as FAFSA (opens Oct 1).",tag:"financial"},
+{term:"CPJE (California Practice Standards and Jurisprudence Examination)",def:"California-specific licensing exam required in addition to NAPLEX for anyone wanting to practice pharmacy in California. Tests California pharmacy law and regulations. UOP includes free CPJE prep for all graduates — a notable benefit.",tag:"regulatory"},
+{term:"COA (Cost of Attendance)",def:"Total estimated annual cost of attending a program, including tuition, fees, housing, food, books, transportation, and personal expenses. Used for calculating financial aid eligibility. COA always significantly exceeds tuition alone — typically add $20–28k/yr for living expenses when evaluating programs.",tag:"financial"},
+{term:"Didactic Phase",def:"The classroom- and lab-based portion of a PharmD program (typically Years 1–3), as opposed to the clinical rotation APPE year. Covers pharmacology, pharmacotherapy, pharmaceutical sciences, patient assessment, pharmacy law, and public health.",tag:"program"},
+{term:"Direct Unsubsidized Loan",def:"Federal loan available to graduate students up to $20,500/yr regardless of financial need. Interest accrues from disbursement. File FAFSA annually to access. Most PharmD students maximize this before taking Grad PLUS loans for the remaining COA.",tag:"financial"},
+{term:"Dual-Degree Program (PharmD/PhD, PharmD/MBA, PharmD/MPH)",def:"A program where students simultaneously earn two degrees. PharmD/PhD programs typically come with tuition waivers and research stipends, making them less expensive than PharmD alone. PharmD/MD programs (first offered nationally by CNU in 2026) are the most intensive combination. Dual degrees usually add 1–3 years.",tag:"program"},
+{term:"EFC / SAI (Expected Family Contribution / Student Aid Index)",def:"The FAFSA formula output estimating how much your household can contribute annually toward educational costs. Used by all schools to calculate financial need and determine eligibility for grants and need-based aid.",tag:"financial"},
+{term:"FAFSA",def:"Free Application for Federal Student Aid — filed annually (opens October 1) to access federal loans, work-study, and grants. All PharmD students should file regardless of income, since it's required for federal student loans. File by March 1 for maximum institutional aid consideration.",tag:"financial"},
+{term:"Fellowship (Pharmacy)",def:"A post-doctoral or post-residency training position focused on a specific area — typically pharmaceutical industry, regulatory affairs, or clinical research. Distinct from a residency. Fellowships are typically 1–2 years and based at pharma companies (Genentech, Pfizer, J&J) or regulatory bodies (FDA). Industry fellowships are highly competitive and well-compensated.",tag:"clinical"},
+{term:"GPA — Cumulative vs. Science (sGPA / BCPM)",def:"PharmCAS calculates your GPA two ways: cumulative (all college courses) and science GPA (BCPM — Biology, Chemistry, Physics, Math). Many programs set minimum thresholds for both separately. UCSD requires 3.0 cumulative and 2.8 science. Your NPB coursework contributes heavily to BCPM.",tag:"metric"},
+{term:"Grad PLUS Loan",def:"Federal loan for graduate students covering remaining COA beyond the $20,500 Unsubsidized limit. Requires a credit check (unlike Unsubsidized). Fixed interest rate, slightly higher than Unsubsidized. Most PharmD students rely on Grad PLUS for the majority of their educational financing.",tag:"financial"},
+{term:"HPSA (Health Professional Shortage Area)",def:"Federally designated areas with insufficient healthcare providers, including pharmacists. Working in an HPSA is required for NHSC and IHS loan repayment programs. CHSU and CDU graduates are particularly well-positioned for HPSA practice given their institutional missions.",tag:"regulatory"},
+{term:"IHS (Indian Health Service) Loan Repayment",def:"Federal program offering up to $50k in tax-free loan repayment per two-year commitment for healthcare providers (including pharmacists) serving at IHS-designated facilities serving Native American communities. Renewable. Award is not counted as taxable income.",tag:"financial"},
+{term:"IPPE (Introductory Pharmacy Practice Experience)",def:"Early clinical experiences embedded in Years 1–3, before the fourth-year APPE rotations. IPPEs are shorter and structured to introduce students to pharmacy practice. Your current pharmacy technician hours do not count as IPPE hours — those are separate curricular requirements within the program.",tag:"clinical"},
+{term:"LOR (Letter of Recommendation)",def:"Required application component. Most programs require 2–4 letters from pharmacists, science professors, research supervisors, or employers. Family members and friends are not acceptable at any program. USC specifically requires at least one letter from a science professor. Your Franz lab PI letter will be exceptionally strong for research-track programs.",tag:"process"},
+{term:"MPJE (Multistate Pharmacy Jurisprudence Examination)",def:"Federal and state pharmacy law exam required for licensure alongside NAPLEX. Tests federal drug laws and state-specific pharmacy regulations. California additionally requires the CPJE. You must pass both NAPLEX and MPJE (and CPJE in CA) to obtain licensure.",tag:"regulatory"},
+{term:"Merit Aid",def:"Scholarship money awarded based on academic achievement, leadership, or other criteria — not financial need. UC programs (UCSF, UCSD, UCI) offer no merit aid. Private schools like USC, UOP, and Chapman can offer significant merit that may bring net cost below UC sticker price. Always research merit scholarships for each school individually.",tag:"financial"},
+{term:"NAPLEX (North American Pharmacist Licensure Examination)",def:"The primary pharmacist licensing exam required in all U.S. states, administered by NABP after PharmD graduation. Tests clinical pharmacy knowledge across drug therapy, patient assessment, and pharmacy practice. Passing score is 75/150 scaled. First-attempt pass rates vary by school — top programs like UCSF, UNC, and UT Austin consistently achieve 90%+. Per-school official data is not universally published; figures in this guide are estimates.",tag:"metric"},
+{term:"Net Price",def:"The actual amount you pay after all grants and scholarships are subtracted from Cost of Attendance. Distinct from sticker tuition. A school with $74k sticker but $20k in merit scholarships has a $54k net price — potentially less than a UC school's $45k sticker. Always compare net prices, not sticker prices, when evaluating programs.",tag:"financial"},
+{term:"NHSC (National Health Service Corps) Loan Repayment",def:"Federal program offering up to $50k in tax-free loan repayment per two-year commitment for licensed healthcare providers (including pharmacists) at NHSC-designated Health Professional Shortage Areas. Renewable. Can dramatically reduce total educational debt. Highly relevant for CHSU or CDU graduates, or any pharmacist willing to practice in underserved areas.",tag:"financial"},
+{term:"PCAT (Pharmacy College Admission Test)",def:"PERMANENTLY RETIRED as of January 10, 2024. No longer required at any accredited U.S. PharmD program. Do not take this exam.",tag:"process"},
+{term:"PGY1 / PGY2 (Post-Graduate Year 1 / 2 Residency)",def:"Post-graduate pharmacy residency training. PGY1 is a broad clinical residency (~1 year) at a hospital or health system. PGY2 is a specialized residency (oncology, critical care, ambulatory care, etc.) following PGY1. Increasingly required for clinical pharmacy roles in hospital settings. Match through ASHP Residency Match program.",tag:"clinical"},
+{term:"PharmCAS",def:"Pharmacy College Application Service — the centralized application platform for virtually all U.S. PharmD programs (analogous to AMCAS for medical school). Submit one primary application through PharmCAS, plus program-specific supplementals. Opens July 10 each year. PharmCAS verifies transcripts and calculates your GPAs. pharmcas.org",tag:"process"},
+{term:"PharmD (Doctor of Pharmacy)",def:"The professional doctorate required to practice as a licensed pharmacist in the U.S. Replaced the B.S. in Pharmacy as the entry-level degree in 2004. Typically 3–4 years post-bachelor's (3-year programs run year-round). After graduation, you complete NAPLEX, MPJE, and CPJE (CA) to obtain licensure.",tag:"program"},
+{term:"PharmD/PhD",def:"Dual degree combining a PharmD with a research doctorate in pharmaceutical sciences, pharmacology, or related fields. Typically adds 2–3 years. Usually funded through research stipends and tuition waivers, making total cost often lower than PharmD alone. Best for applicants with strong research background (e.g., Franz lab) targeting academic medicine, drug discovery, or pharmaceutical R&D.",tag:"program"},
+{term:"PSLF (Public Service Loan Forgiveness)",def:"Federal program forgiving remaining federal student loan balances after 10 years (120 monthly payments) of full-time work for a qualifying public service employer — government agencies, nonprofit hospitals, VA medical centers, academic medical centers. PharmD graduates at nonprofit health systems are commonly PSLF-eligible.",tag:"financial"},
+{term:"Rolling Admissions",def:"An admissions process where decisions are made continuously as applications arrive, rather than all at once after a deadline. UCI and USC use rolling admissions. Applying in August gives you a fundamentally better chance than applying in January — early applicants compete for more seats, earlier interviews, and scholarship priority.",tag:"process"},
+{term:"sGPA (Science GPA / BCPM GPA)",def:"Calculated by PharmCAS using only Biology, Chemistry, Physics, and Math courses. Separate from cumulative GPA. Programs like UCSF and UCSD have separate minimum thresholds for both. Your NPB, BIS, CHE, PHY, and STA coursework all factor into your sGPA.",tag:"metric"},
+{term:"Ten-Year Rule",def:"Policy at UCSF and UCSD requiring that science prerequisite courses be no more than 10 years old at the time of matriculation. If any science course was taken more than 10 years before your entry year, you may need to retake it. Exceptions sometimes granted for applicants working in relevant scientific roles.",tag:"process"},
+{term:"Waitlist Strategy",def:"Most pharmacy programs maintain waitlists. If waitlisted, send a formal letter of continued interest to the program (within 2 weeks of waitlisting), update them on any accomplishments or new developments, and confirm you'll attend if accepted. Do not withdraw from other accepted offers until you have a firm seat. Programs often reach deep into waitlists.",tag:"process"},
+];
+
+// ── RENDER FUNCTIONS ───────────────────────────────
+function showPanel(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function filterSchools(state,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSchools(state);
+}
+
+function renderPills(s){
+  const map={genChem:'Gen Chem',orgChem:'Org Chem',biochem:'Biochem',biology:'Biology',micro:'Micro',anatomy:'Anatomy',physiology:'Physio',calculus:'Calc',stats:'Stats',physics:'Physics',english:'English',speech:'Speech',economics:'Econ',psychology:'Psych',humanBehavior:'Hum Beh'};
+  let out='';
+  Object.keys(map).forEach(k=>{
+    const pr=s.prereqs[k];
+    if(!pr)return;
+    if(!pr.r){out+=`<span class="pill na">— ${map[k]}</span>`;return;}
+    const st=S[k]||'missing';
+    out+=`<span class="pill ${cls(st)}">${ico(st)} ${map[k]}</span>`;
+  });
+  return out;
+}
+
+function renderSchools(filter){
+  const grid=document.getElementById('schools-grid');
+  grid.innerHTML='';
+  const groups=[{l:'California',s:'CA'},{l:'Arizona',s:'AZ'},{l:'Oregon',s:'OR'},{l:'Washington',s:'WA'},{l:'National — Notable Out-of-State Programs',s:'national'}];
+  groups.forEach(g=>{
+    if(filter!=='all'&&filter!==g.s)return;
+    const ss=schools.filter(sc=>sc.state===g.s);
+    if(!ss.length)return;
+    const hdr=document.createElement('div');
+    hdr.className='group-hdr';hdr.style.gridColumn='1/-1';hdr.textContent=g.l;
+    grid.appendChild(hdr);
+    ss.forEach(s=>{
+      const tc=s.state==='national'?'tn':`t${s.tier}`;
+      const tl=s.tier===1?'Tier 1 · Elite':s.tier===2?'Tier 2 · Regional':'Tier 3 · Accessible';
+      const dot=s.overall==='green'?'🟢':s.overall==='yellow'?'🟡':'🔴';
+      const stxt=s.overall==='green'?'On Track':'Action Required';
+      const card=document.createElement('div');
+      card.className=`card ${tc}`;
+      card.innerHTML=`
+        <div class="tier-badge">${tl}</div>
+        <div class="school-name">${s.name}</div>
+        <div class="school-loc">${s.loc}</div>
+        <div class="status-badge ${s.overall}">${dot} ${stxt}</div>
+        <div class="stats-row">
+          <div class="stat-box"><span class="stat-val">${s.gpa.split('/')[0].trim()}</span><span class="stat-lbl">Min GPA</span></div>
+          <div class="stat-box"><span class="stat-val">${s.years}yr</span><span class="stat-lbl">Program</span></div>
+          <div class="stat-box"><span class="stat-val">${s.tuition}</span><span class="stat-lbl">~Tuition/yr</span></div>
+        </div>
+        <div class="naplex-bar">
+          <span style="font-size:10px;font-family:'DM Mono',monospace;white-space:nowrap;">NAPLEX*</span>
+          <div class="naplex-track"><div class="naplex-fill" style="width:${s.naplex}%"></div></div>
+          <span style="font-size:10px;font-family:'DM Mono',monospace;white-space:nowrap;">${s.naplex}%</span>
+        </div>
+        <div class="card-desc">${s.desc}</div>
+        <div class="prereq-status">
+          <div class="prereq-title">Your Prereq Status · Option A</div>
+          <div class="pills">${renderPills(s)}</div>
+          <div class="card-note">${s.note}</div>
+        </div>
+        <div class="card-bottom">
+          <div class="lbl">Total Cost Est.</div>
+          <div class="val">${s.totalCost}</div>
+          <div class="sub">${s.merit}</div>
+        </div>`;
+      grid.appendChild(card);
+    });
+  });
+}
+
+function renderPrereqs(){
+  let h=`<thead><tr><th>Prerequisite</th><th class="stu">You (Opt A)</th>`;
+  mCols.forEach(c=>{h+=`<th>${c.k}</th>`;});
+  h+=`</tr></thead><tbody>`;
+  mRows.forEach(row=>{
+    const st=S[row.k]||'missing';
+    const scl=st==='done'?'cell-done':st==='planned'?'cell-planned':st==='missing'?'cell-missing':'';
+    h+=`<tr><td>${row.l}</td><td class="${scl}" style="font-size:14px;text-align:center;">${ico(st)}</td>`;
+    mCols.forEach(c=>{
+      const sc=schools[c.i];
+      const pr=sc?.prereqs?.[row.k];
+      if(!pr||!pr.r){h+=`<td><span class="dash">—</span></td>`;return;}
+      if(pr.n&&pr.n.startsWith('Rec')){h+=`<td><span class="rec">Rec</span></td>`;return;}
+      const ccl=st==='done'?'cell-done':st==='planned'?'cell-planned':st==='missing'?'cell-missing':'';
+      h+=`<td class="${ccl}"><span class="ck">✓</span><br><span style="font-size:9px;color:var(--muted);font-family:'DM Mono',monospace;">${pr.n||''}</span></td>`;
+    });
+    h+=`</tr>`;
+  });
+  h+=`</tbody>`;
+  document.getElementById('prereq-table').innerHTML=h;
+  const ng=document.getElementById('ns-grid');
+  nsData.forEach(n=>{ng.innerHTML+=`<div class="ns-card"><h4>${n.s}</h4><div class="ns-schools">${n.sc}</div><p>${n.n}</p></div>`;});
+}
+
+function renderMyStatus(){
+  const cont=document.getElementById('status-cards');
+  schools.forEach(s=>{
+    const d=document.createElement('div');
+    d.style.cssText='background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:12px;';
+    const dot=s.overall==='green'?'🟢':s.overall==='yellow'?'🟡':'🔴';
+    d.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;">
+      <div><div style="font-family:'DM Serif Display',serif;font-size:17px;">${s.name}</div>
+      <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);">${s.loc}</div></div>
+      <div class="status-badge ${s.overall}" style="margin-bottom:0;">${dot} ${s.overall==='green'?'On Track':'Action Needed'}</div></div>
+      <div class="pills" style="margin-bottom:8px;">${renderPills(s)}</div>
+      <div class="card-note">${s.note}</div>`;
+    cont.appendChild(d);
+  });
+}
+
+function renderFinancial(){
+  const fg=document.getElementById('finance-grid');
+  finGroups.forEach(g=>{
+    const c=document.createElement('div');c.className='fin-card';
+    let rows='';
+    g.items.forEach(it=>{rows+=`<div class="cost-row">
+      <div class="cost-lbl"><div style="font-weight:500;color:var(--text);">${it.n}</div><div class="cost-note">${it.nt}</div></div>
+      <div style="text-align:right;flex-shrink:0;"><div class="cost-val">${it.yr}</div><div style="font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:2px;">Total: ${it.tot}</div></div></div>`;});
+    c.innerHTML=`<h3>${g.grp}</h3>${rows}`;fg.appendChild(c);
+  });
+  let sh=`<thead><tr><th>Scholarship / Program</th><th>Amount</th><th>Eligibility</th><th>Notes</th></tr></thead><tbody>`;
+  scholarships.forEach(s=>{sh+=`<tr><td>${s.n}</td><td style="font-family:'DM Mono',monospace;color:var(--accent2);white-space:nowrap;">${s.amt}</td><td style="white-space:nowrap;">${s.el}</td><td>${s.nt}</td></tr>`;});
+  sh+=`</tbody>`;
+  document.getElementById('sch-table').innerHTML=sh;
+  const lg=document.getElementById('loan-grid');
+  loans.forEach(l=>{
+    const c=document.createElement('div');c.className='fin-card';
+    c.innerHTML=`<h3>${l.n}</h3><div style="font-size:12px;color:var(--muted);margin-bottom:10px;">${l.d}</div>
+    <div class="cost-row"><div class="cost-lbl">Award Amount</div><div class="cost-val">${l.amt}</div></div>
+    <div class="cost-row"><div class="cost-lbl">Eligibility</div><div style="font-size:12px;color:var(--muted);text-align:right;">${l.el}</div></div>
+    <div style="margin-top:10px;font-size:12px;color:var(--muted);padding-top:10px;border-top:1px solid var(--border);">Best fit: ${l.fit}</div>`;
+    lg.appendChild(c);
+  });
+  const ml=document.getElementById('merit-list');
+  merits.forEach(m=>{ml.innerHTML+=`<div class="merit-row"><div class="merit-dot" style="background:${m.c}"></div><div><div class="merit-tier">${m.t}</div><div class="merit-schools">${m.s}</div></div></div>`;});
+}
+
+function renderSalary(){
+  const sg=document.getElementById('salary-grid');
+  salaries.forEach(s=>{
+    sg.innerHTML+=`<div class="sal-card">
+      <div class="sal-region">${s.r}</div>
+      <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted);">${s.st}</div>
+      <div class="sal-range">${s.range}/yr</div>
+      <div class="sal-bar-wrap">
+        <div class="sal-bar-lbl"><span>Relative to US national avg</span><span>${s.bar}%</span></div>
+        <div class="sal-bar-track"><div class="sal-bar-fill" style="width:${s.bar}%"></div></div>
+      </div>
+      <div class="sal-desc">${s.d}</div>
+      <div class="sal-schools">Schools serving this market:<br>${s.sc}</div>
+    </div>`;
+  });
+}
+
+function renderStrategy(){
+  const cl=document.getElementById('checklist');
+  checks.forEach(c=>{
+    cl.innerHTML+=`<div class="check-item"><div class="check-num">${c.n}</div><div class="check-content"><h3>${c.t}</h3><p>${c.p}</p></div></div>`;
+  });
+}
+
+function renderGlossary(){
+  // Group by first letter
+  const byLetter={};
+  glossary.forEach(g=>{
+    const l=g.term[0].toUpperCase();
+    if(!byLetter[l])byLetter[l]=[];
+    byLetter[l].push(g);
+  });
+  const letters=Object.keys(byLetter).sort();
+  // Alpha nav
+  const nav=document.getElementById('alpha-nav');
+  letters.forEach(l=>{
+    nav.innerHTML+=`<button class="alpha-btn" onclick="scrollToLetter('${l}')">${l}</button>`;
+  });
+  const cont=document.getElementById('gloss-container');
+  letters.forEach(l=>{
+    let cards='';
+    byLetter[l].forEach(g=>{
+      cards+=`<div class="gloss-item" data-term="${g.term.toLowerCase()} ${g.def.toLowerCase()}">
+        <div class="gloss-term">${g.term}</div>
+        <div class="gloss-def">${g.def}</div>
+        <span class="gloss-tag ${g.tag}">${g.tag}</span>
+      </div>`;
+    });
+    cont.innerHTML+=`<div class="gloss-section" id="gloss-${l}">
+      <div class="gloss-letter">${l}</div>
+      <div class="gloss-grid">${cards}</div>
+    </div>`;
+  });
+}
+
+function filterGloss(q){
+  const query=q.toLowerCase().trim();
+  document.querySelectorAll('.gloss-item').forEach(item=>{
+    if(!query||item.dataset.term.includes(query)){item.classList.remove('hidden');}
+    else{item.classList.add('hidden');}
+  });
+  // Hide empty sections
+  document.querySelectorAll('.gloss-section').forEach(sec=>{
+    const visible=sec.querySelectorAll('.gloss-item:not(.hidden)').length;
+    sec.style.display=visible?'':'none';
+  });
+}
+
+function scrollToLetter(l){
+  const el=document.getElementById('gloss-'+l);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+// ── INITIALIZE ────────────────────────────────────
+renderSchools('all');
+renderPrereqs();
+renderMyStatus();
+renderFinancial();
+renderSalary();
+renderStrategy();
+renderGlossary();
+</script>
+</body>
+</html>

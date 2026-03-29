@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pathway Explorer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0b;
+    --paper: #f5f1e8;
+    --cream: #ede9dc;
+    --accent: #c8442a;
+    --gold: #c9921a;
+    --teal: #1a7c74;
+    --muted: #7a7268;
+    --card-bg: #faf8f2;
+    --border: #d9d4c7;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* noise texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 200px;
+    z-index: 9999;
+  }
+
+  header {
+    padding: 3rem 2rem 2rem;
+    border-bottom: 2px solid var(--ink);
+    position: relative;
+  }
+
+  .eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    max-width: 700px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .baseline-tag {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+  }
+
+  .tag {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.25rem 0.65rem;
+    border-radius: 2px;
+  }
+
+  /* filter bar */
+  .filter-bar {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .filter-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 0.5rem;
+  }
+
+  .filter-btn {
+    border: 1.5px solid var(--border);
+    background: transparent;
+    padding: 0.3rem 0.8rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    color: var(--ink);
+    border-radius: 2px;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { background: var(--cream); border-color: var(--ink); }
+  .filter-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .filter-btn.effort-minimal.active { background: var(--teal); border-color: var(--teal); }
+  .filter-btn.effort-moderate.active { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .filter-btn.effort-high.active { background: var(--accent); border-color: var(--accent); }
+
+  /* grid */
+  .grid {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+  }
+
+  .card[data-effort="NONE"]::before, .card[data-effort="MINIMAL"]::before { background: var(--teal); }
+  .card[data-effort="LOW"]::before, .card[data-effort="LOW-MODERATE"]::before { background: var(--gold); }
+  .card[data-effort="MODERATE"]::before, .card[data-effort="MODERATE-HIGH"]::before { background: #d4762a; }
+  .card[data-effort="HIGH"]::before, .card[data-effort="VERY HIGH"]::before { background: var(--accent); }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-color: var(--ink);
+  }
+
+  .card.hidden { display: none; }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .card-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .card-degree {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .effort-badge {
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+    white-space: nowrap;
+    font-weight: 500;
+  }
+
+  [data-effort="NONE"] .effort-badge, [data-effort="MINIMAL"] .effort-badge {
+    background: #d4efe8; color: var(--teal);
+  }
+  [data-effort="LOW"] .effort-badge, [data-effort="LOW-MODERATE"] .effort-badge {
+    background: #f5ead3; color: #9a6d0f;
+  }
+  [data-effort="MODERATE"] .effort-badge, [data-effort="MODERATE-HIGH"] .effort-badge {
+    background: #f9e4cc; color: #a0531a;
+  }
+  [data-effort="HIGH"] .effort-badge, [data-effort="VERY HIGH"] .effort-badge {
+    background: #f5d9d4; color: var(--accent);
+  }
+
+  .card-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .meta-block {
+    padding: 0.65rem;
+    background: var(--cream);
+    border-radius: 2px;
+  }
+
+  .meta-label {
+    font-size: 0.55rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.2rem;
+  }
+
+  .meta-value {
+    font-size: 0.72rem;
+    line-height: 1.4;
+  }
+
+  .verdict {
+    font-size: 0.7rem;
+    line-height: 1.6;
+    color: #3a3730;
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+  }
+
+  .compat-icon {
+    font-size: 0.75rem;
+    margin-right: 0.25rem;
+  }
+
+  /* detail panel */
+  .overlay {
+    position: fixed; inset: 0;
+    background: rgba(15,14,11,0.5);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+
+  .overlay.open { opacity: 1; pointer-events: all; }
+
+  .panel {
+    position: fixed;
+    right: 0; top: 0; bottom: 0;
+    width: min(520px, 95vw);
+    background: var(--paper);
+    border-left: 2px solid var(--ink);
+    z-index: 201;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 2rem;
+  }
+
+  .panel.open { transform: translateX(0); }
+
+  .panel-close {
+    position: absolute;
+    top: 1.25rem; right: 1.25rem;
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-family: 'DM Mono', monospace;
+    font-size: 1rem;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 2px;
+    transition: all 0.15s;
+  }
+  .panel-close:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  .panel-eyebrow {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .panel-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .panel-section {
+    margin-bottom: 1.75rem;
+  }
+
+  .panel-section-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .item-list { list-style: none; }
+
+  .item-list li {
+    font-size: 0.75rem;
+    line-height: 1.7;
+    padding: 0.3rem 0;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .item-list li::before {
+    content: '—';
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  .item-list li.ok::before { content: '✓'; color: var(--teal); }
+  .item-list li.warn::before { content: '⚠'; color: var(--gold); }
+  .item-list li.star::before { content: '⭐'; }
+
+  .timeline-pill {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 0.65rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  .verdict-panel {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1rem 1.25rem;
+    font-size: 0.75rem;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  /* stat bar */
+  .stat-bar-wrap { margin-bottom: 1.5rem; }
+  .stat-bar-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+    color: var(--muted);
+  }
+  .stat-bar-track {
+    height: 6px;
+    background: var(--cream);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .stat-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* footer */
+  footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .card { animation: fadeIn 0.3s ease both; }
+  .card:nth-child(1) { animation-delay: 0.05s; }
+  .card:nth-child(2) { animation-delay: 0.1s; }
+  .card:nth-child(3) { animation-delay: 0.15s; }
+  .card:nth-child(4) { animation-delay: 0.2s; }
+  .card:nth-child(5) { animation-delay: 0.25s; }
+  .card:nth-child(6) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Academic Pathway Analysis — UC Davis NPB Major</div>
+  <h1>Beyond the<br><em>Dual-Track Plan</em></h1>
+  <div class="baseline-tag">
+    <span class="tag">NPB Major</span>
+    <span class="tag">Franz Lab (Spring 2026)</span>
+    <span class="tag">Pharmacy Tech (150-200 hrs)</span>
+    <span class="tag">CHE 135 Planned</span>
+  </div>
+</header>
+
+<div class="filter-bar">
+  <span class="filter-label">Filter by effort:</span>
+  <button class="filter-btn active" data-filter="all">All (17)</button>
+  <button class="filter-btn effort-minimal" data-filter="minimal">Minimal</button>
+  <button class="filter-btn effort-moderate" data-filter="moderate">Moderate</button>
+  <button class="filter-btn effort-high" data-filter="high">High</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>Click any card for full details · Stripe color indicates additional work required</footer>
+
+<div class="overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <button class="panel-close" id="panelClose">✕</button>
+  <div id="panelContent"></div>
+</div>
+
+<script>
+const pathways = [
+  {
+    id: 1,
+    degree: "Master's Degree",
+    title: "MS Clinical Research / Translational Science",
+    effort: "MINIMAL",
+    courses: "0–1",
+    experience: "None required",
+    compat: "✅ Perfect fit",
+    timeline: "Already ready or Fall 2026",
+    verdict: "Easiest transition from your current plan. Essentially no additional work required.",
+    coursesDetail: [
+      { type: "ok", text: "Physiology, biochemistry, anatomy — NPB core ✓" },
+      { type: "ok", text: "Research experience — Franz lab ✓" },
+      { type: "warn", text: "STA 100 (Statistics) may be needed — take Year 3 if not already done" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab research already strong ✓" },
+      { type: "ok", text: "Pharmacy hours provide clinical exposure ✓" },
+      { type: "star", text: "Optional boost: research subject recruiter / CRA at UC Davis Medical Center (5-10 hrs/week)" },
+    ],
+  },
+  {
+    id: 2,
+    degree: "Doctoral Degree",
+    title: "PhD Cancer Biology / Tumor Biology",
+    effort: "LOW",
+    courses: "0–1",
+    experience: "Summer research helpful",
+    compat: "✅ Very compatible",
+    timeline: "Ready Spring 2028",
+    verdict: "Very doable. Franz lab + NPB is 90% of what you need. One cancer biology course helps but isn't mandatory.",
+    coursesDetail: [
+      { type: "ok", text: "Cell biology, biochemistry, physiology — NPB core ✓" },
+      { type: "ok", text: "Research experience — Franz lab ✓" },
+      { type: "warn", text: "NPB 154 (Cancer Biology) recommended Year 3–4" },
+      { type: "warn", text: "Immunology course (NPB 152 or BIS 104) — cancer immunology is huge" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab provides 2 years of research ✓" },
+      { type: "star", text: "Ideal: Summer 2027 in a cancer biology lab (UC Davis Comprehensive Cancer Center, Fred Hutch, UCSF, Stanford)" },
+    ],
+  },
+  {
+    id: 3,
+    degree: "Doctoral Degree",
+    title: "PhD Pharmaceutical Sciences / Pharmacology",
+    effort: "NONE",
+    courses: "0",
+    experience: "None",
+    compat: "✅ Perfect fit",
+    timeline: "Already on track",
+    verdict: "Your current dual-track plan is EXACTLY the preparation for this pathway. Zero additional work needed.",
+    coursesDetail: [
+      { type: "ok", text: "NPB 114 (Pharmacology), biochemistry, physiology ✓" },
+      { type: "ok", text: "CHE 135 (Medicinal Chemistry) in your plan ✓" },
+      { type: "ok", text: "Franz lab medicinal chemistry research ✓" },
+      { type: "warn", text: "CHE 124A/B (Inorganic Chemistry) optional for stronger chemistry background" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab is PERFECT for this path — 2 years is exactly what PhD programs want ✓" },
+    ],
+  },
+  {
+    id: 4,
+    degree: "Master's Degree",
+    title: "MS Pharmaceutical Sciences (Terminal, Industry)",
+    effort: "NONE",
+    courses: "0",
+    experience: "None",
+    compat: "✅ Perfect fit",
+    timeline: "Already ready",
+    verdict: "Current plan is perfect. Apply directly after graduation.",
+    coursesDetail: [
+      { type: "ok", text: "NPB core covers biology/physiology ✓" },
+      { type: "ok", text: "CHE 135 covers medicinal chemistry ✓" },
+      { type: "ok", text: "Franz lab covers research methods ✓" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab research is ideal ✓" },
+      { type: "ok", text: "Some programs like pharmacy experience — you'll have it ✓" },
+    ],
+  },
+  {
+    id: 5,
+    degree: "Master's Degree",
+    title: "Genetic Counseling MS",
+    effort: "MODERATE-HIGH",
+    courses: "2–3",
+    experience: "GC shadowing + counseling volunteer (100+ hrs)",
+    compat: "⚠️ Requires pivot toward counseling",
+    timeline: "Add psych Year 3; shadowing by Spring 2027",
+    verdict: "Requires 2-3 additional courses and significant shadowing/volunteer work. Most work-intensive alternative on this list.",
+    coursesDetail: [
+      { type: "ok", text: "Biology, genetics — NPB equivalent ✓" },
+      { type: "warn", text: "PSC 001 (General Psychology) REQUIRED — take Year 3" },
+      { type: "warn", text: "Human genetics or medical genetics course REQUIRED" },
+      { type: "warn", text: "Developmental psychology (PSC 163) recommended" },
+      { type: "warn", text: "Counseling/communication course — some programs require" },
+    ],
+    expDetail: [
+      { type: "warn", text: "Genetic counseling shadowing REQUIRED: 20-40 hrs minimum — contact UC Davis Health or UCSF" },
+      { type: "warn", text: "Patient interaction experience REQUIRED: crisis hotline, hospital support (50-100 hrs)" },
+      { type: "ok", text: "Franz lab research helpful ✓" },
+    ],
+  },
+  {
+    id: 6,
+    degree: "Professional Degree",
+    title: "Physician Assistant (PA)",
+    effort: "HIGH",
+    courses: "0–2",
+    experience: "1000–2000 patient care hours REQUIRED",
+    compat: "⚠️ Need gap year for hours",
+    timeline: "Gap year in full-time clinical work likely needed",
+    verdict: "Requires MOST additional patient care hours. Pharmacy hours are a start, but likely need a gap year in full-time clinical work OR add EMT/CNA and increase clinical hours.",
+    coursesDetail: [
+      { type: "ok", text: "Anatomy (EXB 106), Physiology (NPB 101), Microbiology (MMG 102), Biochemistry ✓" },
+      { type: "warn", text: "General Psychology (PSC 001) — many PA programs require" },
+      { type: "warn", text: "Statistics (STA 100) — some programs require" },
+      { type: "warn", text: "Medical Terminology — often available online" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Pharmacy technician hours count ✓" },
+      { type: "warn", text: "Medical assistant, EMT certification, CNA, scribe, or phlebotomist — pick one to boost hours" },
+      { type: "warn", text: "By graduation with 200 hours: NOT enough for competitive application" },
+    ],
+  },
+  {
+    id: 7,
+    degree: "Doctoral Degree",
+    title: "MD–PhD",
+    effort: "MODERATE",
+    courses: "0–1",
+    experience: "Hospital volunteering, shadowing, MCAT",
+    compat: "✅ Compatible, add clinical exposure",
+    timeline: "MCAT Summer 2027; gap year likely",
+    verdict: "Franz lab research is perfect for MD-PhD. Additions needed are mostly on the clinical side (shadowing, volunteering) and MCAT. Very doable.",
+    coursesDetail: [
+      { type: "ok", text: "Franz lab covers PhD preparation ✓" },
+      { type: "warn", text: "PHY 007A helpful if not already planned (also required for UCSD PharmD)" },
+      { type: "warn", text: "Consider ethics or medical humanities course for well-roundedness" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab research is excellent for MD-PhD ✓" },
+      { type: "warn", text: "Clinical volunteering in hospitals: 100+ hours (add Year 3)" },
+      { type: "warn", text: "Physician shadowing: 50+ hours (add Year 4)" },
+      { type: "warn", text: "MCAT preparation: 3-6 months dedicated study (Summer 2027)" },
+    ],
+  },
+  {
+    id: 8,
+    degree: "Master's Degree",
+    title: "Public Health (MPH)",
+    effort: "MINIMAL",
+    courses: "0–1",
+    experience: "None required",
+    compat: "✅ Very compatible",
+    timeline: "Already ready or with STA 100",
+    verdict: "One of the EASIEST transitions. MPH programs are very flexible on prerequisites. You're basically ready now.",
+    coursesDetail: [
+      { type: "ok", text: "NPB covers biology/health science foundation ✓" },
+      { type: "warn", text: "STA 100 — helpful for epidemiology track" },
+      { type: "warn", text: "ECN 001 — helpful for health policy track" },
+      { type: "warn", text: "Sociology or psychology — helpful for social/behavioral health" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab research helps (especially for epidemiology tracks) ✓" },
+      { type: "ok", text: "Pharmacy hours count as health experience ✓" },
+      { type: "star", text: "Optional: community health clinics, health education programs" },
+    ],
+  },
+  {
+    id: 9,
+    degree: "Master's Degree",
+    title: "Health Informatics MS",
+    effort: "LOW-MODERATE",
+    courses: "1–2",
+    experience: "None required",
+    compat: "✅ Compatible",
+    timeline: "STA 100 Year 3; programming Year 3–4 or online",
+    verdict: "Requires 1-2 technical courses. Many programs are designed for healthcare professionals transitioning to informatics, so they teach the tech skills.",
+    coursesDetail: [
+      { type: "ok", text: "NPB gives you clinical knowledge ✓" },
+      { type: "warn", text: "STA 100 (Statistics) — very useful for health data analysis" },
+      { type: "warn", text: "ECS 010 or 020 (Intro to CS) — many programs recommend basic programming" },
+      { type: "warn", text: "Database course (ECS 165A) — helpful but many programs teach it" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab analytical work (NMR, HPLC data analysis) shows data literacy ✓" },
+      { type: "ok", text: "Pharmacy experience shows healthcare workflow understanding ✓" },
+      { type: "star", text: "Optional: volunteer with UC Davis Health IT or informatics projects" },
+    ],
+  },
+  {
+    id: 10,
+    degree: "Master's Degree",
+    title: "Regulatory Affairs MS",
+    effort: "NONE",
+    courses: "0",
+    experience: "None",
+    compat: "✅ Perfect fit",
+    timeline: "Already ready",
+    verdict: "Your current plan is PERFECT for regulatory affairs. Zero additional work needed.",
+    coursesDetail: [
+      { type: "ok", text: "NPB science background is sufficient ✓" },
+      { type: "ok", text: "Franz lab drug development research is PERFECT ✓" },
+      { type: "ok", text: "Pharmacy experience shows drug knowledge ✓" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab medicinal chemistry / drug development is ideal ✓" },
+      { type: "star", text: "Some programs prefer pharmaceutical industry internship (not required)" },
+    ],
+  },
+  {
+    id: 11,
+    degree: "Master's / Doctoral",
+    title: "Toxicology MS/PhD",
+    effort: "MINIMAL",
+    courses: "0–1",
+    experience: "None",
+    compat: "✅ Very compatible",
+    timeline: "Already on track",
+    verdict: "NPB + Franz lab is excellent preparation. UC Davis has a strong toxicology program. No major additions needed.",
+    coursesDetail: [
+      { type: "ok", text: "NPB pharmacology and physiology cover most foundations ✓" },
+      { type: "ok", text: "Chemistry background (Organic + CHE 135) is sufficient ✓" },
+      { type: "warn", text: "NPB toxicology elective helpful if offered (check catalog)" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab research is great — drug chemistry background helps ✓" },
+      { type: "star", text: "Optional boost: summer internship at EPA or toxicology lab" },
+    ],
+  },
+  {
+    id: 12,
+    degree: "Master's / Doctoral",
+    title: "Neuroscience MS/PhD",
+    effort: "MODERATE",
+    courses: "2–3",
+    experience: "Summer neuroscience research",
+    compat: "⚠️ Need neuroscience research pivot",
+    timeline: "Neuroscience electives Years 3-4; summer research Summer 2027",
+    verdict: "Requires pivoting some research experience toward neuroscience. NPB is a perfect foundation, but programs want neuroscience research specifically.",
+    coursesDetail: [
+      { type: "ok", text: "NPB core covers neurobiology and physiology ✓" },
+      { type: "warn", text: "NPB 150 (Neuroanatomy) — very valuable if offered" },
+      { type: "warn", text: "NPB 151 (Cellular Neuroscience) or similar" },
+      { type: "warn", text: "NPB 163 (Behavioral Neuroscience) or cognition courses" },
+    ],
+    expDetail: [
+      { type: "warn", text: "Franz lab is chemistry/drug development — NOT neuroscience" },
+      { type: "star", text: "Summer 2027: neuroscience lab at UC Davis Center for Neuroscience or UCSF Summer Research Program" },
+      { type: "star", text: "Alternative: join neuroscience lab part-time Year 4 (6-8 hrs/week) alongside Franz" },
+    ],
+  },
+  {
+    id: 13,
+    degree: "Master's Degree",
+    title: "Nutrition Science MS/PhD",
+    effort: "LOW-MODERATE",
+    courses: "1–2",
+    experience: "None required",
+    compat: "✅ Compatible",
+    timeline: "Nutrition course Year 3–4; STA 100 Year 3",
+    verdict: "Requires 1-2 courses. UC Davis has a top nutrition program. Very doable addition.",
+    coursesDetail: [
+      { type: "ok", text: "NPB physiology and biochemistry cover metabolism foundations ✓" },
+      { type: "ok", text: "Biochemistry (BIS 102/103) ✓" },
+      { type: "ok", text: "Organic Chemistry ✓" },
+      { type: "warn", text: "Nutrition course (NUT 10 or upper-division) — many programs require" },
+      { type: "warn", text: "STA 100 if not taken" },
+    ],
+    expDetail: [
+      { type: "star", text: "Optional: UC Davis Student Health nutrition counseling, community nutrition programs" },
+    ],
+  },
+  {
+    id: 14,
+    degree: "Master's Degree",
+    title: "Forensic Science MS",
+    effort: "LOW-MODERATE",
+    courses: "0–1",
+    experience: "Crime lab internship helpful",
+    compat: "✅ Compatible",
+    timeline: "Analytical chem if needed Year 3–4; internship Summer 2027",
+    verdict: "Franz lab instrumentation experience (NMR, HPLC, mass spec) is excellent preparation. May need one analytical chemistry course.",
+    coursesDetail: [
+      { type: "ok", text: "NPB biology/physiology foundation ✓" },
+      { type: "ok", text: "Organic Chemistry is essential for forensic toxicology ✓" },
+      { type: "warn", text: "Analytical Chemistry (CHE 115/105) — helpful, but Franz lab NMR/HPLC/MS work may cover it" },
+      { type: "warn", text: "For DNA track: BIS 101 Genetics (likely in NPB already)" },
+    ],
+    expDetail: [
+      { type: "ok", text: "Franz lab analytical instrumentation is PERFECT for forensic labs ✓" },
+      { type: "star", text: "Optional: Yolo County Sheriff's Crime Lab or CA Dept. of Justice labs (Summer 2027, Year 4)" },
+    ],
+  },
+  {
+    id: 15,
+    degree: "Professional Degree",
+    title: "Veterinary Medicine (DVM)",
+    effort: "VERY HIGH",
+    courses: "0–2",
+    experience: "250–1000 vet hours REQUIRED",
+    compat: "❌ Incompatible — need to choose",
+    timeline: "Must start vet clinic hours ASAP and drop pharmacy track",
+    verdict: "Requires MAJOR pivot. You'd need to drop pharmacy hours and switch to vet hours. Only pursue if you love animals more than human medicine.",
+    coursesDetail: [
+      { type: "ok", text: "Biology, Chemistry, Biochemistry, Physiology, Microbiology, Genetics ✓" },
+      { type: "warn", text: "STA 100 (Statistics) — add if not taken" },
+      { type: "warn", text: "PHY 007A — may need to add" },
+    ],
+    expDetail: [
+      { type: "warn", text: "Veterinary clinical hours: 200-500 hours minimum REQUIRED" },
+      { type: "warn", text: "Animal experience: 100+ hours (farm, equine especially important for UC Davis)" },
+      { type: "warn", text: "Franz lab: does NOT count (no animals)" },
+      { type: "warn", text: "Pharmacy tech: does NOT count (human medicine)" },
+    ],
+  },
+  {
+    id: 16,
+    degree: "Career Path",
+    title: "Medical Science Liaison (MSL)",
+    effort: "MINIMAL",
+    courses: "0",
+    experience: "Depends on entry degree",
+    compat: "✅ Compatible via multiple routes",
+    timeline: "Focus on degree first; MSL training post-degree",
+    verdict: "MSL is an endpoint from multiple degree paths. Focus on the degree first, then MSL training happens on the job or through fellowship programs.",
+    coursesDetail: [
+      { type: "ok", text: "Via PharmD: continue current plan ✓" },
+      { type: "ok", text: "Via PhD (Pharm Sci/Pharmacology): Franz lab ✓" },
+      { type: "ok", text: "Via MS (Pharm Sci/Clinical Research): see those requirements ✓" },
+    ],
+    expDetail: [
+      { type: "star", text: "Presentation skills: Toastmasters or public speaking course" },
+      { type: "star", text: "Scientific communication: practice explaining research to non-experts" },
+      { type: "star", text: "Networking: attend scientific conferences when possible" },
+    ],
+  },
+  {
+    id: 17,
+    degree: "Career Path",
+    title: "Science Writing / Medical Communications",
+    effort: "MODERATE",
+    courses: "2–3",
+    experience: "Build writing portfolio",
+    compat: "⚠️ Requires writing focus",
+    timeline: "Writing course Year 3; build portfolio Years 3–4",
+    verdict: "Requires developing a writing portfolio DURING undergrad. Your planning docs show you can write clearly — now you need published science writing samples.",
+    coursesDetail: [
+      { type: "ok", text: "Science background (NPB) is foundation ✓" },
+      { type: "warn", text: "UWP 104F (Science Writing) — strongly recommended" },
+      { type: "warn", text: "Journalism or Professional Writing course" },
+      { type: "warn", text: "English electives focused on writing" },
+    ],
+    expDetail: [
+      { type: "warn", text: "Need to build writing portfolio: UC Davis student science magazine/blog" },
+      { type: "warn", text: "University newspaper science articles or freelance science writing" },
+      { type: "warn", text: "Science communication on social media (Twitter/X science threads)" },
+    ],
+  },
+];
+
+const effortOrder = { "NONE": 0, "MINIMAL": 1, "LOW": 2, "LOW-MODERATE": 3, "MODERATE": 4, "MODERATE-HIGH": 5, "HIGH": 6, "VERY HIGH": 7 };
+const effortBucket = (e) => {
+  if (["NONE","MINIMAL"].includes(e)) return "minimal";
+  if (["LOW","LOW-MODERATE","MODERATE"].includes(e)) return "moderate";
+  return "high";
+};
+const effortPercent = (e) => Math.round((effortOrder[e] / 7) * 100);
+
+function buildCards() {
+  const grid = document.getElementById('grid');
+  pathways.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.dataset.effort = p.effort;
+    card.dataset.bucket = effortBucket(p.effort);
+    card.style.animationDelay = `${i * 0.04}s`;
+    card.innerHTML = `
+      <div class="card-header">
+        <div>
+          <div class="card-degree">${p.degree}</div>
+          <div class="card-title">${p.title}</div>
+        </div>
+        <span class="effort-badge">${p.effort}</span>
+      </div>
+      <div class="card-meta">
+        <div class="meta-block">
+          <div class="meta-label">Extra Courses</div>
+          <div class="meta-value">${p.courses}</div>
+        </div>
+        <div class="meta-block">
+          <div class="meta-label">Extra Exp.</div>
+          <div class="meta-value">${p.experience}</div>
+        </div>
+      </div>
+      <div class="verdict"><span class="compat-icon">${p.compat.split(' ')[0]}</span>${p.verdict}</div>
+    `;
+    card.addEventListener('click', () => openPanel(p));
+    grid.appendChild(card);
+  });
+}
+
+function openPanel(p) {
+  const panel = document.getElementById('panel');
+  const overlay = document.getElementById('overlay');
+  const content = document.getElementById('panelContent');
+
+  const courseItems = p.coursesDetail.map(i =>
+    `<li class="${i.type}">${i.text}</li>`).join('');
+  const expItems = p.expDetail.map(i =>
+    `<li class="${i.type}">${i.text}</li>`).join('');
+
+  const ep = effortPercent(p.effort);
+  const barColor = ep <= 15 ? 'var(--teal)' : ep <= 45 ? 'var(--gold)' : ep <= 70 ? '#d4762a' : 'var(--accent)';
+
+  content.innerHTML = `
+    <div class="panel-eyebrow">${p.degree} · #${p.id} of 17</div>
+    <h2 class="panel-title">${p.title}</h2>
+    
+    <div class="panel-section">
+      <div class="panel-section-title">Effort required beyond current plan</div>
+      <div class="stat-bar-wrap">
+        <div class="stat-bar-label"><span>Courses</span><span>${p.courses}</span></div>
+        <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${Math.min(100, (parseInt(p.courses)||0) * 30)}%; background:${barColor}"></div></div>
+      </div>
+      <div class="stat-bar-wrap">
+        <div class="stat-bar-label"><span>Overall effort</span><span>${p.effort}</span></div>
+        <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${ep}%; background:${barColor}"></div></div>
+      </div>
+    </div>
+
+    <div class="panel-section">
+      <div class="panel-section-title">Coursework — what you need</div>
+      <ul class="item-list">${courseItems}</ul>
+    </div>
+    
+    <div class="panel-section">
+      <div class="panel-section-title">Experience — what you need</div>
+      <ul class="item-list">${expItems}</ul>
+    </div>
+    
+    <div class="panel-section">
+      <div class="panel-section-title">Timeline</div>
+      <span class="timeline-pill">${p.timeline}</span>
+    </div>
+    
+    <div class="panel-section">
+      <div class="panel-section-title">Verdict</div>
+      <div class="verdict-panel">${p.verdict}</div>
+    </div>
+  `;
+
+  panel.classList.add('open');
+  overlay.classList.add('open');
+
+  // animate bars
+  setTimeout(() => {
+    content.querySelectorAll('.stat-bar-fill').forEach(b => {
+      const w = b.style.width;
+      b.style.width = '0';
+      requestAnimationFrame(() => { b.style.width = w; });
+    });
+  }, 50);
+}
+
+function closePanel() {
+  document.getElementById('panel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+}
+
+document.getElementById('panelClose').addEventListener('click', closePanel);
+document.getElementById('overlay').addEventListener('click', closePanel);
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.card').forEach(card => {
+      const show = filter === 'all' || card.dataset.bucket === filter;
+      card.classList.toggle('hidden', !show);
+    });
+    // update count
+    document.querySelector('[data-filter="all"]').textContent = `All (17)`;
+    if (filter !== 'all') {
+      const visible = document.querySelectorAll('.card:not(.hidden)').length;
+      btn.textContent = btn.textContent.replace(/\s*\(\d+\)/, '') + ` (${visible})`;
+    }
+  });
+});
+
+buildCards();
+</script>
+</body>
+</html>

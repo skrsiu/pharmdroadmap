@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PharmD vs MS Pathways — UC Davis NPB Student</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1117;
+    --paper: #f8f5ee;
+    --cream: #ede9de;
+    --gold: #c8972a;
+    --gold-light: #e8c06a;
+    --rust: #b84a2e;
+    --teal: #1d6a6a;
+    --slate: #3a4a5c;
+    --muted: #7a7060;
+    --border: #d4cfc2;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(200,151,42,0.06) 20px,
+      rgba(200,151,42,0.06) 21px
+    );
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; position: relative; }
+  .header-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  .header h1 em { color: var(--gold); font-style: normal; }
+  .header-sub {
+    font-size: 0.85rem;
+    color: rgba(248,245,238,0.6);
+    font-weight: 300;
+    margin-top: 0.4rem;
+  }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--cream);
+    border-bottom: 2px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-inner {
+    max-width: 900px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .nav-btn {
+    padding: 0.9rem 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { color: var(--ink); }
+  .nav-btn.active {
+    color: var(--ink);
+    border-bottom-color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── MAIN ── */
+  main { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  .section-desc {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-weight: 300;
+  }
+
+  /* ── CARDS ── */
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; }
+
+  .card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .card-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+    background: var(--slate);
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    border-radius: 2px;
+    margin-bottom: 0.75rem;
+  }
+  .card.highlight .card-tag { background: var(--gold); }
+  .card.clinical .card-tag { background: var(--teal); }
+  .card.industry .card-tag { background: var(--rust); }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+  }
+  .card p { font-size: 0.8rem; color: var(--muted); line-height: 1.55; }
+
+  .card-meta {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;
+  }
+  .meta-item label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: block;
+  }
+  .meta-item span { font-size: 0.78rem; font-weight: 500; }
+
+  /* ── BADGE ── */
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.15rem 0.45rem;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .badge.high { background: #d4edda; color: #1a5928; }
+  .badge.competitive { background: #fff3cd; color: #856404; }
+  .badge.selective { background: #f8d7da; color: #7a1a23; }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-wrapper { overflow-x: auto; margin-top: 1.5rem; }
+  table.compare {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    min-width: 700px;
+  }
+  table.compare thead tr {
+    background: var(--ink);
+    color: var(--paper);
+  }
+  table.compare th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  table.compare th:first-child { min-width: 120px; }
+  table.compare th.pharmd-col { background: rgba(200,151,42,0.25); color: var(--gold-light); }
+  table.compare td {
+    padding: 0.7rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.45;
+  }
+  table.compare tr:nth-child(even) td { background: #faf9f5; }
+  table.compare td:first-child { font-weight: 500; font-family: 'DM Mono', monospace; font-size: 0.72rem; letter-spacing: 0.03em; color: var(--slate); }
+  table.compare td.pharmd-col { background: rgba(200,151,42,0.07) !important; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .filter-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    border: 1.5px solid var(--border);
+    background: white;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover, .filter-btn.active { background: var(--ink); color: white; border-color: var(--ink); }
+
+  /* ── DECISION TREE ── */
+  .decision-tree { margin-top: 1rem; }
+  .question-block {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 4px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+  .question-block h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .options { display: flex; flex-direction: column; gap: 0.5rem; }
+  .option-btn {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 3px;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    cursor: pointer;
+    font-size: 0.82rem;
+    transition: all 0.15s;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .option-btn:hover { background: var(--ink); color: white; border-color: var(--ink); }
+  .option-btn .arrow { opacity: 0.4; font-size: 0.9rem; }
+  .option-btn:hover .arrow { opacity: 1; }
+
+  .result-box {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 4px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .result-box.show { display: block; animation: fadeIn 0.3s ease; }
+  .result-box .result-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .result-box p { font-size: 0.82rem; line-height: 1.6; color: rgba(248,245,238,0.85); }
+  .reset-btn {
+    margin-top: 1rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px solid rgba(248,245,238,0.3);
+    color: var(--paper);
+    padding: 0.4rem 0.9rem;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reset-btn:hover { background: rgba(248,245,238,0.15); }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 2rem; margin-top: 1.5rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 6px; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .timeline-item { position: relative; margin-bottom: 1.5rem; }
+  .timeline-dot {
+    position: absolute; left: -2rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--paper);
+    top: 3px;
+  }
+  .timeline-item.urgent .timeline-dot { background: var(--rust); }
+  .timeline-item.note .timeline-dot { background: var(--teal); }
+  .timeline-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .timeline-item h4 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .timeline-item p { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── SALARY CHART ── */
+  .salary-chart { margin-top: 1.5rem; }
+  .bar-row {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem;
+  }
+  .bar-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    min-width: 160px;
+    color: var(--slate);
+  }
+  .bar-wrap { flex: 1; position: relative; height: 26px; background: var(--cream); border-radius: 2px; overflow: hidden; }
+  .bar {
+    height: 100%;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    color: white;
+    transition: width 0.8s cubic-bezier(0.23,1,0.32,1);
+    border-radius: 2px;
+  }
+  .bar-range { font-size: 0.65rem; color: var(--muted); font-family: 'DM Mono', monospace; min-width: 130px; }
+
+  /* ── ALERTS ── */
+  .alert {
+    background: #fffbeb;
+    border: 1.5px solid #f5d155;
+    border-left: 4px solid var(--gold);
+    border-radius: 3px;
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    line-height: 1.6;
+  }
+  .alert strong { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-bottom: 0.3rem; color: #7a5c00; }
+
+  /* ── FRANZ BOX ── */
+  .franz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+  @media (max-width: 600px) { .franz-grid { grid-template-columns: 1fr; } }
+  .franz-item {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+  }
+  .franz-item h4 { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .franz-item .impact {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    padding: 0.15rem 0.4rem;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  .impact.very-strong { background: #d4edda; color: #1a5928; }
+  .impact.strong { background: #cce5ff; color: #004085; }
+  .impact.moderate { background: #fff3cd; color: #856404; }
+  .impact.low { background: #f8d7da; color: #7a1a23; }
+  .franz-item p { font-size: 0.76rem; color: var(--muted); line-height: 1.5; }
+
+  @media (max-width: 600px) {
+    main { padding: 1rem; }
+    .header { padding: 2rem 1rem 1.75rem; }
+    .bar-label { min-width: 110px; font-size: 0.6rem; }
+    .bar-range { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <p class="header-eyebrow">UC Davis · NPB Major · Franz Research Group · February 2026</p>
+    <h1>PharmD vs. <em>MS Pathways</em></h1>
+    <p class="header-sub">A decision-support comparison for a nursing-interest pre-health student</p>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('overview', this)">Overview</button>
+    <button class="nav-btn" onclick="showSection('comparison', this)">Comparison</button>
+    <button class="nav-btn" onclick="showSection('salary', this)">Financials</button>
+    <button class="nav-btn" onclick="showSection('franz', this)">Franz Lab Impact</button>
+    <button class="nav-btn" onclick="showSection('decision', this)">Decision Tool</button>
+    <button class="nav-btn" onclick="showSection('timeline', this)">Action Plan</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── OVERVIEW ── -->
+  <section id="overview" class="section active">
+    <p class="section-title">Programme Categories at a Glance</p>
+    <p class="section-desc">Seven pathways relevant to your NPB / Franz Research Group / nursing-interest profile.</p>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filterCards('all', this)">All</button>
+      <button class="filter-btn" onclick="filterCards('clinical', this)">Clinical</button>
+      <button class="filter-btn" onclick="filterCards('industry', this)">Industry</button>
+      <button class="filter-btn" onclick="filterCards('research', this)">Research</button>
+    </div>
+
+    <div class="cards" id="programCards">
+
+      <div class="card highlight" data-type="clinical research">
+        <span class="card-tag">Anchor Path</span>
+        <h3>PharmD</h3>
+        <p>Medication expert, clinical pharmacy, drug optimisation. Highest long-term salary ceiling for clinical roles.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~4 yrs</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge high">High Prob.</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>$120k–$162k</span></div>
+          <div class="meta-item"><label>Prereq overlap</label><span>Near-total</span></div>
+        </div>
+      </div>
+
+      <div class="card clinical" data-type="clinical">
+        <span class="card-tag">Clinical</span>
+        <h3>MEPN</h3>
+        <p>RN licensure → NP/DNP. Primary nursing pathway from a non-nursing bachelor's. Near-identical prereqs to PharmD under Option A.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~3 yrs (RN) + 2–3 NP</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge competitive">Competitive</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>NP: $120k–$160k</span></div>
+          <div class="meta-item"><label>Prereq overlap</label><span>Near-total</span></div>
+        </div>
+      </div>
+
+      <div class="card" data-type="research industry">
+        <span class="card-tag">Research</span>
+        <h3>MS Clinical Research</h3>
+        <p>Clinical trial management, drug development oversight, health data analytics. Franz lab is the primary differentiator here.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~2 yrs</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge competitive">Competitive</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>$70k–$130k</span></div>
+          <div class="meta-item"><label>Franz value</label><span>Very Strong</span></div>
+        </div>
+      </div>
+
+      <div class="card industry" data-type="industry research">
+        <span class="card-tag">Industry</span>
+        <h3>MS Regulatory Affairs</h3>
+        <p>FDA/EMA submissions, pharmaceutical QA, biotech industry. NMR/HPLC/mass spec skills map directly. Most underexplored for this profile.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~2 yrs</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge competitive">Competitive</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>$75k–$160k+</span></div>
+          <div class="meta-item"><label>Franz value</label><span>Very Strong</span></div>
+        </div>
+      </div>
+
+      <div class="card industry" data-type="industry research">
+        <span class="card-tag">Industry</span>
+        <h3>MS Biomedical Informatics</h3>
+        <p>Clinical data analysis, EHR systems, health AI. Fastest-growing healthcare field. Best for students drawn to technology over bedside care.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~2 yrs</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge competitive">Competitive</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>$85k–$175k+</span></div>
+          <div class="meta-item"><label>Franz value</label><span>Moderate</span></div>
+        </div>
+      </div>
+
+      <div class="card" data-type="clinical research">
+        <span class="card-tag">Population</span>
+        <h3>MPH / MS Public Health</h3>
+        <p>Epidemiology, health policy, community health. Most accessible and fastest to complete. Does not lead to clinical practice.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~2 yrs</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge competitive">Competitive</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>$60k–$120k</span></div>
+          <div class="meta-item"><label>Franz value</label><span>Moderate</span></div>
+        </div>
+      </div>
+
+      <div class="card" data-type="clinical">
+        <span class="card-tag">Management</span>
+        <h3>MS Healthcare Admin</h3>
+        <p>Hospital operations, managed care, health systems strategy. Fastest & most accessible, but furthest from direct clinical care.</p>
+        <div class="card-meta">
+          <div class="meta-item"><label>Timeline</label><span>~1.5–2 yrs</span></div>
+          <div class="meta-item"><label>Admission</label><span><span class="badge high">High (CSU)</span></span></div>
+          <div class="meta-item"><label>CA Salary</label><span>$70k–$160k+</span></div>
+          <div class="meta-item"><label>Franz value</label><span>Low</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── COMPARISON ── -->
+  <section id="comparison" class="section">
+    <p class="section-title">Side-by-Side Comparison</p>
+    <p class="section-desc">PharmD vs each MS pathway across the dimensions that matter most for this profile.</p>
+
+    <div class="filter-bar" id="compareFilter">
+      <button class="filter-btn active" onclick="showCompare('all', this)">All Programmes</button>
+      <button class="filter-btn" onclick="showCompare('clinical', this)">MEPN</button>
+      <button class="filter-btn" onclick="showCompare('research', this)">Clinical Research</button>
+      <button class="filter-btn" onclick="showCompare('regulatory', this)">Regulatory Affairs</button>
+      <button class="filter-btn" onclick="showCompare('informatics', this)">Informatics</button>
+      <button class="filter-btn" onclick="showCompare('mph', this)">MPH</button>
+    </div>
+
+    <div class="compare-wrapper">
+      <table class="compare" id="compareTable">
+        <thead>
+          <tr>
+            <th>Factor</th>
+            <th class="pharmd-col">PharmD</th>
+            <th>MEPN</th>
+            <th>MS Clin. Research</th>
+            <th>MS Reg. Affairs</th>
+            <th>MS Informatics</th>
+            <th>MPH</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Timeline</td>
+            <td class="pharmd-col">~4 yrs + optional 1–2 yr residency</td>
+            <td>~3 yrs to RN; +2–3 for NP</td>
+            <td>~2 yrs</td>
+            <td>~2 yrs</td>
+            <td>~2 yrs</td>
+            <td>~2 yrs</td>
+          </tr>
+          <tr>
+            <td>Licensure</td>
+            <td class="pharmd-col">Yes — NAPLEX + MPJE</td>
+            <td>Yes — NCLEX (RN); then NP cert</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>GPA Floor</td>
+            <td class="pharmd-col">3.0 min; avg ~3.5–3.6</td>
+            <td>3.0 overall + 3.0 science</td>
+            <td>3.0–3.2; avg ~3.4–3.6</td>
+            <td>3.0–3.2</td>
+            <td>3.0–3.2</td>
+            <td>3.0 min; avg ~3.3–3.5</td>
+          </tr>
+          <tr>
+            <td>NPB Overlap</td>
+            <td class="pharmd-col">Near-total</td>
+            <td>Near-total</td>
+            <td>Strong</td>
+            <td>Strong</td>
+            <td>Moderate</td>
+            <td>Strong</td>
+          </tr>
+          <tr>
+            <td>Franz Lab Value</td>
+            <td class="pharmd-col">Strong</td>
+            <td>Moderate (rare differentiator)</td>
+            <td>Very Strong</td>
+            <td>Very Strong</td>
+            <td>Moderate</td>
+            <td>Moderate</td>
+          </tr>
+          <tr>
+            <td>CA Starting Salary</td>
+            <td class="pharmd-col">$120k–$162k</td>
+            <td>RN: $80k–$120k; NP: $120k–$160k</td>
+            <td>$70k–$130k</td>
+            <td>$75k–$100k entry; $110k–$160k+ senior</td>
+            <td>$85k–$110k entry; $120k–$175k+ senior</td>
+            <td>$60k–$90k (gov't); $80k–$120k (industry)</td>
+          </tr>
+          <tr>
+            <td>Admission Tier</td>
+            <td class="pharmd-col"><span class="badge high">High Prob.</span></td>
+            <td><span class="badge competitive">Competitive</span></td>
+            <td><span class="badge competitive">Competitive</span> → <span class="badge selective">Selective</span></td>
+            <td><span class="badge competitive">Competitive</span></td>
+            <td><span class="badge competitive">Competitive</span> → <span class="badge selective">Selective</span></td>
+            <td><span class="badge competitive">Competitive</span></td>
+          </tr>
+          <tr>
+            <td>Best CA Targets</td>
+            <td class="pharmd-col">UCSF, UCSD, UCI, USC</td>
+            <td>UC Davis, UCI, USC</td>
+            <td>UCSF CTSI, UC Davis, USC Keck</td>
+            <td>USC, SFSU, UCSF, UCSD</td>
+            <td>UCSF, UCSD, Stanford, USC Viterbi</td>
+            <td>UC Berkeley SPH, UCSF, UCLA Fielding</td>
+          </tr>
+          <tr>
+            <td>Long-Term Ceiling</td>
+            <td class="pharmd-col">Clinical Dir., Director of Pharmacy, industry leadership</td>
+            <td>NP/DNP independent practice; nursing faculty; health systems exec</td>
+            <td>Clinical Research Dir., VP Clinical Ops</td>
+            <td>VP Regulatory Affairs, Chief Quality Officer</td>
+            <td>CDO (healthcare), VP Health Informatics, Health AI Lead</td>
+            <td>Health officer, CDC/WHO, health policy director</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── FINANCIALS ── -->
+  <section id="salary" class="section">
+    <p class="section-title">Financial Picture</p>
+    <p class="section-desc">Salary ranges, tuition burden, and break-even timelines. The honest comparison is closer than raw salaries suggest.</p>
+
+    <div class="salary-chart" id="salaryChart"></div>
+
+    <div class="compare-wrapper" style="margin-top:2rem">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Programme</th>
+            <th>Tuition (CA Total)</th>
+            <th>Est. Total Debt</th>
+            <th>CA Starting Salary</th>
+            <th>Break-Even</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>PharmD</td><td>$150k–$200k</td><td>$150k–$200k</td><td>$130k–$150k median</td><td>~5–8 yrs (+ residency adds 2 yrs opp. cost)</td></tr>
+          <tr><td>MEPN</td><td>$60k–$100k</td><td>$60k–$100k</td><td>$80k–$100k (RN)</td><td>~4–6 yrs to RN; NP extends ROI</td></tr>
+          <tr><td>MPH</td><td>$30k–$80k</td><td>$30k–$80k</td><td>$65k–$80k</td><td>~4–7 yrs</td></tr>
+          <tr><td>MS Healthcare Admin</td><td>$25k–$60k</td><td>$25k–$60k</td><td>$75k–$90k</td><td>~3–5 yrs</td></tr>
+          <tr><td>MS Clinical Research</td><td>$40k–$80k</td><td>$40k–$80k</td><td>$80k–$100k</td><td>~3–5 yrs</td></tr>
+          <tr><td>MS Regulatory Affairs</td><td>$30k–$70k</td><td>$30k–$70k</td><td>$80k–$100k</td><td>~3–5 yrs</td></tr>
+          <tr><td>MS Biomedical Informatics</td><td>$40k–$90k</td><td>$40k–$90k</td><td>$90k–$110k</td><td>~2–4 yrs</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert">
+      <strong>⚠ Residency Reality</strong>
+      PharmD graduates who pursue PGY1+PGY2 residency training earn ~$45k–$58k/yr stipend instead of the $110k–$130k a staff pharmacist earns immediately. The ~$120k–$150k opportunity cost extends the real break-even timeline to <strong>8–12 years</strong> for residents — much closer to the MS pathways than raw tuition numbers suggest.
+    </div>
+  </section>
+
+  <!-- ── FRANZ LAB ── -->
+  <section id="franz" class="section">
+    <p class="section-title">Franz Lab Impact on Admission</p>
+    <p class="section-desc">Research Group membership starting Spring 2026 materially changes your competitive position — but the effect is not uniform.</p>
+
+    <div class="franz-grid">
+      <div class="franz-item">
+        <div class="impact very-strong">Very Strong Impact</div>
+        <h4>MS Clinical Research</h4>
+        <p>Hands-on NMR/HPLC/mass spec, drug delivery project, and a named PI letter directly address what these programmes value. Transforms borderline into competitive.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact very-strong">Very Strong Impact</div>
+        <h4>MS Regulatory Affairs</h4>
+        <p>Analytical chemistry skills are core regulatory science competencies. Drug delivery project directly applicable. Distinguishes application in a technical applicant pool.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact strong">Strong Impact</div>
+        <h4>PharmD</h4>
+        <p>Molecular drug narrative, medicinal chemistry background, and chemistry faculty letter differentiates from the typical applicant pool. Moves strong to stronger.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact strong">Strong Impact</div>
+        <h4>MEPN</h4>
+        <p>Research experience is rare in nursing applicant pools. Prof. Franz letter is an institutional advantage specifically at UC Davis. Moves average to above-average.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact moderate">Moderate Impact</div>
+        <h4>MS Biomedical Informatics</h4>
+        <p>Lab data management and quantitative methods are relevant but less decisive than for Clinical Research MS. Helpful, not transformative.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact moderate">Moderate Impact</div>
+        <h4>MPH</h4>
+        <p>Adds credibility for quantitative/epidemiology tracks. Already accessible — Franz lab provides minor additional benefit but is not a game-changer for MPH admissions.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact moderate">Moderate Impact</div>
+        <h4>MS Nursing Science (post-MEPN)</h4>
+        <p>Research experience before and during MEPN distinguishes within the nursing research track. Not applicable until after RN licensure.</p>
+      </div>
+      <div class="franz-item">
+        <div class="impact low">No Meaningful Impact</div>
+        <h4>MS Healthcare Admin</h4>
+        <p>Administration programmes are driven by organisational, leadership, and management experience — not laboratory research skills.</p>
+      </div>
+    </div>
+
+    <div class="alert" style="margin-top:1.5rem">
+      <strong>Key Takeaway</strong>
+      Leverage Franz lab most aggressively in applications that explicitly value research methods and scientific rigour — MS Clinical Research and MS Regulatory Affairs. Use it as a differentiator in PharmD and MEPN pools. Do not rely on it for healthcare admin or standalone MPH applications.
+    </div>
+  </section>
+
+  <!-- ── DECISION TOOL ── -->
+  <section id="decision" class="section">
+    <p class="section-title">Decision Tool</p>
+    <p class="section-desc">Answer three questions to identify the best-fit pathway for your goals.</p>
+
+    <div class="decision-tree">
+      <div class="question-block" id="q1">
+        <h4>Question 1 — What do you want to do on an average Tuesday, ten years from now?</h4>
+        <div class="options">
+          <button class="option-btn" onclick="pickAnswer(1, 'bedside')">At a patient's bedside — assessing, caring, full holistic nursing care <span class="arrow">→</span></button>
+          <button class="option-btn" onclick="pickAnswer(1, 'meds')">Reviewing medication regimens, counselling on drug therapy, clinical rounding <span class="arrow">→</span></button>
+          <button class="option-btn" onclick="pickAnswer(1, 'trials')">Running a clinical trial, managing drug development data, drug-to-patient pipeline <span class="arrow">→</span></button>
+          <button class="option-btn" onclick="pickAnswer(1, 'fda')">Writing FDA submissions, pharmaceutical QA, biotech/pharma industry roles <span class="arrow">→</span></button>
+          <button class="option-btn" onclick="pickAnswer(1, 'data')">Building health data systems, analysing clinical outcomes at scale, health AI <span class="arrow">→</span></button>
+          <button class="option-btn" onclick="pickAnswer(1, 'mgmt')">Managing a hospital department or health system operations <span class="arrow">→</span></button>
+          <button class="option-btn" onclick="pickAnswer(1, 'policy')">Analysing population health trends, designing community interventions, policy <span class="arrow">→</span></button>
+        </div>
+      </div>
+
+      <div id="result" class="result-box">
+        <div class="result-title" id="result-title"></div>
+        <p id="result-body"></p>
+        <button class="reset-btn" onclick="resetDecision()">← Start over</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ACTION PLAN ── -->
+  <section id="timeline" class="section">
+    <p class="section-title">Immediate Action Plan</p>
+    <p class="section-desc">Sequenced steps from February 2026 through application season. GPA comes first.</p>
+
+    <div class="alert" style="margin-top:0; margin-bottom:1.5rem">
+      <strong>⚠ Workload Warning</strong>
+      You cannot simultaneously commit to 150 pharmacy tech hours, 200+ nursing clinical hours, Franz lab, and GPA protection without risk. Overcommitting in Year 3 may damage the GPA that makes all these paths viable. <strong>Prioritise GPA first; accumulate hours in gaps and summers.</strong>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item urgent">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">This Week — February 2026</div>
+        <h4>Confirm Franz Lab Start</h4>
+        <p>Lock in start date, project, and weekly hours with Prof. Franz. Target 6–8 hrs/wk (drop to 4–6 hrs/wk during GPA-critical Fall 2026 quarter).</p>
+      </div>
+      <div class="timeline-item urgent">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">April 2026</div>
+        <h4>Begin Pharmacy Tech Licence &amp; Applications</h4>
+        <p>Apply for positions by April 2026. Prioritise clinical settings: Kaiser Permanente Fremont, UC Davis Health, hospital inpatient pharmacies. Retail acceptable only if clinical roles unavailable.</p>
+      </div>
+      <div class="timeline-item note">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Now → Summer 2026 (if MEPN is under consideration)</div>
+        <h4>Register as Clinical Volunteer</h4>
+        <p>UC Davis Medical Center or Fremont-area hospital. Even 2–4 hrs/wk now builds the nursing clinical portfolio (target 150–300 direct patient care hours by Summer 2027) in parallel.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Summer 2026</div>
+        <h4>Audit MEPN Prerequisite Status</h4>
+        <p>Confirm whether Statistics (STA 13/100), Nutrition (NUT 10/11), Lifespan Development (HDE 100A/B/C), and Oral Communication (CMN 1/5/120) are completed. Schedule any missing courses in Summer 2026 or Winter 2027.</p>
+      </div>
+      <div class="timeline-item note">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Summer 2026 (if Informatics is of interest)</div>
+        <h4>Add Introductory Programming</h4>
+        <p>Python or R. Not required for all informatics programmes, but strengthens the application meaningfully. Consider online coursework during lighter quarters.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Winter–Spring 2027</div>
+        <h4>Review Target Programme Pages</h4>
+        <p>MS Regulatory Affairs: USC, SFSU, UCSF. MS Clinical Research: UCSF CTSI, UC Davis CTS. MS Informatics: UCSF, UCSD. Identify letters of recommendation needed for each path.</p>
+      </div>
+      <div class="timeline-item urgent">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Spring 2027 — Critical Decision Point</div>
+        <h4>Choose Primary Path &amp; Begin Personal Statement Drafting</h4>
+        <p>PharmCAS (pharmacy) and NursingCAS (nursing) require <strong>distinct narratives and different letter-writer profiles</strong>. You must commit to a primary identity. The decision should be grounded in your clinical hour experiences in both pharmacy and nursing settings accumulated to this point.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">July 2027</div>
+        <h4>Submit PharmCAS (if PharmD primary)</h4>
+        <p>Submit pharmacy school applications. Target UCSF, UCSD, UCI, USC. Strong application: Franz lab letter, pharmacy tech hours, NPB prereq completion, 3.55–3.75 GPA.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">November 2027</div>
+        <h4>Submit NursingCAS (if MEPN parallel or primary)</h4>
+        <p>Target UC Davis, UCI, USC. Requires distinct personal statement emphasising nursing identity — not a rephrased pharmacy essay.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">Fall 2028</div>
+        <h4>Programme Entry</h4>
+        <p>Target start date across all pathways under this planning sequence.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+function filterCards(type, btn) {
+  document.querySelectorAll('#programCards .card').forEach(c => {
+    const t = c.dataset.type || '';
+    c.style.display = (type === 'all' || t.includes(type)) ? '' : 'none';
+  });
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+function showCompare(type, btn) {
+  const table = document.getElementById('compareTable');
+  const cols = { all: [1,2,3,4,5,6], clinical: [1,2], research: [1,3], regulatory: [1,4], informatics: [1,5], mph: [1,6] };
+  const show = cols[type] || [1,2,3,4,5,6];
+  table.querySelectorAll('th, td').forEach(cell => {
+    const idx = cell.cellIndex + 1;
+    cell.style.display = show.includes(idx) ? '' : 'none';
+  });
+  document.querySelectorAll('#compareFilter .filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+}
+
+const answers = {
+  bedside: { title: 'Best Path: MEPN → RN → NP/DNP', body: 'Your goal is holistic patient care at the bedside. MEPN is the direct entry route from a non-nursing bachelor\'s degree. Prerequisites overlap almost entirely with PharmD under Option A — your coursework is not wasted. Begin accumulating nursing clinical volunteer hours now (150–300 hours needed). Note: UCSF MEPN is currently paused as of February 2026. Backup: PharmD (near-identical prereqs; pursue if pharmacy identity also resonates after clinical hours).' },
+  meds: { title: 'Best Path: PharmD', body: 'Drug therapy management, clinical rounding, and medication optimisation is the PharmD identity. Highest long-term salary ceiling for clinical roles. Your NPB coursework covers nearly all prerequisites. Franz lab adds a strong medicinal chemistry narrative. Begin pharmacy tech hours (150–200) from April 2026 and target PharmCAS submission by July 2027. Backup: MEPN (if nursing identity is also genuine after clinical exposure).' },
+  trials: { title: 'Best Path: MS Clinical Research / Translational Science', body: 'The science-to-patient pipeline — clinical trial oversight, drug development, health data analytics — is exactly where your Franz lab skills apply most powerfully. NMR, HPLC, mass spectrometry, and the drug delivery project directly address what UCSF CTSI, UC Davis CTS, and USC Keck value most. This path bridges pharmacy and nursing interests without requiring either clinical licensure. It is the highest Franz-lab-leverage option.' },
+  fda: { title: 'Best Path: MS Regulatory Affairs / Pharmaceutical Sciences', body: 'FDA/EMA submissions, pharmaceutical QA, drug approval strategy — this is the most underexplored path for your chemistry profile. Your existing analytical chemistry skills (NMR, HPLC, mass spec) map almost directly onto regulatory science competencies. The salary ceiling at senior biotech/pharma levels approaches or matches PharmD. Best for students drawn to pharmaceutical industry over bedside care. Most underrepresented in typical pre-health planning.' },
+  data: { title: 'Best Path: MS Biomedical / Health Informatics', body: 'Clinical data analysis, EHR systems, and health AI is one of the fastest-growing healthcare fields with strong salary trajectories at senior levels. Best for students who want to work at the intersection of clinical science and technology rather than direct patient care. Note: without programming experience (Python/R), some programmes will require catch-up coursework — consider adding this in Summer 2026. Backup: MS Clinical Research (data methods overlap).' },
+  mgmt: { title: 'Best Path: MS Healthcare Administration (MSHA/MHA)', body: 'Hospital operations, managed care, and health systems strategy is the MSHA track. It is the fastest and most accessible MS path and the one least requiring clinical hours. Best suited for students whose genuine interest is in how health systems are run, not treating patients. For a student with clinical pharmacy or nursing interests, MSHA is better positioned as a post-PharmD or post-MEPN credential rather than a substitute for clinical training.' },
+  policy: { title: 'Best Path: MPH / MS in Public Health', body: 'Population-level health, epidemiology, and policy work is the MPH domain. It is the most accessible and fastest MS to complete (2 years). However, it does not lead to clinical practice — it leads to public health and policy. It is an excellent complement to PharmD (many pharmacists hold dual PharmD/MPH credentials) but a weak substitute if direct patient care is the goal. Best UC Berkeley SPH, UCSF MPH, UCLA Fielding, UC Davis MPH.' }
+};
+
+function pickAnswer(q, key) {
+  const a = answers[key];
+  if (!a) return;
+  document.getElementById('result-title').textContent = a.title;
+  document.getElementById('result-body').textContent = a.body;
+  document.getElementById('result').classList.add('show');
+  document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function resetDecision() {
+  document.getElementById('result').classList.remove('show');
+}
+
+// ── SALARY BARS ──
+const salaryData = [
+  { label: 'PharmD', min: 120, max: 162, color: '#c8972a' },
+  { label: 'MEPN (NP)', min: 120, max: 160, color: '#1d6a6a' },
+  { label: 'MS Biomedical Info.', min: 85, max: 175, color: '#3a4a5c' },
+  { label: 'MS Reg. Affairs', min: 75, max: 160, color: '#b84a2e' },
+  { label: 'MS Clin. Research', min: 70, max: 130, color: '#4a6a8c' },
+  { label: 'MS Healthcare Admin', min: 70, max: 160, color: '#6a4a8c' },
+  { label: 'MPH (industry)', min: 60, max: 120, color: '#5a7a5a' },
+  { label: 'MPH (public)', min: 60, max: 90, color: '#8a7a5a' },
+];
+const MAX = 180;
+const chart = document.getElementById('salaryChart');
+chart.innerHTML = '<p style="font-family:\'DM Mono\',monospace;font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">California Salary Range (Entry → Senior, $k)</p>';
+salaryData.forEach(d => {
+  const left = (d.min / MAX * 100).toFixed(1);
+  const width = ((d.max - d.min) / MAX * 100).toFixed(1);
+  chart.innerHTML += `
+    <div class="bar-row">
+      <div class="bar-label">${d.label}</div>
+      <div class="bar-wrap">
+        <div style="position:absolute;left:${left}%;width:${width}%;height:100%;background:${d.color};opacity:0.85;border-radius:2px;display:flex;align-items:center;justify-content:center;">
+          <span style="font-family:'DM Mono',monospace;font-size:0.62rem;color:white;font-weight:500;">$${d.min}k–$${d.max}k</span>
+        </div>
+      </div>
+      <div class="bar-range" style="font-family:'DM Mono',monospace;font-size:0.65rem;color:var(--muted);">entry → senior</div>
+    </div>`;
+});
+</script>
+</body>
+</html>

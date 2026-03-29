@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dual-Path Evaluation Report | PharmD + MD Strategic Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f0e0d;
+    --paper: #f5f0e8;
+    --cream: #ede8dc;
+    --accent-gold: #c8932a;
+    --accent-rust: #b84c2b;
+    --accent-navy: #1a2d4a;
+    --accent-sage: #4a6741;
+    --muted: #6b6358;
+    --rule: #c8bfaf;
+    --pharmd: #1a2d4a;
+    --md: #6b2d2d;
+    --dual: #2d4a1a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.65;
+    font-size: 15px;
+  }
+
+  /* ─── MASTHEAD ─────────────────────────────────────────────── */
+  .masthead {
+    background: var(--accent-navy);
+    color: var(--paper);
+    padding: 56px 60px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .masthead::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 320px; height: 320px;
+    border: 1px solid rgba(200,147,42,0.2);
+    border-radius: 50%;
+  }
+  .masthead::after {
+    content: '';
+    position: absolute;
+    top: 20px; right: 20px;
+    width: 200px; height: 200px;
+    border: 1px solid rgba(200,147,42,0.15);
+    border-radius: 50%;
+  }
+  .masthead-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 16px;
+  }
+  .masthead h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .masthead-sub {
+    font-size: 16px;
+    color: rgba(245,240,232,0.7);
+    font-weight: 300;
+    margin-bottom: 28px;
+  }
+  .masthead-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .meta-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.55);
+    border-left: 2px solid var(--accent-gold);
+    padding-left: 10px;
+  }
+
+  /* ─── LAYOUT ────────────────────────────────────────────────── */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  /* ─── CRITICAL QUESTION ─────────────────────────────────────── */
+  .core-question {
+    background: var(--accent-navy);
+    color: var(--paper);
+    margin: 48px 0 0;
+    padding: 40px 48px;
+    border-left: 5px solid var(--accent-gold);
+    position: relative;
+  }
+  .core-question .q-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 16px;
+  }
+  .core-question p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    line-height: 1.5;
+    color: var(--paper);
+  }
+
+  /* ─── SECTION HEADERS ───────────────────────────────────────── */
+  .section-wrap {
+    padding: 52px 0 12px;
+    border-top: 1px solid var(--rule);
+    margin-top: 40px;
+  }
+  .section-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent-gold);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 700;
+    color: var(--accent-navy);
+    margin-bottom: 20px;
+  }
+  .section-lead {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 680px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  /* ─── SCENARIO CARDS ────────────────────────────────────────── */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--rule);
+    margin: 32px 0;
+  }
+  .scenario-card {
+    padding: 32px;
+    position: relative;
+  }
+  .scenario-card:first-child {
+    border-right: 1px solid var(--rule);
+    background: #f9f5ed;
+  }
+  .scenario-card:last-child {
+    background: #eef3f0;
+  }
+  .scenario-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .scenario-card:first-child .scenario-label { color: var(--accent-rust); }
+  .scenario-card:last-child .scenario-label { color: var(--accent-sage); }
+  .scenario-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .scenario-card p { font-size: 14px; line-height: 1.6; color: var(--muted); }
+  .scenario-verdict {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    margin-top: 14px;
+    padding: 8px 12px;
+    background: rgba(0,0,0,0.05);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── COMPARISON TABLE ──────────────────────────────────────── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .compare-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--cream);
+    border-bottom: 2px solid var(--rule);
+    color: var(--muted);
+  }
+  .compare-table th.pharmd-col { color: var(--pharmd); }
+  .compare-table th.md-col { color: var(--md); }
+  .compare-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:first-child { font-weight: 500; font-size: 13px; color: var(--muted); }
+  .compare-table .pharmd-val { color: var(--pharmd); }
+  .compare-table .md-val { color: var(--md); }
+  .compare-table tr:nth-child(odd) td { background: rgba(0,0,0,0.016); }
+
+  /* ─── TIMELINE ──────────────────────────────────────────────── */
+  .timeline {
+    margin: 32px 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 110px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: var(--rule);
+  }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+    margin-bottom: 0;
+    position: relative;
+  }
+  .tl-period {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    padding: 16px 20px 16px 0;
+    text-align: right;
+    line-height: 1.4;
+    padding-top: 18px;
+  }
+  .tl-content {
+    border-left: none;
+    padding: 16px 0 16px 28px;
+    border-bottom: 1px solid rgba(200,191,175,0.4);
+    position: relative;
+  }
+  .tl-content::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 22px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--rule);
+  }
+  .tl-row.priority-high .tl-content::before { border-color: var(--accent-rust); background: var(--accent-rust); }
+  .tl-row.priority-dual .tl-content::before { border-color: var(--accent-sage); background: var(--accent-sage); }
+  .tl-row.priority-mcat .tl-content::before { border-color: var(--accent-gold); background: var(--accent-gold); }
+  .tl-row.priority-decision .tl-content::before { border-color: var(--accent-navy); background: var(--accent-navy); }
+
+  .tl-status {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .priority-high .tl-status { color: var(--accent-rust); }
+    .priority-dual .tl-status { color: var(--accent-sage); }
+  .priority-mcat .tl-status { color: var(--accent-gold); }
+  .priority-decision .tl-status { color: var(--accent-navy); }
+
+  .tl-tracks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .tl-track {
+    font-size: 12.5px;
+    line-height: 1.55;
+    padding: 10px 14px;
+    border-left: 2px solid var(--rule);
+  }
+  .tl-track.pharmd { border-color: var(--pharmd); background: rgba(26,45,74,0.04); }
+  .tl-track.mcat { border-color: var(--accent-gold); background: rgba(200,147,42,0.04); }
+  .tl-track-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.6;
+  }
+
+  /* ─── MCAT GRID ─────────────────────────────────────────────── */
+  .mcat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .mcat-card {
+    border: 1px solid var(--rule);
+    padding: 20px 22px;
+    background: white;
+  }
+  .mcat-section-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .mcat-abbrev {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--accent-navy);
+    margin-bottom: 10px;
+  }
+  .mcat-coverage {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+  }
+  .coverage-strong { background: #d4edda; color: #1a5c2a; }
+  .coverage-adequate { background: #fff3cd; color: #7d5a00; }
+  .coverage-supported { background: #cce5ff; color: #003d80; }
+  .coverage-selfstudy { background: #f8d7da; color: #721c24; }
+  .mcat-courses { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+
+  /* ─── CALLOUT BOXES ─────────────────────────────────────────── */
+  .callout {
+    margin: 28px 0;
+    padding: 24px 28px;
+    border-left: 4px solid var(--accent-gold);
+    background: rgba(200,147,42,0.06);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .callout.warning {
+    border-color: var(--accent-rust);
+    background: rgba(184,76,43,0.05);
+  }
+  .callout.success {
+    border-color: var(--accent-sage);
+    background: rgba(74,103,65,0.05);
+  }
+  .callout-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    color: var(--accent-gold);
+  }
+  .callout.warning .callout-label { color: var(--accent-rust); }
+  .callout.success .callout-label { color: var(--accent-sage); }
+
+  /* ─── DECISION TABLE ────────────────────────────────────────── */
+  .decision-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 13.5px;
+  }
+  .decision-table th {
+    padding: 11px 14px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent-navy);
+    color: rgba(245,240,232,0.7);
+  }
+  .decision-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .decision-table tr:last-child td { border-bottom: none; }
+  .decision-table tr:nth-child(odd) td { background: rgba(0,0,0,0.02); }
+  .outcome-good { color: var(--accent-sage); font-weight: 500; }
+  .outcome-warn { color: var(--accent-gold); font-weight: 500; }
+  .outcome-risk { color: var(--accent-rust); font-weight: 500; }
+
+  /* ─── REACTIVE FAILURE ──────────────────────────────────────── */
+  .failure-steps {
+    counter-reset: failure;
+    margin: 20px 0;
+  }
+  .failure-step {
+    counter-increment: failure;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .failure-step::before {
+    content: counter(failure);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--accent-rust);
+    color: white;
+    width: 24px; height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border-radius: 2px;
+    margin-top: 1px;
+  }
+  .failure-step p { font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+  /* ─── Q&A DECISION ──────────────────────────────────────────── */
+  .qa-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .qa-item {
+    border: 1px solid var(--rule);
+    padding: 16px 18px;
+    background: var(--cream);
+  }
+  .qa-question {
+    font-size: 13.5px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.45;
+  }
+  .qa-answer {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* ─── RESIDENCY TABLE ───────────────────────────────────────── */
+  .residency-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 13.5px;
+  }
+  .residency-table th {
+    padding: 11px 14px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--cream);
+    border-bottom: 2px solid var(--rule);
+    color: var(--muted);
+  }
+  .residency-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+  .residency-table tr:last-child td { border-bottom: none; }
+  .risk-low { color: var(--accent-sage); font-weight: 600; font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+  .risk-mod { color: var(--accent-gold); font-weight: 600; font-size: 11px; font-family: 'IBM Plex Mono', monospace; }
+
+  /* ─── SUMMARY TABLE ─────────────────────────────────────────── */
+  .summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 14px;
+  }
+  .summary-table tr { border-bottom: 1px solid var(--rule); }
+  .summary-table tr:last-child { border-bottom: none; }
+  .summary-table td { padding: 12px 0; vertical-align: top; }
+  .summary-table td:first-child {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    width: 200px;
+    padding-right: 24px;
+    padding-top: 14px;
+  }
+  .summary-table td:last-child {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  /* ─── ACTION ITEMS ──────────────────────────────────────────── */
+  .action-list {
+    margin: 24px 0;
+    counter-reset: action;
+  }
+  .action-item {
+    display: flex;
+    gap: 18px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+    counter-increment: action;
+  }
+  .action-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--cream);
+    line-height: 1;
+    -webkit-text-stroke: 1.5px var(--rule);
+    flex-shrink: 0;
+    width: 36px;
+    text-align: right;
+  }
+  .action-content { padding-top: 4px; }
+  .action-content strong {
+    display: block;
+    font-size: 14.5px;
+    margin-bottom: 4px;
+    color: var(--accent-navy);
+  }
+  .action-content p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ─── FOOTER ────────────────────────────────────────────────── */
+  .report-footer {
+    background: var(--accent-navy);
+    color: rgba(245,240,232,0.5);
+    padding: 28px 60px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    margin-top: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer-right { color: var(--accent-gold); }
+
+  /* ─── NAV ───────────────────────────────────────────────────── */
+  .toc {
+    background: var(--cream);
+    padding: 32px 40px;
+    margin: 40px 0 0;
+    border-top: 3px solid var(--accent-navy);
+  }
+  .toc-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .toc-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px 24px;
+    list-style: none;
+  }
+  .toc-list li a {
+    font-size: 13px;
+    color: var(--accent-navy);
+    text-decoration: none;
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .toc-list li a:hover { color: var(--accent-gold); }
+  .toc-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 700px) {
+    .masthead { padding: 40px 28px 36px; }
+    .container { padding: 0 24px; }
+    .scenario-grid, .tl-tracks, .mcat-grid, .qa-grid, .toc-list { grid-template-columns: 1fr; }
+    .timeline::before { left: 80px; }
+    .tl-row { grid-template-columns: 80px 1fr; }
+    .toc { padding: 24px; }
+    .report-footer { padding: 24px; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-label">Dual-Path Evaluation Report</div>
+  <h1>PharmD + MD<br>Strategic Analysis</h1>
+  <p class="masthead-sub">A structured framework for evaluating concurrent pharmaceutical and medical school pathways</p>
+  <div class="masthead-meta">
+    <span class="meta-chip">UC Davis Year 2 Student</span>
+    <span class="meta-chip">NPB Major</span>
+    <span class="meta-chip">Prepared February 2026</span>
+    <span class="meta-chip">Franz Research Group</span>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="container">
+  <div class="toc">
+    <div class="toc-title">Contents</div>
+    <ul class="toc-list">
+      <li><a href="#s1"><span class="toc-num">01</span> The Core Question</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> Option A Pathway</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> Dual-Path Framework</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> MCAT Requirements</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> Decision Framework</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> What Not To Do</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> Spring 2028 Scenarios</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> Summary & Actions</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> Residency Realities</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="container">
+  <div class="section-wrap" id="s1">
+    <span class="section-num">Section 01</span>
+    <h2 class="section-title">The Core Question You Must Answer First</h2>
+    <p class="section-lead">Before any timeline, course plan, or MCAT strategy is relevant, you need to honestly answer one question. Your answer determines everything that follows.</p>
+  </div>
+
+  <div class="core-question">
+    <div class="q-label">The Core Question</div>
+    <p>"If you were guaranteed admission to a solid, respected PharmD program tomorrow — not UCSF, just a good program — would you still feel a genuine pull toward the MD path?"</p>
+  </div>
+
+  <div class="section-wrap" style="padding-top: 32px; border-top: none; margin-top: 24px;">
+    <h3 style="font-family: 'Playfair Display', serif; font-size: 20px; color: var(--accent-navy); margin-bottom: 16px;">PharmD vs. MD/DO — The Two Different Lives</h3>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Factor</th>
+        <th class="pharmd-col">PharmD</th>
+        <th class="md-col">MD / DO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Degree</td>
+        <td class="pharmd-val">Doctor of Pharmacy (PharmD)</td>
+        <td class="md-val">Doctor of Medicine / Osteopathic Medicine</td>
+      </tr>
+      <tr>
+        <td>Training after graduation</td>
+        <td class="pharmd-val">1–2 year residency (optional). Stipend ~$45K–$58K/yr. ~$120K–$150K opportunity cost over PGY1+PGY2.</td>
+        <td class="md-val">3–7+ year residency (required)</td>
+      </tr>
+      <tr>
+        <td>Time to independent practice</td>
+        <td class="pharmd-val">~5.5–6.5 years from now</td>
+        <td class="md-val">~8–11 years from now</td>
+      </tr>
+      <tr>
+        <td>Primary clinical role</td>
+        <td class="pharmd-val">Medication expert, patient counseling, clinical pharmacy, ambulatory care</td>
+        <td class="md-val">Diagnosis, full medical decision authority, prescribing across specialties</td>
+      </tr>
+      <tr>
+        <td>Typical starting salary</td>
+        <td class="pharmd-val">$120,000–$162,000 (CA median ~$157K)</td>
+        <td class="md-val">$200,000–$450,000+ (varies widely by specialty)</td>
+      </tr>
+      <tr>
+        <td>Lifestyle trajectory</td>
+        <td class="pharmd-val">Generally more predictable hours in most settings</td>
+        <td class="md-val">Residency is intense; attending lifestyle varies by specialty</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="scenario-grid">
+    <div class="scenario-card">
+      <div class="scenario-label">Scenario A</div>
+      <h3>90%+ PharmD Committed</h3>
+      <p>Do NOT pursue the MCAT. It adds stress, time, and risk with no strategic benefit. Your entire energy belongs in GPA protection and pharmacy experience.</p>
+      <div class="scenario-verdict">→ Stop at Section 2. Execute pharmacy plan.</div>
+    </div>
+    <div class="scenario-card">
+      <div class="scenario-label">Scenario B</div>
+      <h3>Genuinely Open to MD</h3>
+      <p>A structured dual-path is viable under Option A. The MCAT must be treated as a first-class planned priority, not a backup afterthought.</p>
+      <div class="scenario-verdict">→ Continue to Section 3 for full framework.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="container">
+  <div class="section-wrap" id="s2">
+    <span class="section-num">Section 02</span>
+    <h2 class="section-title">Why Option A Is the Only Compatible Path</h2>
+    <p class="section-lead">NPB + selective pharmaceutical chemistry electives is the only plan that realistically keeps the MCAT as a viable option. Options B and C cannot support dual-path planning for this student.</p>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:18px; margin-bottom:16px; color:var(--accent-navy);">MCAT Content Alignment — Option A Coverage</h3>
+
+  <div class="mcat-grid">
+    <div class="mcat-card">
+      <div class="mcat-section-name">Section B/B</div>
+      <div class="mcat-abbrev">Biological &amp; Biochemical Foundations</div>
+      <span class="mcat-coverage coverage-strong">STRONG</span>
+      <div class="mcat-courses">NPB 101 (Physiology), BIS 103 (Biochem), MMG 102 (Micro), EXB 106 (Anatomy), upper-div NPB electives</div>
+    </div>
+    <div class="mcat-card">
+      <div class="mcat-section-name">Section C/P</div>
+      <div class="mcat-abbrev">Chemical &amp; Physical Foundations</div>
+      <span class="mcat-coverage coverage-adequate">ADEQUATE</span>
+      <div class="mcat-courses">CHE 002A/B/C, CHE 118A/B, PHY 007A/B completed. CHE 124A/B adds signal. Franz Research Group (NMR, HPLC, mass spectrometry) reinforces C/P content. Physics self-review needed.</div>
+    </div>
+    <div class="mcat-card">
+      <div class="mcat-section-name">Section CARS</div>
+      <div class="mcat-abbrev">Critical Analysis &amp; Reasoning</div>
+      <span class="mcat-coverage coverage-supported">SUPPORTED</span>
+      <div class="mcat-courses">UWP 104F, ENL 003 writing courses. Primarily a self-study/practice section.</div>
+    </div>
+    <div class="mcat-card">
+      <div class="mcat-section-name">Section P/S</div>
+      <div class="mcat-abbrev">Psychological &amp; Social Foundations</div>
+      <span class="mcat-coverage coverage-selfstudy">SELF-STUDY</span>
+      <div class="mcat-courses">No dedicated course required. Standard MCAT prep materials sufficient. Intro Psychology and Sociology.</div>
+    </div>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-label">Why Options B &amp; C Are Incompatible</div>
+    Physical Chemistry (CHE 107A/B) is not tested on the MCAT and is projected to drop GPA to 3.0–3.3 for this student. Extended physics quarters add GPA drag with no high school physics background. Peak study loads of 30–35 hrs/week leave no bandwidth for 300–500 hours of MCAT prep.
+    <br><br><strong>Option A is not merely preferable — it is the prerequisite for keeping any dual-path viable.</strong>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="container">
+  <div class="section-wrap" id="s3">
+    <span class="section-num">Section 03</span>
+    <h2 class="section-title">The Dual-Path Strategic Framework</h2>
+    <p class="section-lead">Applies only if you answered yes to the core question. This framework treats the MCAT as a genuine parallel priority, structured around the pharmacy application timeline.</p>
+  </div>
+
+  <div class="callout success">
+    <div class="callout-label">The Foundational Principle</div>
+    <strong>Do not frame this as:</strong> "If I fail top PharmD programs, I'll try the MCAT."<br><br>
+    <strong>Frame this as:</strong> "If medicine is a real interest, I will structure my timeline now so both paths remain viable — and I will make an informed decision in Spring 2028 with both pharmacy results and an MCAT score in hand."
+  </div>
+
+  <div class="timeline">
+    <div class="tl-row priority-high">
+      <div class="tl-period">Spring<br>2026</div>
+      <div class="tl-content">
+        <div class="tl-status">PharmD Priority Phase</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            PHY 007A, CHE 118C, Econ. Secure pharmacy position by April. Begin Franz Research Group (organic synthesis, medicinal chemistry, chemical biology).
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            No MCAT prep. Foundation coursework only. MCAT is background consideration only.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-high">
+      <div class="tl-period">Summer<br>2026</div>
+      <div class="tl-content">
+        <div class="tl-status">PharmD Priority Phase</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Begin pharmacy hours (15–20 hrs/wk). Franz lab continues (6–8 hrs/wk). Prepare for Fall 2026 heavy load.
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            No MCAT prep. Too early — Biochem and Physiology not yet complete.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-high" style="--status-color: var(--accent-rust);">
+      <div class="tl-period">Fall<br>2026</div>
+      <div class="tl-content">
+        <div class="tl-status" style="color:var(--accent-rust); font-weight:600;">⚠ CRITICAL GPA QUARTER</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            NPB 101, BIS 103, CHE 124A, PHY 007B. Register for Winter Anatomy. Franz lab at reduced hours (4–6 hrs/wk — GPA takes priority).
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            No MCAT prep. GPA-critical quarter. Any distraction is too costly.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-high">
+      <div class="tl-period">Winter<br>2027</div>
+      <div class="tl-content">
+        <div class="tl-status">PharmD-Only Quarter</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Anatomy (EXB 106/106L) — light quarter. Continue pharmacy hours.
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            No MCAT prep. Anatomy is time-intensive. Light quarter is for recovery, not new demands.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-dual">
+      <div class="tl-period">Spring<br>2027</div>
+      <div class="tl-content">
+        <div class="tl-status">⟶ Dual-Path Active</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Microbiology (MMG 102). ALL PREREQS COMPLETE. Begin personal statement drafts.
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            MCAT prep begins in earnest. All key content now complete. 10–12 hrs/wk prep.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-dual">
+      <div class="tl-period">Summer<br>2027</div>
+      <div class="tl-content">
+        <div class="tl-status">⚡ Highest Conflict Window</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Submit PharmCAS by early July. Finalize personal statement, letters of rec. Target 150–200 pharmacy hours.
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            Reduce MCAT prep intensity during peak PharmCAS work (May–July). Resume full prep post-submission. PharmCAS is priority.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-mcat">
+      <div class="tl-period">Fall<br>2027</div>
+      <div class="tl-content">
+        <div class="tl-status">★ Ideal MCAT Window</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Interview season. Light course load. Interview prep Oct–Dec.
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            Dedicated MCAT prep — lowest-pressure quarter in the entire plan. Full prep block. Target test date: Oct–Nov 2027.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-decision">
+      <div class="tl-period">Winter–Spring<br>2027–28</div>
+      <div class="tl-content">
+        <div class="tl-status">Decision Point Approaching</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Continue interviews. Await pharmacy decisions (Mar–May 2028).
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            MCAT score in hand. If pursuing MD backup, AMCAS opens May 2028.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-row priority-decision">
+      <div class="tl-period">Spring–Summer<br>2028</div>
+      <div class="tl-content">
+        <div class="tl-status">✓ Fully Informed Decision</div>
+        <div class="tl-tracks">
+          <div class="tl-track pharmd">
+            <div class="tl-track-label">PharmD Track</div>
+            Accept PharmD offer OR pursue reapplication / MD path based on outcomes.
+          </div>
+          <div class="tl-track mcat">
+            <div class="tl-track-label">MCAT / MD Track</div>
+            If MD path pursued: submit AMCAS May–June 2028 for Fall 2029 entry.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Why Fall 2027 Is the Ideal MCAT Window</div>
+    Fall 2027 was already designed as an interview-focused light quarter in the pharmacy plan. It is the only quarter in the entire 2026–2028 period with genuinely reduced academic pressure. Rather than filling this quarter with electives, a student pursuing the dual path has a natural, undistorted block for 300–500 hours of MCAT preparation — without any conflict with GPA-critical coursework or PharmCAS deadlines.
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="container">
+  <div class="section-wrap" id="s4">
+    <span class="section-num">Section 04</span>
+    <h2 class="section-title">MCAT Requirements &amp; Score Targets</h2>
+    <p class="section-lead">Understanding what the MCAT requires — in content, preparation time, and score — is essential for realistic dual-path planning.</p>
+  </div>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>Factor</th><th>Details</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Typical prep hours</td><td>300–500 hours total (10–15 hrs/week over 4–6 months)</td></tr>
+      <tr><td>Test length</td><td>~7.5 hours on test day across 4 sections</td></tr>
+      <tr><td>Score range</td><td>472–528 (500 = national average)</td></tr>
+      <tr><td>Competitive score — CA MD schools</td><td><strong>510–515+</strong></td></tr>
+      <tr><td>Competitive score — DO programs</td><td><strong>505+</strong></td></tr>
+      <tr><td>Score validity</td><td>Generally 2–3 years; varies by school. Verify with each target program.</td></tr>
+      <tr><td>Maximum attempts</td><td>Up to 3 times/year; 7 times lifetime. AAMC recommends no more than 2–3 attempts.</td></tr>
+      <tr><td>AMCAS application opens</td><td>Early May each year</td></tr>
+      <tr><td>Recommended final test date (rolling applications)</td><td>No later than early May of application year</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout success">
+    <div class="callout-label">Content Readiness Milestone</div>
+    By the end of Spring 2027, all MCAT content prerequisites under Option A are complete. This is the earliest a well-prepared test attempt should be considered. <strong>Do not attempt the MCAT before completing Biochemistry, Physiology, and Anatomy</strong> — these are high-yield sections on the B/B portion of the exam.
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="container">
+  <div class="section-wrap" id="s5">
+    <span class="section-num">Section 05</span>
+    <h2 class="section-title">Decision Framework — Is the Dual Path Right for You?</h2>
+    <p class="section-lead">Answer honestly. There is no correct answer — only the answer that reflects what you actually want.</p>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:17px; color:var(--accent-navy); margin-bottom:14px;">Question Set A: Career Motivation</h3>
+  <div class="qa-grid">
+    <div class="qa-item">
+      <div class="qa-question">If you were guaranteed PharmD admission tomorrow, would you still want to explore medicine?</div>
+      <div class="qa-answer">YES → Dual path may be appropriate.<br>NO → MCAT is not in your plan.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">Can you name specific aspects of the physician role — not salary, not prestige — that genuinely interest you?</div>
+      <div class="qa-answer">YES → Proceed to Question Set B.<br>NO → Reconsider whether MD interest is genuine.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">Are you willing to pursue a residency of 3–7+ years after medical school?</div>
+      <div class="qa-answer">YES → You understand the time commitment.<br>NO → PharmD's shorter training path may be the better fit.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">Is your interest in MD driven primarily by fear of not getting into top pharmacy schools?</div>
+      <div class="qa-answer">YES → Stop here. MCAT as a rejection response is the reactive framing to avoid.<br>NO → Continue.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:17px; color:var(--accent-navy); margin:24px 0 14px;">Question Set B: Practical Readiness</h3>
+  <div class="qa-grid">
+    <div class="qa-item">
+      <div class="qa-question">Can you realistically protect a 3.6+ GPA under Option A while planning for MCAT prep and maintaining Franz Research Group lab work (6–8 hrs/wk)?</div>
+      <div class="qa-answer">Option A is designed to make this possible. Options B/C are not.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">Do you have 8–12 hours/week available for pharmacy experience in Fall 2026–Spring 2027?</div>
+      <div class="qa-answer">This is non-negotiable for PharmD competitiveness. MCAT prep cannot eat into this time. Franz lab (6–8 hrs/wk) must also be budgeted.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">Are you prepared to dedicate Fall 2027 to intensive MCAT preparation?</div>
+      <div class="qa-answer">YES → The dual path is operationally feasible.<br>NO → Reconsider the timing or commitment.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">Are you financially and mentally prepared for the possibility of applying to both pharmacy and medical school in 2027–2028?</div>
+      <div class="qa-answer">Dual applications add cost, time, and complexity. Be honest about bandwidth.</div>
+    </div>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:17px; color:var(--accent-navy); margin:24px 0 14px;">Question Set C: Risk Tolerance</h3>
+  <div class="qa-grid">
+    <div class="qa-item">
+      <div class="qa-question">If your MCAT score is below 505, are you prepared to pursue PharmD only and not apply to MD programs?</div>
+      <div class="qa-answer">A low MCAT score should not trigger a rushed DO-program application. Know your floor before you test.</div>
+    </div>
+    <div class="qa-item">
+      <div class="qa-question">If you are admitted to PharmD but not MD programs, is PharmD a fully satisfying outcome — not a consolation?</div>
+      <div class="qa-answer">If PharmD feels like settling, that is important information about your career motivation.</div>
+    </div>
+    <div class="qa-item" style="grid-column: 1/-1;">
+      <div class="qa-question">If you are admitted to an MD program but only borderline pharmacy programs, which do you choose?</div>
+      <div class="qa-answer">Working through this hypothetical now prevents panicked decision-making in Spring 2028.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="container">
+  <div class="section-wrap" id="s6">
+    <span class="section-num">Section 06</span>
+    <h2 class="section-title">The Reactive Plan — What Not To Do</h2>
+    <p class="section-lead">This is the most common failure mode for students considering a dual path. Recognize it and avoid it.</p>
+  </div>
+
+  <div class="callout warning">
+    <div class="callout-label">The Reactive Failure Pattern</div>
+    <div class="failure-steps">
+      <div class="failure-step"><p>Spring 2028: Receive pharmacy rejections from top programs (UCSF, UCSD).</p></div>
+      <div class="failure-step"><p>Panic sets in. Decide impulsively to "try the MCAT."</p></div>
+      <div class="failure-step"><p>No MCAT prep has been done. Register for a June 2028 test date.</p></div>
+      <div class="failure-step"><p>Attempt 300–500 hours of prep in 6 weeks while emotionally depleted.</p></div>
+      <div class="failure-step"><p>Score comes in at 498–502 — below competitive threshold for CA MD schools.</p></div>
+      <div class="failure-step"><p>Apply to MD programs late in the 2028 cycle with a below-average score.</p></div>
+      <div class="failure-step"><p>Receive no MD interviews due to late, under-prepared application.</p></div>
+      <div class="failure-step"><p>Now 2+ years behind original plan with neither path secured.</p></div>
+    </div>
+    <br>This is not a hypothetical. It is the predictable outcome of treating the MCAT as a consolation exam. The antidote is the proactive framing described in Section 3: decide early, plan deliberately, and execute the MCAT in a designated window before pharmacy results arrive.
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="container">
+  <div class="section-wrap" id="s7">
+    <span class="section-num">Section 07</span>
+    <h2 class="section-title">Spring 2028 Outcome Scenarios &amp; Decision Logic</h2>
+    <p class="section-lead">If you pursue the dual path correctly, you will arrive in Spring 2028 with both PharmD admission decisions and an MCAT score simultaneously.</p>
+  </div>
+
+  <table class="decision-table">
+    <thead>
+      <tr>
+        <th>PharmD Outcome</th>
+        <th>MCAT Score</th>
+        <th>Recommended Decision Logic</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Admitted to target program(s)</td>
+        <td><span class="outcome-good">510+ (competitive)</span></td>
+        <td>Best case. Choose between programs based on fit and goals. Apply to MD programs via AMCAS if still desired (submit May 2028 for Fall 2029).</td>
+      </tr>
+      <tr>
+        <td>Admitted to target program(s)</td>
+        <td><span class="outcome-warn">505–509</span></td>
+        <td>Accept best PharmD offer. MD application possible but more competitive at DO programs. Pharmacy path is strong; proceed unless MD interest is very strong.</td>
+      </tr>
+      <tr>
+        <td>Admitted to target program(s)</td>
+        <td><span class="outcome-risk">Below 505</span></td>
+        <td>Accept PharmD offer. A below-505 score is not competitive for CA MD schools. PharmD is the right path. Consider retaking MCAT only if deeply committed to MD.</td>
+      </tr>
+      <tr>
+        <td>Admitted to lower-tier PharmD only</td>
+        <td><span class="outcome-good">510+</span></td>
+        <td>Strong decision point. With 510+, MD application is genuinely viable. Evaluate whether MD interest justifies pursuing AMCAS in May 2028 or accepting PharmD and deferring.</td>
+      </tr>
+      <tr>
+        <td>Admitted to lower-tier PharmD only</td>
+        <td><span class="outcome-warn">505–509</span></td>
+        <td>Moderate decision. Accept PharmD if the program is solid. MD application at DO level is possible. Depends on strength of MD interest.</td>
+      </tr>
+      <tr>
+        <td>Not admitted to PharmD</td>
+        <td><span class="outcome-good">510+</span></td>
+        <td>Pivot actively to MD path. Submit AMCAS May 2028. The gap year becomes medical school application year.</td>
+      </tr>
+      <tr>
+        <td>Not admitted to PharmD</td>
+        <td><span class="outcome-risk">Below 510</span></td>
+        <td>Strengthen both applications. Gap year for pharmacy re-application AND MCAT retake if MD path is genuine. Do not apply to either with below-competitive credentials.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 8 -->
+<div class="container">
+  <div class="section-wrap" id="s8">
+    <span class="section-num">Section 08</span>
+    <h2 class="section-title">Summary &amp; Immediate Action Items</h2>
+  </div>
+
+  <table class="summary-table">
+    <tbody>
+      <tr>
+        <td>Is the dual path possible?</td>
+        <td>Yes, but only under Option A. Options B and C are structurally incompatible for this student.</td>
+      </tr>
+      <tr>
+        <td>Is it advisable?</td>
+        <td>Only if you genuinely want the physician path, not as insurance against pharmacy rejection.</td>
+      </tr>
+      <tr>
+        <td>Best MCAT timing?</td>
+        <td>Fall 2027 — the only low-pressure quarter in the plan, after PharmCAS is submitted and before pharmacy decisions arrive.</td>
+      </tr>
+      <tr>
+        <td>When does MCAT prep start?</td>
+        <td>Spring 2027, alongside personal statement drafting, after all MCAT content prerequisites are complete.</td>
+      </tr>
+      <tr>
+        <td>When is the decision point?</td>
+        <td>Spring 2028, when pharmacy decisions and MCAT score arrive simultaneously. Full information, no reactive pressure.</td>
+      </tr>
+      <tr>
+        <td>What if pharmacy goes well?</td>
+        <td>You still have the option to apply to medical school via AMCAS in May 2028. Dual-path planning does not foreclose the pharmacy outcome.</td>
+      </tr>
+      <tr>
+        <td>Score validity note?</td>
+        <td>Typically 2–3 years depending on target school. Verify with each program before testing.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:20px; color:var(--accent-navy); margin:32px 0 20px;">Immediate Action Items — This Week (February 2026)</h3>
+
+  <div class="action-list">
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <div class="action-content">
+        <strong>Answer the core question honestly</strong>
+        <p>Is medicine a genuine interest, or is this primarily fear of pharmacy rejection? Write down your answer.</p>
+      </div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <div class="action-content">
+        <strong>Commit to Option A and confirm Franz Research Group role</strong>
+        <p>Schedule NPB advisor meeting and HPA appointment. Request critical course timing moves (EXB 106/106L → Winter 2027; MMG 102 → Spring 2027). Confirm lab start date, project assignment, and weekly hours with Prof. Franz (target 6–8 hrs/wk, reduced to 4–6 hrs/wk during Fall 2026 GPA-critical quarter).</p>
+      </div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <div class="action-content">
+        <strong>Begin pharmacy experience immediately</strong>
+        <p>Update resume and apply to pharmacy technician positions. Prioritize clinical and hospital settings: Kaiser Permanente Fremont, UC Davis Health, and hospital inpatient pharmacies. Retail chains acceptable for hours accumulation only if clinical roles are unavailable. Target a position by April 2026. Note: Franz lab work and pharmacy hours serve different purposes — both must run in parallel; neither substitutes for the other.</p>
+      </div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">4</div>
+      <div class="action-content">
+        <strong>If dual path: note Fall 2027 as your MCAT window</strong>
+        <p>Research MCAT prep resources now (AAMC Official Prep, prep courses). Do not begin active prep until Spring 2027. Franz Research Group lab experience (medicinal chemistry, chemical biology, drug delivery) is building your MD application's non-MCAT components organically from Spring 2026 onward.</p>
+      </div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">5</div>
+      <div class="action-content">
+        <strong>Begin California Pharmacy Technician License application</strong>
+        <p>Required for paid technician positions. Start the process now.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 9 -->
+<div class="container">
+  <div class="section-wrap" id="s9">
+    <span class="section-num">Section 09</span>
+    <h2 class="section-title">PharmD Residency Realities</h2>
+    <p class="section-lead">Cost, pay, job market risk, and specialty comparison — what pre-pharmacy students often misunderstand about residency.</p>
+  </div>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:18px; color:var(--accent-navy); margin-bottom:14px;">Residency Financing: You Are Paid, Not Paying</h3>
+  <table class="compare-table">
+    <thead><tr><th>Factor</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>PGY1 stipend</td><td>~$45,000–$58,000/year. Includes health benefits. No tuition charged.</td></tr>
+      <tr><td>PGY2 stipend</td><td>~$48,000–$62,000/year. Slightly higher than PGY1. Same structure: employed, benefits included, no tuition.</td></tr>
+      <tr><td>The real cost: opportunity cost</td><td>A PharmD graduate who skips residency earns ~$110,000–$130,000 from day one. A resident earns ~$50,000–$55,000 for 1–2 years instead. The gap — approximately <strong>$120,000–$150,000 in foregone earnings over a PGY1+PGY2 sequence</strong> — is the true financial cost. This is not reflected in 15-year financial projections.</td></tr>
+      <tr><td>Residency payoff</td><td>Access to specialty clinical roles, academic positions, and leadership tracks effectively closed to non-residency PharmD graduates. Salary ceiling is materially higher for residency-trained pharmacists — but the payoff is back-loaded (years 5–15, not years 1–3).</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family:'Playfair Display',serif; font-size:18px; color:var(--accent-navy); margin:28px 0 14px;">Specialty Comparison — Job Market Risk</h3>
+
+  <table class="residency-table">
+    <thead>
+      <tr>
+        <th>Specialty</th>
+        <th>Job Market Risk</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Infectious Disease (ID)</strong></td>
+        <td><span class="risk-low">LOW — Most Promising</span></td>
+        <td>Antibiotic stewardship is federally mandated for hospital accreditation. Demand is broad and geographically distributed — not concentrated at elite institutions. Scope is expanding: antimicrobial resistance, fungal infections, HIV, transplant ID. Best overall combination of job availability, geographic flexibility, and intellectual depth.</td>
+      </tr>
+      <tr>
+        <td><strong>Oncology</strong></td>
+        <td><span class="risk-mod">MODERATE — Geographic Risk</span></td>
+        <td>Highest intellectual ceiling; salary potential at major cancer centers is excellent. However, jobs are concentrated at NCI-designated cancer centers and academic medical centers. Geographic inflexibility significantly raises unemployment or underemployment risk. Strong fit for this student's NPB + medicinal chemistry research profile, but requires geographic flexibility.</td>
+      </tr>
+      <tr>
+        <td><strong>Cardiology</strong></td>
+        <td><span class="risk-low">LOW — Stable Demand</span></td>
+        <td>Needed at any hospital with a cardiac unit, which is virtually every major hospital. Consistent, high-volume demand. The NPB background (cardiovascular physiology, autonomic pharmacology) is a natural fit. Role is rigorous but more procedurally defined than ID or oncology.</td>
+      </tr>
+      <tr>
+        <td><strong>Critical Care</strong></td>
+        <td><span class="risk-low">LOW — Broad Availability</span></td>
+        <td>ICU pharmacists are needed at every major hospital. Excellent job availability across geographies. However, the pace is intense (often nights and weekends), and burnout rates are notable. Safest from a pure employment standpoint, but lifestyle trade-offs are real.</td>
+      </tr>
+      <tr>
+        <td><strong>Ambulatory Care</strong></td>
+        <td><span class="risk-low">LOW — Growing Demand</span></td>
+        <td>Growing with value-based care models and chronic disease management. More predictable hours and lifestyle than critical care or inpatient specialties. Good geographic distribution and expanding role in FQHCs, large group practices, and integrated health systems.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout warning">
+    <div class="callout-label">The Real Failure Mode: Underemployment, Not Unemployment</div>
+    PGY1 graduates almost always find work. The real risk is completing a PGY1 and PGY2 (two years of stipend-level income, ~$120K–$150K in foregone earnings), then landing in a general clinical staff pharmacist role that did not require either residency. The antidote is not avoiding residency — it is choosing a specialty with broad geographic demand (ID, cardiology, critical care) or being genuinely willing to relocate for oncology positions.
+  </div>
+
+  <div class="callout success">
+    <div class="callout-label">Strategic Recommendation for This Student</div>
+    Do not commit to a PGY2 specialty before PharmD Year 2 or 3. Given this student's NPB background (physiology, pharmacology, neuroscience) and Franz Research Group medicinal chemistry work, both ID and oncology are strong intellectual fits. If the priority is geographic freedom and career resilience, <strong>ID is the clearer choice</strong>. If the priority is the highest intellectual ceiling and a research-adjacent practice, and the student is willing to relocate, <strong>oncology remains the most compelling long-term direction</strong> — and the undergraduate research profile being built now will directly differentiate a future oncology application.
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="report-footer">
+  <span>Dual-Path Evaluation Report · UC Davis Year 2 · February 2026</span>
+  <span class="footer-right">Based on: Student Guide, Decision Guide, Advisor Reports, West Coast Pharmacy Guide, Implementation Guide, AAMC Guidance</span>
+</div>
+
+</body>
+</html>

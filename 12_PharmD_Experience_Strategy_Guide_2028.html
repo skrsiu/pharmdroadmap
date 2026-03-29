@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PharmD Experience Strategy Guide — 2028</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0e14; --surface:#111720; --surface2:#18202e; --surface3:#1e2a3a;
+  --border:#243040; --border2:#2e3d52;
+  --text:#e8f0f8; --muted:#7a9ab8; --dim:#4a6580;
+  --gold:#e8b84b; --gold-dim:#5a4010; --gold-glow:rgba(232,184,75,0.1);
+  --teal:#3dd6c8; --teal-dim:#0e4040; --teal-glow:rgba(61,214,200,0.09);
+  --sky:#5baee8; --sky-dim:#0e2a48;
+  --rose:#e85a6a; --rose-dim:#4a0e18; --rose-glow:rgba(232,90,106,0.09);
+  --green:#5ae89a; --green-dim:#0a3020; --green-glow:rgba(90,232,154,0.09);
+  --amber:#f0a030; --purple:#a87ce8; --purple-dim:#2a1050;
+  --font-display:'Fraunces',serif; --font-body:'Instrument Sans',sans-serif; --font-mono:'Fira Code',monospace;
+  --nav-h:58px; --max-w:1080px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);font-size:16px;line-height:1.7;min-height:100vh}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:rgba(10,14,20,0.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);z-index:100;display:flex;align-items:center;padding:0 36px;gap:0}
+.nav-brand{font-family:var(--font-mono);font-size:11px;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;margin-right:auto;white-space:nowrap}
+.nav-links{display:flex;gap:2px;overflow-x:auto}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-a{font-family:var(--font-mono);font-size:10px;color:var(--muted);text-decoration:none;letter-spacing:0.08em;text-transform:uppercase;padding:6px 11px;border-radius:4px;transition:all .18s;white-space:nowrap}
+.nav-a:hover{color:var(--text);background:var(--surface2)}
+.nav-a.act{color:var(--gold);background:var(--gold-glow)}
+
+/* HERO */
+.hero{padding:calc(var(--nav-h) + 60px) 48px 56px;max-width:var(--max-w);margin:0 auto}
+.hero-kicker{font-family:var(--font-mono);font-size:10px;color:var(--teal);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.hero-kicker::before{content:'';display:block;width:28px;height:1px;background:var(--teal)}
+.hero h1{font-family:var(--font-display);font-size:clamp(36px,5vw,56px);font-weight:300;line-height:1.1;margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:15px;color:var(--muted);max-width:600px;line-height:1.75;margin-bottom:36px}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:860px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;position:relative;overflow:hidden}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat.c-gold::before{background:var(--gold)}
+.stat.c-teal::before{background:var(--teal)}
+.stat.c-rose::before{background:var(--rose)}
+.stat.c-green::before{background:var(--green)}
+.stat.c-sky::before{background:var(--sky)}
+.stat-val{font-family:var(--font-display);font-size:22px;font-weight:500;margin-bottom:2px}
+.stat.c-gold .stat-val{color:var(--gold)}
+.stat.c-teal .stat-val{color:var(--teal)}
+.stat.c-rose .stat-val{color:var(--rose)}
+.stat.c-green .stat-val{color:var(--green)}
+.stat.c-sky .stat-val{color:var(--sky)}
+.stat-lbl{font-family:var(--font-mono);font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;line-height:1.4}
+
+/* MAIN */
+.main{max-width:var(--max-w);margin:0 auto;padding:0 48px 80px}
+
+/* SECTION */
+.sec{padding-top:72px}
+.sec-eye{font-family:var(--font-mono);font-size:9px;color:var(--dim);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:6px}
+.sec-title{font-family:var(--font-display);font-size:clamp(24px,3vw,32px);font-weight:300;line-height:1.2;display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.sec-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.sec-title em{font-style:italic;color:var(--gold)}
+.sec-lead{font-size:14px;color:var(--muted);max-width:700px;line-height:1.75;margin-bottom:28px}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:56px 0}
+
+/* CARD */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:10px;transition:border-color .2s}
+.card:hover{border-color:var(--border2)}
+.card.t1{border-left:3px solid var(--gold)}
+.card.t2{border-left:3px solid var(--teal)}
+.card.t3{border-left:3px solid var(--green)}
+.card.t4{border-left:3px solid var(--dim)}
+.card-head{display:flex;align-items:flex-start;gap:12px;margin-bottom:8px}
+.card-ico{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;margin-top:2px}
+.card-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:2px}
+.card-addr{font-family:var(--font-mono);font-size:10px;color:var(--dim)}
+.card-body{font-size:13px;color:var(--muted);line-height:1.7}
+.card-body strong{color:var(--text)}
+.card-body em{color:var(--gold);font-style:normal}
+
+/* TAGS */
+.tags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.tag{font-family:var(--font-mono);font-size:9px;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:4px;font-weight:500}
+.tg{background:var(--gold-glow);color:var(--gold);border:1px solid var(--gold-dim)}
+.tt{background:var(--teal-glow);color:var(--teal);border:1px solid var(--teal-dim)}
+.tr{background:var(--rose-glow);color:var(--rose);border:1px solid var(--rose-dim)}
+.tgr{background:var(--green-glow);color:var(--green);border:1px solid var(--green-dim)}
+.ts{background:rgba(91,174,232,0.1);color:var(--sky);border:1px solid var(--sky-dim)}
+.tp{background:rgba(168,124,232,0.1);color:var(--purple);border:1px solid var(--purple-dim)}
+.td{background:rgba(74,101,128,0.12);color:var(--muted);border:1px solid var(--border)}
+
+/* TIER LABEL */
+.tier-lbl{display:flex;align-items:center;gap:10px;margin:24px 0 12px}
+.tbadge{font-family:var(--font-mono);font-size:9px;letter-spacing:0.15em;text-transform:uppercase;padding:4px 11px;border-radius:100px;font-weight:500}
+.t1b{background:rgba(232,184,75,0.1);color:var(--gold);border:1px solid var(--gold-dim)}
+.t2b{background:rgba(61,214,200,0.09);color:var(--teal);border:1px solid var(--teal-dim)}
+.t3b{background:rgba(90,232,154,0.08);color:var(--green);border:1px solid var(--green-dim)}
+.t4b{background:rgba(74,101,128,0.1);color:var(--muted);border:1px solid var(--border)}
+.tier-sub{font-size:11px;color:var(--dim);font-family:var(--font-mono)}
+.tier-line{flex:1;height:1px;background:var(--border)}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:22px;padding-bottom:10px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tab-btn{font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--border);border-radius:5px;padding:6px 14px;cursor:pointer;transition:all .18s}
+.tab-btn:hover{color:var(--text);border-color:var(--border2)}
+.tab-btn.on{color:var(--gold);background:var(--gold-glow);border-color:var(--gold-dim)}
+.tab-panel{display:none}
+.tab-panel.on{display:block}
+
+/* CHECKLIST */
+.ck-list{display:flex;flex-direction:column;gap:5px;margin-top:14px}
+.ck-row{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .15s}
+.ck-row:hover{border-color:var(--border2)}
+.ck-row.done{opacity:.4}
+.ck-row.done .ck-box{background:var(--green);border-color:var(--green)}
+.ck-row.done .ck-box::after{content:'✓';color:var(--bg);font-size:9px;display:flex;align-items:center;justify-content:center;height:100%;font-weight:700}
+.ck-box{width:16px;height:16px;border:1.5px solid var(--border2);border-radius:3px;flex-shrink:0;margin-top:2px;transition:all .15s}
+.ck-text{font-size:13px;color:var(--text);line-height:1.5}
+.ck-sub{font-size:11px;color:var(--dim);margin-top:2px}
+.ck-time{font-family:var(--font-mono);font-size:9px;color:var(--dim);white-space:nowrap;margin-left:auto;flex-shrink:0;padding-top:2px}
+
+/* INFO BOXES */
+.ib{border-radius:9px;padding:14px 18px;margin:12px 0;font-size:13px;line-height:1.7}
+.ib.am{background:rgba(240,160,48,0.07);border:1px solid rgba(240,160,48,0.22);color:var(--muted)}
+.ib.am strong{color:var(--amber)}
+.ib.tl{background:var(--teal-glow);border:1px solid var(--teal-dim);color:var(--muted)}
+.ib.tl strong{color:var(--teal)}
+.ib.rs{background:var(--rose-glow);border:1px solid var(--rose-dim);color:var(--muted)}
+.ib.rs strong{color:var(--rose)}
+.ib.gd{background:var(--gold-glow);border:1px solid var(--gold-dim);color:var(--muted)}
+.ib.gd strong{color:var(--gold)}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}
+
+/* PRIORITY LIST */
+.p-list{display:flex;flex-direction:column;gap:6px;margin:14px 0}
+.p-row{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px}
+.p-num{font-family:var(--font-display);font-size:20px;font-weight:500;min-width:26px;opacity:.45;line-height:1.3}
+.p-title{font-size:13px;font-weight:600;color:var(--text)}
+.p-body{font-size:12px;color:var(--muted);margin-top:2px}
+
+/* NARRATIVE BOX */
+.narr{background:linear-gradient(135deg,rgba(232,184,75,0.06),rgba(61,214,200,0.03));border:1px solid var(--gold-dim);border-radius:12px;padding:22px 26px;margin:20px 0;position:relative;overflow:hidden}
+.narr::before{content:'"';position:absolute;top:-14px;left:14px;font-family:var(--font-display);font-size:90px;color:var(--gold);opacity:.07;line-height:1}
+.narr-lbl{font-family:var(--font-mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px}
+.narr-text{font-family:var(--font-display);font-size:15px;font-style:italic;color:var(--text);line-height:1.8;font-weight:300}
+
+/* WEIGHT BARS */
+.w-period{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px;margin-bottom:10px}
+.w-period-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.w-period-title{font-size:14px;font-weight:600;color:var(--text)}
+.w-period-total{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.w-bars{display:flex;flex-direction:column;gap:7px}
+.w-bar-row{display:grid;grid-template-columns:110px 1fr 56px;align-items:center;gap:10px}
+.w-bar-lbl{font-family:var(--font-mono);font-size:10px;color:var(--muted);text-align:right;text-transform:uppercase;letter-spacing:0.05em}
+.w-bar-track{height:9px;background:var(--surface3);border-radius:5px;overflow:hidden}
+.w-bar-fill{height:100%;border-radius:5px}
+.w-bar-val{font-family:var(--font-mono);font-size:10px;color:var(--text)}
+.w-note{font-size:11.5px;color:var(--dim);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);line-height:1.6}
+.w-note strong{color:var(--rose)}
+
+/* SCHOOL CARDS */
+.sc-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:8px}
+.sc-head{display:flex;align-items:center;gap:12px;padding:13px 18px;cursor:pointer;transition:background .18s;user-select:none}
+.sc-head:hover{background:var(--surface2)}
+.sc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.sc-name{font-size:14px;font-weight:600;color:var(--text);min-width:130px}
+.sc-type{font-family:var(--font-mono);font-size:9px;color:var(--dim);margin-left:4px}
+.sc-bars{flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.sc-bar-item{display:flex;flex-direction:column;gap:3px}
+.sc-bar-lbl{font-family:var(--font-mono);font-size:8px;color:var(--dim);text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap;overflow:hidden}
+.sc-bar-track{height:4px;background:var(--surface3);border-radius:2px;overflow:hidden}
+.sc-bar-fill{height:100%;border-radius:2px}
+.sc-chevron{font-size:10px;color:var(--dim);transition:transform .2s;margin-left:8px;flex-shrink:0}
+.sc-chevron.open{transform:rotate(180deg)}
+.sc-body{display:none;padding:4px 18px 16px;border-top:1px solid var(--border)}
+.sc-body.open{display:block}
+.sc-detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.sc-detail{background:var(--surface2);border-radius:7px;padding:11px 13px}
+.sc-d-title{font-family:var(--font-mono);font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px}
+.sc-d-val{font-size:12px;color:var(--text);line-height:1.55}
+.sc-d-val strong{color:var(--gold)}
+
+/* RESEARCH TIMELINE */
+.r-tl{position:relative;padding-left:26px;margin-bottom:28px}
+.r-tl::before{content:'';position:absolute;left:9px;top:10px;bottom:10px;width:2px;background:linear-gradient(to bottom,var(--gold),var(--teal));opacity:.45}
+.r-entry{position:relative;margin-bottom:24px}
+.r-dot{position:absolute;left:-23px;top:7px;width:11px;height:11px;border-radius:50%;border:2px solid var(--bg)}
+.r-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 22px}
+.r-card-hd{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px;gap:14px}
+.r-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+.r-pi{font-family:var(--font-mono);font-size:10px;color:var(--muted)}
+.r-period{font-family:var(--font-mono);font-size:10px;color:var(--dim);text-align:right;white-space:nowrap}
+.r-body{font-size:13px;color:var(--muted);line-height:1.7}
+.r-body strong{color:var(--text)}
+.r-body em{color:var(--gold);font-style:normal}
+
+/* PATHWAY GRID */
+.pw-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.pw-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px 18px;position:relative;overflow:hidden}
+.pw-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.pw-card.pw1::before{background:var(--gold)}
+.pw-card.pw2::before{background:var(--teal)}
+.pw-card.pw3::before{background:var(--sky)}
+.pw-card.pw4::before{background:var(--purple)}
+.pw-card.pw5::before{background:var(--green)}
+.pw-num{font-family:var(--font-display);font-size:32px;font-weight:300;opacity:.1;position:absolute;top:6px;right:12px;line-height:1}
+.pw-card.pw1 .pw-num{color:var(--gold)}
+.pw-card.pw2 .pw-num{color:var(--teal)}
+.pw-card.pw3 .pw-num{color:var(--sky)}
+.pw-card.pw4 .pw-num{color:var(--purple)}
+.pw-card.pw5 .pw-num{color:var(--green)}
+.pw-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.pw-body{font-size:12px;color:var(--muted);line-height:1.65}
+.pw-body strong{color:var(--text)}
+
+/* FOOTER */
+.footer{border-top:1px solid var(--border);padding:24px 48px;max-width:var(--max-w);margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.footer-note{font-family:var(--font-mono);font-size:10px;color:var(--dim)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.hero>*{animation:fadeUp .45s ease both}
+.hero>*:nth-child(1){animation-delay:.04s}
+.hero>*:nth-child(2){animation-delay:.09s}
+.hero>*:nth-child(3){animation-delay:.14s}
+.hero>*:nth-child(4){animation-delay:.19s}
+
+@media(max-width:768px){
+  .hero,.main{padding-left:20px;padding-right:20px}
+  .stats-row{grid-template-columns:repeat(2,1fr)}
+  .g2,.g3,.g4,.sc-detail-grid,.pw-grid{grid-template-columns:1fr}
+  .sc-bars{display:none}
+  .nav-a{font-size:9px;padding:5px 8px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-brand">PharmD · Experience Strategy · 2028</div>
+  <div class="nav-links">
+    <a class="nav-a act" href="#overview">Overview</a>
+    <a class="nav-a" href="#volunteering">Volunteering</a>
+    <a class="nav-a" href="#pharmacy-hours">Pharm Hours</a>
+    <a class="nav-a" href="#research">Research</a>
+    <a class="nav-a" href="#schools">By School</a>
+    <a class="nav-a" href="#allocation">Allocation</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">UC Davis NPB Option A · Fremont, CA · Wang → Franz Lab</div>
+  <h1>Experience <em>Strategy Guide</em><br>PharmD 2028</h1>
+  <p class="hero-sub">A complete roadmap for every non-GPA dimension of a competitive PharmD application — clinical volunteering, pharmacy tech hours, research trajectory, community engagement, and how to balance all of them across your Davis and Bay Area bases.</p>
+  <div class="stats-row">
+    <div class="stat c-gold"><div class="stat-val">200+</div><div class="stat-lbl">Pharmacy hours target</div></div>
+    <div class="stat c-teal"><div class="stat-val">50–80</div><div class="stat-lbl">Clinical volunteer hrs</div></div>
+    <div class="stat c-rose"><div class="stat-val">2 Labs</div><div class="stat-lbl">Wang → Franz trajectory</div></div>
+    <div class="stat c-green"><div class="stat-val">9</div><div class="stat-lbl">Target schools</div></div>
+    <div class="stat c-sky"><div class="stat-val">Jul '27</div><div class="stat-lbl">PharmCAS submission</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ══════════════════════════════
+     SECTION 1 — OVERVIEW
+     ══════════════════════════════ -->
+<section class="sec" id="overview">
+  <div class="sec-eye">Section 01</div>
+  <div class="sec-title">The Six <em>Dimensions</em></div>
+  <p class="sec-lead">Most applicants think PharmD admissions is GPA + pharmacy hours. That's the floor. UCSF and UCSD evaluate across six distinct dimensions. Understanding the full picture is what turns a generic application into a targeted one.</p>
+
+  <div class="g3">
+    <div class="card t1" style="border-left-color:var(--gold)">
+      <div class="tags"><span class="tag tg">Core · All Schools</span></div>
+      <div class="card-name" style="margin-bottom:6px">① Pharmacy Experience</div>
+      <div class="card-body">The baseline credential. Every school requires it. The question is <strong>how much and what kind</strong>. Hospital/clinical tech hours are worth more than retail because they demonstrate exposure to clinical pharmacist decision-making — not just prescription verification. Beyond ~120 retail hours, marginal story value drops sharply.</div>
+    </div>
+    <div class="card t1" style="border-left-color:var(--teal)">
+      <div class="tags"><span class="tag tt">Separate Eval · UCSF/UCSD</span></div>
+      <div class="card-name" style="margin-bottom:6px">② Healthcare / Clinical Exposure</div>
+      <div class="card-body">Distinct from pharmacy hours. Observing other healthcare settings — hospitals, clinics, community health — demonstrates you understand <strong>where pharmacy fits in the broader care ecosystem</strong>. UCSF evaluates this as an independent line item. 50–100 hours in a genuine clinical setting is the meaningful threshold.</div>
+    </div>
+    <div class="card t1" style="border-left-color:var(--rose)">
+      <div class="tags"><span class="tag tr">Heavy Weight · UCSF/UCSD/USC</span></div>
+      <div class="card-name" style="margin-bottom:6px">③ Research Experience</div>
+      <div class="card-body">Not required at most schools but <strong>heavily weighted at UCSF, UCSD, and USC</strong>. A poster, abstract, or manuscript in preparation moves the needle. Your Wang → Franz lab trajectory is genuinely uncommon and, framed correctly, a significant differentiator — most applicants have zero research.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--amber)">
+      <div class="tags"><span class="tag tg">Depth Over Breadth</span></div>
+      <div class="card-name" style="margin-bottom:6px">④ Leadership</div>
+      <div class="card-body">Pre-pharmacy club officer, tutoring, TA, student government — any <strong>sustained role with real responsibility</strong>. One role with genuine depth beats five titles with no substance. Schools want evidence you function professionally beyond the classroom and can take initiative in organized settings.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--purple)">
+      <div class="tags"><span class="tag tr">UCSF Mission Critical</span></div>
+      <div class="card-name" style="margin-bottom:6px">⑤ Community Service</div>
+      <div class="card-body">Distinct from clinical volunteering. Health fairs, free clinics, community outreach, <strong>underserved population programs</strong>. UCSF weights this heavily as part of their explicit social mission. Experience at ZSFG, SCVMC, or Asian Health Services Oakland maps directly onto their stated values and supplemental essay prompts.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--sky)">
+      <div class="tags"><span class="tag ts">Quality Over Title</span></div>
+      <div class="card-name" style="margin-bottom:6px">⑥ Letters of Recommendation</div>
+      <div class="card-body">3 letters: <strong>pharmacist supervisor + science faculty + research mentor</strong>. Franz lab PI letter describing your medicinal chemistry work by name is worth more than a generic department chair letter. Start these conversations 12 months before application — give writers time to produce something specific.</div>
+    </div>
+  </div>
+
+  <div style="margin-top:26px">
+    <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:10px">If You Can Only Do a Few Things — Priority Order</div>
+    <div class="p-list">
+      <div class="p-row"><div class="p-num" style="color:var(--gold)">1</div><div><div class="p-title">Franz lab — keep going and document everything</div><div class="p-body">A poster or abstract before application puts you in the top 5% of applicants at UCSF/UCSD by research credential alone. Ask Prof. Franz about publication timeline now.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--teal)">2</div><div><div class="p-title">Health-system pharmacy tech position</div><div class="p-body">One summer at Kaiser Fremont inpatient or UC Davis Health pharmacy transforms the hours narrative from retail to clinical. Apply simultaneously to both.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--sky)">3</div><div><div class="p-title">Clinical hospital volunteer hours — 50–80 hrs</div><div class="p-body">Fills the "clinical exposure beyond dispensing" gap that UCSF evaluates separately. Apply March–April 2026 to UC Davis Medical Center and Washington Hospital Fremont.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--purple)">4</div><div><div class="p-title">Community health engagement — one meaningful role</div><div class="p-body">Free clinic volunteering, health education, or community health program with underserved populations. 30–50 hours at one sustained setting beats scattered one-day events.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--green)">5</div><div><div class="p-title">Pre-pharmacy club or equivalent leadership</div><div class="p-body">One officer-level role with sustained commitment. Pre-pharmacy club, health education, tutoring program. Not a long list — one real one with depth.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════
+     SECTION 2 — VOLUNTEERING
+     ══════════════════════════════ -->
+<section class="sec" id="volunteering">
+  <div class="sec-eye">Section 02</div>
+  <div class="sec-title">Clinical <em>Volunteering</em></div>
+  <p class="sec-lead">The goal is breadth of patient care exposure beyond the pharmacy counter — seeing pharmacists in clinical team environments. Apply March–April 2026 (4–8 week onboarding pipeline). Target 50–80 hours at one consistent setting across Summer 2026. Consistency beats volume.</p>
+
+  <div class="ib tl">
+    <strong>Strategy note:</strong> Your pharmacy tech license is more credentialed than volunteering. Do not reduce tech hours to add volunteer hours — run both in parallel. The value of volunteering is a second distinct experience category to draw from in UCSF/UCSD MMI interviews. One well-known setting for 8 weeks beats scattered hours across multiple hospitals.
+  </div>
+
+  <div class="tabs" style="margin-top:22px">
+    <button class="tab-btn on" onclick="switchTab(this,'vol','davis')">Davis / Sacramento / Vacaville</button>
+    <button class="tab-btn" onclick="switchTab(this,'vol','bay')">SF Bay Area</button>
+    <button class="tab-btn" onclick="switchTab(this,'vol','apply')">How to Apply</button>
+  </div>
+
+  <!-- DAVIS VOL -->
+  <div class="tab-panel on" id="vol-davis">
+    <div class="tier-lbl"><span class="tbadge t1b">Tier 1</span><span class="tier-sub">Highest narrative value · Apply first</span><span class="tier-line"></span></div>
+
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">🏛️</div>
+        <div style="flex:1">
+          <div class="card-name">UC Davis Medical Center</div>
+          <div class="card-addr">4301 X St, Sacramento · 25 min from Davis · health.ucdavis.edu/volunteer</div>
+        </div>
+        <span class="tag tg">Top Pick Davis</span>
+      </div>
+      <div class="tags"><span class="tag tg">UC Affiliation</span><span class="tag tt">Level I Trauma</span><span class="tag tr">NCI Cancer Center</span><span class="tag ts">Clinical Pharmacy Teams</span></div>
+      <div class="card-body">
+        <strong>The single most strategically important hospital for your Davis-based application narrative.</strong> It's your university's own academic medical center — one of the top research hospitals on the West Coast. Clinical pharmacists are deeply integrated into oncology, transplant, and critical care teams. For a UC Davis student doing Franz lab research at UC Davis, volunteering at UC Davis Medical Center creates an <em>institutional narrative loop</em> (UC Davis student → UC Davis research → UC Davis Medical Center → UCSF PharmD) that's nearly impossible to replicate. Request pharmacy, oncology, or cancer center placement explicitly in your application.
+      </div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t2b">Tier 2</span><span class="tier-sub">Strong strategic options · Apply simultaneously</span><span class="tier-line"></span></div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🌿</div>
+        <div style="flex:1">
+          <div class="card-name">Dignity Health – Woodland Memorial Hospital</div>
+          <div class="card-addr">1325 Cottonwood St, Woodland · 10 min from campus · dignityhealth.org</div>
+        </div>
+        <span class="tag tt">Closest to Campus</span>
+      </div>
+      <div class="tags"><span class="tag tt">10 Min Commute</span><span class="tag td">Community Hospital</span><span class="tag td">Academic Year Viable</span></div>
+      <div class="card-body">The closest full-service hospital to UC Davis campus — <strong>ideal for academic-year shifts when commute time is scarce.</strong> A Saturday morning shift at Woodland is achievable even during a heavy science quarter without disrupting weekday study schedules. Same Dignity Health system as Mercy General Sacramento — building a relationship here creates a natural pathway to larger Dignity facilities in summer.</div>
+    </div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente South Sacramento Medical Center</div>
+          <div class="card-addr">6600 Bruceville Rd, Sacramento · 30 min from Davis · 4.4★</div>
+        </div>
+        <span class="tag tg">UCSF Equity Angle</span>
+      </div>
+      <div class="tags"><span class="tag tg">Underserved Population</span><span class="tag tt">Kaiser Model</span><span class="tag tr">UCSF Social Mission</span></div>
+      <div class="card-body">South Sacramento Kaiser serves a heavily underserved patient population including large Southeast Asian and Latino communities — <strong>the Davis-area equivalent of Santa Clara VMC for the UCSF health equity narrative.</strong> UCSF specifically evaluates applicants for awareness of health equity. Volunteering here gives you UCSF social mission content even while based in Davis.</div>
+    </div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Dignity Health – Mercy General Hospital</div>
+          <div class="card-addr">4001 J St, Sacramento · 25 min · 4.3★</div>
+        </div>
+      </div>
+      <div class="tags"><span class="tag tt">Oncology Program</span><span class="tag td">Dignity System Continuity</span></div>
+      <div class="card-body">One of Sacramento's premier community hospitals with a strong oncology and cardiac program. Same Dignity Health system as Woodland Memorial — if you start academic-year volunteering at Woodland, transitioning to Mercy General in summer provides a natural escalation in clinical complexity within one institutional relationship.</div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t3b">Tier 3</span><span class="tier-sub">Backup / Vacaville corridor / most convenient</span><span class="tier-line"></span></div>
+
+    <div class="card t3">
+      <div class="card-head">
+        <div class="card-ico" style="background:var(--green-glow)">🚗</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente Vacaville Medical Center</div>
+          <div class="card-addr">1 Quality Dr, Vacaville · 20 min from Davis · 4.3★</div>
+        </div>
+        <span class="tag tgr">I-80 Midpoint</span>
+      </div>
+      <div class="card-body">Uniquely positioned on I-80 between Davis and Fremont — 20 min from Davis, 45 min from Fremont. If you work as a pharmacy tech here (see Pharmacy Hours section), a dual presence as volunteer + employed tech at the same institution is an unusual and compelling narrative detail. Same Kaiser clinical pharmacy integration model.</div>
+    </div>
+
+    <div class="card t3">
+      <div class="card-head">
+        <div class="card-ico" style="background:var(--green-glow)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Sutter Davis Hospital</div>
+          <div class="card-addr">2000 Sutter Pl, Davis · Walking distance from campus</div>
+        </div>
+        <span class="tag tgr">Most Convenient</span>
+      </div>
+      <div class="card-body">Literally the closest hospital to UC Davis — walkable. Small community hospital, modest clinical complexity, but the proximity is unmatched. Good for maintaining some clinical exposure hours even during Winter 2027 when everything else is being scaled back to protect GPA.</div>
+    </div>
+
+    <div class="card t3">
+      <div class="card-head">
+        <div class="card-ico" style="background:var(--green-glow)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">NorthBay Health Medical Center — Fairfield</div>
+          <div class="card-addr">1200 B Gale Wilson Blvd, Fairfield · 35 min from Davis</div>
+        </div>
+      </div>
+      <div class="card-body">Regional health system serving Solano County between Davis and the Bay. Lower prestige than Kaiser or UC Davis but a legitimate community hospital with an active volunteer program. Good backup if higher-tier programs have waitlists.</div>
+    </div>
+  </div>
+
+  <!-- BAY AREA VOL -->
+  <div class="tab-panel" id="vol-bay">
+    <div class="tier-lbl"><span class="tbadge t1b">Tier 1</span><span class="tier-sub">Highest prestige + UCSF narrative value</span><span class="tier-line"></span></div>
+
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">🔬</div>
+        <div style="flex:1">
+          <div class="card-name">Zuckerberg SF General Hospital & Trauma Center</div>
+          <div class="card-addr">1001 Potrero Ave, San Francisco · UCSF-affiliated · Level I Trauma · zsfg.org</div>
+        </div>
+        <span class="tag tr">UCSF #1 Pick</span>
+      </div>
+      <div class="tags"><span class="tag tr">UCSF Affiliation</span><span class="tag tg">Health Equity Mission</span><span class="tag tt">PharmD Rotations Site</span><span class="tag ts">Safety Net Hospital</span></div>
+      <div class="card-body">
+        <strong>The single strongest choice for the UCSF application narrative in the entire Bay Area.</strong> ZSFG is where UCSF PharmD students do required clinical rotations. It's San Francisco's county hospital — the safety net institution for the city's most vulnerable populations. UCSF's social mission is explicitly evaluated in admissions, and an applicant who proactively sought exposure at ZSFG before being accepted to PharmD school sends a signal admissions committees recognize immediately. UCSF trains pharmacists specifically to serve this patient population. 45–55 min from Fremont via BART or Bay Bridge.
+      </div>
+    </div>
+
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">🧬</div>
+        <div style="flex:1">
+          <div class="card-name">UCSF Benioff Children's Hospital — Oakland</div>
+          <div class="card-addr">747 52nd St, Oakland · 30 min from Fremont · 510-428-3000</div>
+        </div>
+        <span class="tag tg">UCSF Brand</span>
+      </div>
+      <div class="tags"><span class="tag tg">UCSF Affiliated</span><span class="tag tr">Pediatric Specialty Pharmacy</span><span class="tag ts">Clinical Pharmacy</span></div>
+      <div class="card-body">UCSF-affiliated academic children's hospital. The same institution whose PharmD program you're applying to. Pediatric clinical pharmacy involves active pharmacist involvement in complex dosing, oncology protocols, and toxicology. The UCSF connection on your application is not subtle. Request pharmacy or oncology unit placement. ucsfbenioffchildrens.org/volunteer.</div>
+    </div>
+
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">⭐</div>
+        <div style="flex:1">
+          <div class="card-name">Stanford Medical Center — Main Campus</div>
+          <div class="card-addr">300 Pasteur Dr, Palo Alto · 30 min via Dumbarton Bridge · 650-723-4000</div>
+        </div>
+        <span class="tag tg">Highest Prestige</span>
+      </div>
+      <div class="tags"><span class="tag tg">Stanford Brand</span><span class="tag tr">Research Hospital</span><span class="tag tt">Clinical Pharmacy Leaders</span></div>
+      <div class="card-body">Highest prestige clinical volunteer option in the Bay Area. Stanford's clinical pharmacy program is world-class — pharmacists run independent clinics, participate in clinical trials, function as full team members in every specialty. The name is recognized by admissions at every program on your list. Apply early and be specific about your pre-pharmacy goals. stanfordhealthcare.org/volunteer.</div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t2b">Tier 2</span><span class="tier-sub">Fremont-accessible · Strong options</span><span class="tier-line"></span></div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Washington Hospital Healthcare System</div>
+          <div class="card-addr">2000 Mowry Ave, Fremont · Closest from home · washingtonhealth.com</div>
+        </div>
+        <span class="tag tt">Closest · First Apply</span>
+      </div>
+      <div class="tags"><span class="tag tt">Pharmacy Dept Access</span><span class="tag ts">Oncology Unit</span><span class="tag td">Fremont Community</span></div>
+      <div class="card-body">Fremont's only full-service acute care hospital — independent nonprofit with pharmacy department, oncology unit, cardiac care, and Level II trauma. Most practical summer option from home base. <strong>Specifically request pharmacy department or oncology unit placement</strong> — Washington Hospital has an inpatient pharmacy that clinical pharmacy students rotate through. You can also apply for paid tech work here separately (see Pharmacy Hours) — confirm with HR whether dual roles are permitted.</div>
+    </div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">El Camino Health — Mountain View</div>
+          <div class="card-addr">2500 Grant Rd, Mountain View · 25 min via Dumbarton · 650-940-7000</div>
+        </div>
+        <span class="tag tt">National Clinical Pharmacy Award</span>
+      </div>
+      <div class="tags"><span class="tag tt">Top Clinical Pharmacy Program</span><span class="tag tg">Oncology Center</span><span class="tag ts">Cardiac</span></div>
+      <div class="card-body">Nationally recognized specifically for its clinical pharmacy program — one of the first hospitals to implement comprehensive clinical pharmacist autonomous practice. Pharmacists manage anticoagulation, renal dosing, and medication reconciliation independently. <strong>Best South Bay option for clinical pharmacy interview content.</strong> This is exactly the practice model PharmD trains toward. elcaminohealth.org/volunteer.</div>
+    </div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Santa Clara Valley Medical Center</div>
+          <div class="card-addr">751 S Bascom Ave, San Jose · 35 min from Fremont · 408-885-5000</div>
+        </div>
+        <span class="tag tr">UCSF Equity Narrative</span>
+      </div>
+      <div class="tags"><span class="tag tr">County Safety Net</span><span class="tag tg">Underserved Populations</span><span class="tag ts">High Complexity</span></div>
+      <div class="card-body">Santa Clara County's safety net hospital — serves uninsured, underinsured, and Medi-Cal patients with large Latino and Vietnamese communities. Bay Area equivalent of ZSFG for health equity narrative. UCSF evaluates applicants specifically for commitment to underserved communities, and experience here gives you concrete content for UCSF's supplemental essay. svcmc.org/volunteer.</div>
+    </div>
+
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente Fremont Medical Center</div>
+          <div class="card-addr">39400 Paseo Padre Pkwy, Fremont · From home · 510-248-3000</div>
+        </div>
+      </div>
+      <div class="card-body">Kaiser integrated pharmacy model — pharmacists on rounds, managing MTM, counseling patients at discharge. Closest Kaiser to home. If you also apply for paid tech work at Kaiser Fremont, confirm with HR whether volunteer + employee dual roles at the same facility are permitted. healthy.kaiserpermanente.org.</div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t3b">Tier 3</span><span class="tier-sub">Backup · Still legitimate</span><span class="tier-line"></span></div>
+
+    <div class="card t3">
+      <div class="card-head">
+        <div class="card-ico" style="background:var(--green-glow)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente Santa Clara Medical Center</div>
+          <div class="card-addr">700 Lawrence Expy, Santa Clara · 35 min from Fremont · 408-851-1000</div>
+        </div>
+      </div>
+      <div class="card-body">Largest Kaiser in South Bay, higher clinical complexity than Fremont Kaiser. Good backup if Fremont Kaiser volunteer program has a waitlist. Same integrated pharmacy model.</div>
+    </div>
+  </div>
+
+  <!-- HOW TO APPLY VOL -->
+  <div class="tab-panel" id="vol-apply">
+    <div class="ib am">
+      <strong>Timeline critical:</strong> Hospital volunteer onboarding takes 4–8 weeks from application to first shift (background check, health screening, orientation, placement assignment). Apply by March–April 2026 to be volunteering by June. Do not wait until summer break to apply.
+    </div>
+    <div class="ck-list">
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">Confirm immunizations at UC Davis Student Health — MMR, varicella, Hepatitis B series (3 shots over 6 months), TB test, annual flu shot</div><div class="ck-sub">Required before any hospital will clear you. If Hep B series is incomplete, start now — it takes 6 months total.</div></div>
+        <div class="ck-time">Now</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">Submit applications to UC Davis Medical Center AND Washington Hospital Fremont in the same week — apply to both, accept whichever opens first</div><div class="ck-sub">Parallel applications, not sequential. Don't wait for one to respond before applying to the next.</div></div>
+        <div class="ck-time">Mar 2026</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">Apply to UCSF Benioff Children's Oakland OR Stanford Medical Center for top-tier Bay Area summer option</div><div class="ck-sub">UCSF brand is the strongest for UCSF PharmD application. Stanford is highest prestige overall. Apply same week as Davis options.</div></div>
+        <div class="ck-time">Mar 2026</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">In every application: state explicitly you are a licensed pharmacy technician pursuing PharmD and request pharmacy, oncology, or clinical floor placement by name</div><div class="ck-sub">Do not write "I want to help people." Coordinators respond to specific, professional framing. Licensed tech pursuing PharmD is a distinct and appealing applicant profile.</div></div>
+        <div class="ck-time">Mar 2026</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">Follow up by phone if no response within 2 weeks — call volunteer services directly, don't just wait on the online portal</div><div class="ck-sub">A phone call moves applications faster than online portals alone at most hospitals. Ask for the volunteer coordinator by name.</div></div>
+        <div class="ck-time">Apr 2026</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">Complete background check and health screening — schedule before final exams, not after spring quarter ends</div></div>
+        <div class="ck-time">Apr–May 2026</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">Begin consistent shifts: 6–8 hrs/week from June through August — target 50–80 total hours</div><div class="ck-sub">One hospital, same department, same staff over 8+ weeks = credible interview content. Sporadic shifts across multiple locations do not produce the specific stories MMI interviewers want.</div></div>
+        <div class="ck-time">Jun 2026</div>
+      </div>
+      <div class="ck-row" onclick="this.classList.toggle('done')">
+        <div class="ck-box"></div>
+        <div style="flex:1"><div class="ck-text">After every shift: write one specific journal note — a pharmacist interaction, a medication safety observation, a clinical decision you witnessed</div><div class="ck-sub">These notes are your personal statement and MMI raw material. "I observed a pharmacist catch a drug interaction that prevented a serious adverse event" is an interview answer. "I helped patients" is not.</div></div>
+        <div class="ck-time">Jun–Aug 2026</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════
+     SECTION 3 — PHARMACY HOURS
+     ══════════════════════════════ -->
+<section class="sec" id="pharmacy-hours">
+  <div class="sec-eye">Section 03</div>
+  <div class="sec-title">Pharmacy <em>Tech Hours</em></div>
+  <p class="sec-lead">You already have your license. The question is where to work, not whether to work. A hospital tech hour carries more interview value than a retail hour — not because retail is bad, but because the marginal story value of additional CVS shifts drops sharply after 100–120 hours. Build toward health-system experience as fast as practical.</p>
+
+  <div class="g4">
+    <div class="card" style="border-top:2px solid var(--gold)">
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px">Tier 1</div>
+      <div class="card-name" style="font-size:14px;margin-bottom:5px">Hospital Inpatient</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">IV room, unit dose, sterile compounding. Work alongside clinical pharmacists making therapeutic decisions. Highest interview value — you see PharmD-level practice firsthand.</div>
+    </div>
+    <div class="card" style="border-top:2px solid var(--teal)">
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px">Tier 2</div>
+      <div class="card-name" style="font-size:14px;margin-bottom:5px">Ambulatory / Specialty</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">Kaiser outpatient, oncology infusion, specialty compounding, health system clinic. Integrated care model with visible pharmacist-patient counseling. Strong narrative value.</div>
+    </div>
+    <div class="card" style="border-top:2px solid var(--sky)">
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--sky);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px">Tier 3</div>
+      <div class="card-name" style="font-size:14px;margin-bottom:5px">Independent / Community</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">Local independent pharmacies. Owner-pharmacist often counsels patients directly. More pharmacist-patient interaction visible than chains. Decent narrative, harder to find openings.</div>
+    </div>
+    <div class="card" style="border-top:2px solid var(--dim)">
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--dim);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:5px">Tier 4</div>
+      <div class="card-name" style="font-size:14px;margin-bottom:5px">Retail Chain</div>
+      <div style="font-size:12px;color:var(--muted);line-height:1.6">CVS, Walgreens, Walmart, Target. Easiest to get. Good for early accumulation and starting your hours clock. Pivot to health-system positions as soon as practical — don't stay exclusively retail.</div>
+    </div>
+  </div>
+
+  <div class="tabs" style="margin-top:24px">
+    <button class="tab-btn on" onclick="switchTab(this,'pharm','davis')">Davis / Sac / Vacaville · Academic Year</button>
+    <button class="tab-btn" onclick="switchTab(this,'pharm','bay')">Bay Area · Summer Only</button>
+    <button class="tab-btn" onclick="switchTab(this,'pharm','tips')">Application Tips</button>
+  </div>
+
+  <!-- DAVIS PHARM -->
+  <div class="tab-panel on" id="pharm-davis">
+    <div class="ib am" style="margin-bottom:18px">
+      <strong>Academic year constraint:</strong> 8–12 hrs/week maximum during quarters. GPA is upstream of everything — a B in NPB 101 because you were working 20 hrs/week cannot be undone. Proximity matters: 25 min or less commute preferred so travel doesn't eat into study time.
+    </div>
+
+    <div class="tier-lbl"><span class="tbadge t1b">Tier 1</span><span class="tier-line"></span></div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">🏛️</div>
+        <div style="flex:1">
+          <div class="card-name">UC Davis Health — Inpatient & Outpatient Pharmacy</div>
+          <div class="card-addr">4301 X St, Sacramento · health.ucdavis.edu/careers</div>
+        </div>
+        <span class="tag tg">Best Davis Option</span>
+      </div>
+      <div class="tags"><span class="tag tg">UC Davis Brand</span><span class="tag tr">Oncology / Transplant Pharmacy</span><span class="tag tt">Level I Trauma</span></div>
+      <div class="card-body"><strong>Absolute strongest Davis-area position.</strong> UC Davis Health inpatient pharmacy handles IV compounding, oncology pharmacy, transplant pharmacy, and clinical pharmacist teams on every floor. Working here as a tech while doing Franz lab research at UC Davis creates an extraordinary institutional narrative for UCSF and UCSD. Inpatient positions are competitive — your license puts you in the pool. <em>Outpatient pharmacy positions (specialty pharmacy, infusion services) are easier to get and still carry the UC Davis Health brand — apply inpatient first, outpatient as fallback.</em></div>
+    </div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente Vacaville Medical Center</div>
+          <div class="card-addr">1 Quality Dr, Vacaville · 20 min from Davis · jobs.kaiserpermanente.org</div>
+        </div>
+        <span class="tag tt">Most Practical</span>
+      </div>
+      <div class="tags"><span class="tag tt">Kaiser Inpatient Model</span><span class="tag tg">20 Min Commute</span><span class="tag ts">I-80 Corridor</span></div>
+      <div class="card-body">20 min from Davis on I-80 — close enough for a 10–12 hr/week academic year schedule. Kaiser Vacaville has both inpatient and outpatient pharmacy positions. Kaiser inpatient = integrated clinical model with pharmacists on care teams. <strong>The most practical Tier 1 option by commute distance.</strong> Apply through Kaiser careers AND call the pharmacy directly — direct contact consistently gets further than online-only at Kaiser.</div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t2b">Tier 2</span><span class="tier-line"></span></div>
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🌿</div>
+        <div style="flex:1">
+          <div class="card-name">Dignity Health – Woodland Memorial Hospital</div>
+          <div class="card-addr">1325 Cottonwood St, Woodland · 10 min from Davis · dignityhealth.org/careers</div>
+        </div>
+        <span class="tag tgr">Proximity Win</span>
+      </div>
+      <div class="card-body">10 minutes from campus — closest hospital to UC Davis. Smaller inpatient pharmacy than UC Davis Health, but still genuine hospital pharmacy experience. If UC Davis Health and Kaiser Vacaville don't have openings, this is the next best option. <strong>Apply in parallel with Tier 1 options — don't wait for one rejection before applying to the next.</strong></div>
+    </div>
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Sutter Davis Hospital</div>
+          <div class="card-addr">2000 Sutter Pl, Davis · Walking distance · sutterhealth.org/careers</div>
+        </div>
+        <span class="tag tt">On Campus</span>
+      </div>
+      <div class="card-body">Walking distance from campus. Small community hospital — inpatient pharmacy openings are rare but check the Sutter Health careers portal regularly. The zero-commute factor is significant during Winter 2027 when everything else is being compressed. When an opening appears, apply immediately.</div>
+    </div>
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">NorthBay Health — Vacaville or Fairfield</div>
+          <div class="card-addr">Vacaville: 20 min · Fairfield: 35 min · northbay.org/careers</div>
+        </div>
+      </div>
+      <div class="card-body">Regional health system serving Solano County. Smaller than Kaiser or UC Davis but a legitimate health-system pharmacy employer. Good backup if Tier 1 options don't have openings. NorthBay hires licensed techs for both campuses on a rolling basis.</div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t4b">Tier 4</span><span class="tier-sub">Start here if nothing else comes through — keep applying upward</span><span class="tier-line"></span></div>
+    <div class="card t4">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(74,101,128,0.12)">🛒</div>
+        <div style="flex:1">
+          <div class="card-name">CVS / Walmart / Target — Davis-Woodland Area</div>
+          <div class="card-addr">CVS Richards Blvd Davis · Walmart Woodland · Target Woodland</div>
+        </div>
+      </div>
+      <div class="card-body">Use to start accumulating hours and to build initial experience if health-system positions don't open immediately. Get 50–80 retail hours while continuing to apply to Kaiser Vacaville and UC Davis Health. Do not let retail become the permanent default — it's the starting point, not the endpoint.</div>
+    </div>
+  </div>
+
+  <!-- BAY AREA PHARM -->
+  <div class="tab-panel" id="pharm-bay">
+    <div class="ib tl" style="margin-bottom:18px">
+      <strong>Summer only — no commute constraint, 20–25 hrs/week viable.</strong> Fremont-based. Maximize clinical quality of hours. These are the hours that build your strongest application narrative — the summer tech position is where retail hours become clinical hours.
+    </div>
+
+    <div class="tier-lbl"><span class="tbadge t1b">Tier 1</span><span class="tier-sub">Hospital inpatient · Highest narrative value</span><span class="tier-line"></span></div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente Fremont — Inpatient Pharmacy</div>
+          <div class="card-addr">39400 Paseo Padre Pkwy, Fremont · jobs.kaiserpermanente.org</div>
+        </div>
+        <span class="tag tg">First Apply</span>
+      </div>
+      <div class="tags"><span class="tag tg">Closest Tier 1</span><span class="tag tt">Clinical Pharmacy Model</span><span class="tag ts">IV Room · Unit Dose</span></div>
+      <div class="card-body"><strong>Closest Tier 1 option from Fremont.</strong> Kaiser inpatient pharmacy = techs assist clinical pharmacists integrated into care teams, IV compounding, unit dose dispensing, pharmacists attending rounds. If you land inpatient at Kaiser Fremont, this is the best summer position by commute and narrative value combined. <em>Apply at jobs.kaiserpermanente.org AND call the Fremont pharmacy directly — ask for the pharmacy manager and state you are a licensed tech pursuing PharmD. Direct contact consistently outperforms online-only at Kaiser.</em></div>
+    </div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente Oakland Medical Center</div>
+          <div class="card-addr">280 W MacArthur Blvd, Oakland · 20 min from Fremont · jobs.kaiserpermanente.org</div>
+        </div>
+        <span class="tag tt">Higher Complexity</span>
+      </div>
+      <div class="card-body">Larger Kaiser facility than Fremont — more specialty pharmacy, higher clinical pharmacist activity, one of the busier Northern California Kaiser hospitals. If Fremont inpatient doesn't have openings, Oakland is the immediate next step in the same system. Same brand, same model, stronger complexity for UCSF/UCSD narrative.</div>
+    </div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">🏥</div>
+        <div style="flex:1">
+          <div class="card-name">Washington Hospital — Inpatient Pharmacy</div>
+          <div class="card-addr">2000 Mowry Ave, Fremont · jobs.whhs.com</div>
+        </div>
+        <span class="tag tg">Dual Role Option</span>
+      </div>
+      <div class="card-body">Washington Hospital has an inpatient pharmacy separately from its volunteer program. <strong>You may be able to be both a paid tech employee and a clinical volunteer at the same institution</strong> — confirm with HR whether dual roles are permitted. Working as tech while volunteering on clinical floors gives you two distinct perspectives of one institution — unusually rich essay material that few applicants can claim.</div>
+    </div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">🔬</div>
+        <div style="flex:1">
+          <div class="card-name">UCSF Health — Inpatient Pharmacy (SF Campus)</div>
+          <div class="card-addr">505 Parnassus Ave, SF · 45–55 min via BART · jobs.ucsf.edu</div>
+        </div>
+        <span class="tag tr">Highest Prestige</span>
+      </div>
+      <div class="tags"><span class="tag tr">UCSF Brand</span><span class="tag tg">Research Hospital Pharmacy</span><span class="tag ts">Clinical Trial Access</span></div>
+      <div class="card-body">Most prestigious inpatient pharmacy position on this entire list. Clinical pharmacists at UCSF are nationally recognized researchers and practitioners. Working alongside them even as a tech creates interview material qualitatively different from any community hospital. <strong>BART from Fremont to SF is 45–55 min — worth it for a summer position.</strong> Emphasize Franz lab research connection to UCSF's academic mission in your cover letter. Search "pharmacy technician" at jobs.ucsf.edu.</div>
+    </div>
+    <div class="card t1">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(232,184,75,0.1)">⭐</div>
+        <div style="flex:1">
+          <div class="card-name">Stanford Health Care — Inpatient Pharmacy</div>
+          <div class="card-addr">Palo Alto / Redwood City · 30 min via Dumbarton · stanfordhealthcare.org/careers</div>
+        </div>
+        <span class="tag tg">Stanford Brand</span>
+      </div>
+      <div class="card-body">Stanford inpatient pharmacy serves oncology, transplant, cardiovascular surgery — highly complex medication management environments. Techs assist in IV room, sterile compounding, floor delivery. Brand name on your application carries weight at every school on your list. 30 min via Dumbarton Bridge makes it the most accessible prestige option from Fremont.</div>
+    </div>
+
+    <div class="tier-lbl" style="margin-top:20px"><span class="tbadge t2b">Tier 2</span><span class="tier-sub">Ambulatory / health system outpatient · Good fallback</span><span class="tier-line"></span></div>
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">⚕️</div>
+        <div style="flex:1">
+          <div class="card-name">Kaiser Permanente — Any East Bay Outpatient Pharmacy</div>
+          <div class="card-addr">Fremont, Oakland, Hayward, San Leandro · jobs.kaiserpermanente.org</div>
+        </div>
+      </div>
+      <div class="card-body">Easier to land than inpatient, still carries Kaiser health-system brand. Any Kaiser outpatient pharmacy on your resume signals health-system experience and integrated care model exposure. Good fallback if inpatient positions don't open up during application window.</div>
+    </div>
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">🌿</div>
+        <div style="flex:1">
+          <div class="card-name">El Camino Health — Outpatient Pharmacy, Mountain View</div>
+          <div class="card-addr">Mountain View · 25 min via Dumbarton · elcaminohealth.org/careers</div>
+        </div>
+        <span class="tag tt">Dual Presence Option</span>
+      </div>
+      <div class="card-body">El Camino Health outpatient pharmacies are connected to their nationally recognized clinical pharmacy program. If you're also volunteering at El Camino, being both employed tech and clinical volunteer at the same institution is an unusual narrative detail particularly relevant for USC and UCI applications.</div>
+    </div>
+    <div class="card t2">
+      <div class="card-head">
+        <div class="card-ico" style="background:rgba(61,214,200,0.09)">💊</div>
+        <div style="flex:1">
+          <div class="card-name">CVS Specialty / Walgreens Specialty Pharmacy — Bay Area</div>
+          <div class="card-addr">Multiple Bay Area locations · cvs.com/careers · walgreens.com/careers</div>
+        </div>
+      </div>
+      <div class="card-body">Specialty pharmacy divisions handle oncology oral agents, infusion coordination, rare disease management — categorically different from standard retail despite the brand name. Worth targeting specifically over standard retail positions if health-system options don't materialize. Explicitly search "specialty pharmacy technician" rather than the general tech listing.</div>
+    </div>
+  </div>
+
+  <!-- PHARM TIPS -->
+  <div class="tab-panel" id="pharm-tips">
+    <div class="g2" style="margin-top:8px">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">How to Stand Out in Applications</div>
+        <div class="ck-list">
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Call the pharmacy directly in addition to submitting online</div><div class="ck-sub">Ask for the pharmacy manager. Most applicants only apply online — a phone call is a genuine differentiator.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Lead with your license — you are a licensed tech, not an aspiring one</div><div class="ck-sub">This changes the conversation from entry-level applicant to credentialed professional seeking clinical exposure.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Apply to UC Davis Health, Kaiser Vacaville, and Woodland Memorial all in the same week</div><div class="ck-sub">Parallel applications. Health-system positions fill on irregular timelines — sequential applying costs weeks.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Mention your PharmD goal explicitly — health-system pharmacies prefer hiring pre-pharmacy students</div><div class="ck-sub">Pre-pharmacy students stay longer and are more engaged than general applicants. Pharmacies know this.</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:9px;color:var(--teal);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px">Bay Area Summer Priority Order</div>
+        <div class="p-list" style="gap:5px">
+          <div class="p-row" style="padding:9px 13px"><div class="p-num" style="color:var(--gold);font-size:17px">1</div><div><div class="p-title" style="font-size:12px">Kaiser Fremont Inpatient</div><div class="p-body">Closest Tier 1 by commute from home</div></div></div>
+          <div class="p-row" style="padding:9px 13px"><div class="p-num" style="color:var(--gold);font-size:17px">2</div><div><div class="p-title" style="font-size:12px">Washington Hospital Inpatient</div><div class="p-body">Can combine with volunteer role at same facility</div></div></div>
+          <div class="p-row" style="padding:9px 13px"><div class="p-num" style="color:var(--teal);font-size:17px">3</div><div><div class="p-title" style="font-size:12px">Kaiser Oakland Inpatient</div><div class="p-body">Higher complexity than Fremont Kaiser</div></div></div>
+          <div class="p-row" style="padding:9px 13px"><div class="p-num" style="color:var(--teal);font-size:17px">4</div><div><div class="p-title" style="font-size:12px">UCSF Health SF</div><div class="p-body">Highest prestige — BART commute is worth it</div></div></div>
+          <div class="p-row" style="padding:9px 13px"><div class="p-num" style="color:var(--sky);font-size:17px">5</div><div><div class="p-title" style="font-size:12px">Stanford Health Care</div><div class="p-body">30 min Dumbarton, strong brand</div></div></div>
+          <div class="p-row" style="padding:9px 13px"><div class="p-num" style="color:var(--sky);font-size:17px">6</div><div><div class="p-title" style="font-size:12px">Kaiser East Bay Outpatient</div><div class="p-body">Fallback if inpatient unavailable</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════
+     SECTION 4 — RESEARCH
+     ══════════════════════════════ -->
+<section class="sec" id="research">
+  <div class="sec-eye">Section 04</div>
+  <div class="sec-title">Research <em>Experience</em></div>
+  <p class="sec-lead">Most pre-pharmacy applicants have zero research experience. A meaningful minority have one lab. Having two distinct labs — Wang (food/analytical chemistry) then Franz (medicinal chemistry) — is genuinely uncommon and a compelling narrative when framed as deliberate progression rather than instability.</p>
+
+  <div class="r-tl">
+    <!-- WANG LAB -->
+    <div class="r-entry">
+      <div class="r-dot" style="background:var(--gold)"></div>
+      <div class="r-card" style="border-left:3px solid var(--gold)">
+        <div class="r-card-hd">
+          <div>
+            <div class="r-title">Wang Lab — Food Chemistry & Analytical Science</div>
+            <div class="r-pi">Prof. Selina Wang · UC Davis Olive Center / Food Science & Technology</div>
+          </div>
+          <div class="r-period">Apr 2025 — Spr/Sum 2026<br>~12–14 months total</div>
+        </div>
+        <div class="tags"><span class="tag tg">HPLC / GC-MS</span><span class="tag tt">Food Authentication</span><span class="tag ts">Analytical Chemistry</span><span class="tag td">Polyphenol Analysis</span></div>
+        <div class="r-body" style="margin-top:12px">
+          <strong>What this gives you for pharmacy school:</strong> Directly transferable analytical skills — HPLC operation and data interpretation, chromatographic separation principles, spectroscopic analysis (NMR/MS), experimental design, data quality control, scientific writing. These are the same instruments used in pharmaceutical analysis and drug quality control. UCSF and UCSD admissions readers who are pharmaceutical scientists recognize that HPLC and GC-MS experience in food chemistry is mechanistically identical to pharmaceutical analytical chemistry. The instrumentation does not change because the sample matrix did.
+          <br><br>
+          More importantly: <em>you have been doing real science with real instrumentation since April 2025.</em> By your application date, that's 2+ years of genuine laboratory experience. Most applicants saying "I have research experience" mean two months of pipetting in a teaching lab.
+          <br><br>
+          <strong>What this gives you beyond pharmacy:</strong> Wang lab opens doors Franz lab does not — nutraceuticals, dietary supplement quality control, food-drug interaction research, FDA CFSAN food safety regulatory careers. If at any point you wanted to pivot toward regulatory science, the dual food/pharmaceutical analytical background is directly relevant.
+          <br><br>
+          <strong>Before you leave:</strong> Ask Prof. Wang for an LOR. Ask if you can be acknowledged in any pending publications — even one line in an acknowledgments section is a CV entry. Request a brief written summary of your contributions for PharmCAS activities section material.
+        </div>
+      </div>
+    </div>
+
+    <!-- TRANSITION -->
+    <div style="padding-left:6px;margin:-4px 0 4px;display:flex;align-items:center;gap:10px">
+      <div style="font-family:var(--font-mono);font-size:10px;color:var(--gold);letter-spacing:0.08em">→ DELIBERATE TRANSITION — 12 months is sufficient for meaningful contribution</div>
+    </div>
+
+    <!-- FRANZ LAB -->
+    <div class="r-entry" style="margin-top:16px">
+      <div class="r-dot" style="background:var(--teal)"></div>
+      <div class="r-card" style="border-left:3px solid var(--teal)">
+        <div class="r-card-hd">
+          <div>
+            <div class="r-title">Franz Lab — Medicinal Chemistry & Drug Design</div>
+            <div class="r-pi">Prof. Mark Franz · UC Davis Department of Chemistry</div>
+          </div>
+          <div class="r-period">Spr/Sum 2026 → Application<br>12–18 months to Jul 2027</div>
+        </div>
+        <div class="tags"><span class="tag tt">Drug Design</span><span class="tag tg">Organic Synthesis</span><span class="tag tr">SAR Studies</span><span class="tag ts">Pharmacological Characterization</span></div>
+        <div class="r-body" style="margin-top:12px">
+          <strong>The most pharmacy-relevant undergraduate research available at UC Davis.</strong> Medicinal chemistry is literally the science of designing drug molecules. When a UCSF MMI interviewer asks why you want to be a pharmacist rather than staying in research, you can speak credibly about how drug design connects to drug therapy — because you've seen both sides of the molecule.
+          <br><br>
+          <strong>For UCSF's PharmD/PhD track specifically:</strong> Franz lab medicinal chemistry is the ideal credential. UCSF PharmD values applicants who could pursue graduate-level pharmaceutical science. Even if you never intend to do a PhD, the credential signals intellectual capacity that separates you from applicants whose entire pharmacy experience is dispensing.
+          <br><br>
+          <strong style="color:var(--teal)">How to maximize output before application:</strong> Ask Prof. Franz explicitly which project you'll contribute to and what the publication timeline looks like — attach to a project moving toward a paper. Attend every group meeting; know all lab projects, not just your own. Ask to co-present at a departmental seminar or journal club. Request acknowledgment in any paper produced. Keep a detailed research notebook — PharmCAS activities descriptions are 700 characters, your notebook is the source material.
+          <br><br>
+          <strong>Target output before July 2027 submission:</strong> UC Davis Undergraduate Research Conference poster (Spring 2027, minimum). Better: ACS or regional pharmaceutical sciences conference abstract. Best: "manuscript in preparation" co-authorship — a legitimate and noticed CV line even before publication.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="narr">
+    <div class="narr-lbl">Application Narrative Arc — How to Frame Both Labs</div>
+    <div class="narr-text">"I began scientific research in an analytical chemistry laboratory studying food systems, where I learned to operate HPLC and GC-MS instruments, design controlled experiments, and interpret spectroscopic data. After establishing foundational laboratory skills, I sought a position in medicinal chemistry that would connect my research experience directly to pharmaceutical science. In the Franz lab, I apply those analytical skills to the study of drug molecule design — which has deepened my understanding of how structural features of a drug determine its biological activity, and reinforced my commitment to clinical pharmacy as the profession that translates that science into patient care."</div>
+  </div>
+
+  <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;margin:26px 0 12px">How Research Broadens Your Pathways Beyond PharmD</div>
+  <div class="pw-grid">
+    <div class="pw-card pw1">
+      <div class="pw-num">01</div>
+      <div class="pw-title">PharmD / PhD Dual Degree</div>
+      <div class="pw-body">UCSF and UCSD offer PharmD/PhD programs — PhD fully funded, adds 2–3 years. <strong>Franz lab medicinal chemistry is the ideal credential for pharmaceutical sciences PhD.</strong> Apply through the same PharmCAS application — indicate dual degree interest. Published research or strong PI LOR makes these highly competitive slots accessible.</div>
+    </div>
+    <div class="pw-card pw2">
+      <div class="pw-num">02</div>
+      <div class="pw-body"><div class="pw-title">Pharmaceutical Industry</div>PharmD + medicinal chemistry research = pathway to clinical pharmacology, medical affairs, or regulatory roles at biotech. <strong>The Bay Area biotech corridor</strong> (South SF, Emeryville, South Bay) is the most concentrated pharma environment in the world. Franz lab background is directly legible to Genentech, Gilead, and BioMarin hiring managers.</div>
+    </div>
+    <div class="pw-card pw3">
+      <div class="pw-num">03</div>
+      <div class="pw-title">FDA / Regulatory Science</div>
+      <div class="pw-body">Wang lab (food chemistry) + Franz lab (pharmaceutical chemistry) is an unusual combination directly relevant to FDA careers. <strong>CFSAN (food safety) and CDER (drug evaluation)</strong> both hire scientists with this dual background. Federal pharmacist and regulatory scientist positions are stable, well-compensated, and undersubscribed.</div>
+    </div>
+    <div class="pw-card pw4">
+      <div class="pw-num">04</div>
+      <div class="pw-title">Academic Pharmacy Faculty</div>
+      <div class="pw-body">PharmD/PhD + postdoc leads to faculty positions at schools of pharmacy. <strong>Pharmaceutical sciences faculty at UCSF, UCSD, USC</strong> are practicing researchers whose students are PharmD candidates. A long path (10+ years) but Franz lab is the first correct step.</div>
+    </div>
+    <div class="pw-card pw5">
+      <div class="pw-num">05</div>
+      <div class="pw-title">Clinical Pharmacology / Translational</div>
+      <div class="pw-body">A PharmD with research background accesses translational medicine — bridging bench and bedside. <strong>Clinical pharmacologist roles</strong> at academic medical centers involve pharmacokinetic studies, drug interaction research, and formulary management at a level pure clinical pharmacists do not access.</div>
+    </div>
+    <div class="pw-card" style="border-left:3px solid var(--amber)">
+      <div class="pw-num" style="color:var(--amber)">06</div>
+      <div class="pw-title">Nutraceuticals / Supplement Industry</div>
+      <div class="pw-body">Wang lab food chemistry + Franz lab pharmaceutical chemistry + PharmD = rare triple credential for the growing nutraceutical and functional food industry. <strong>Supplement quality control, formulation pharmacist, food-drug interaction specialist</strong> — roles that barely exist currently but are expanding rapidly.</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════
+     SECTION 5 — BY SCHOOL
+     ══════════════════════════════ -->
+<section class="sec" id="schools">
+  <div class="sec-eye">Section 05</div>
+  <div class="sec-title">Requirements <em>By School</em></div>
+  <p class="sec-lead">Each school evaluates the six dimensions differently. Click any school to expand its full breakdown. Bar indicators show relative weight each school places on each dimension — use this to prioritize where to invest effort for your highest-priority targets.</p>
+
+  <div class="ib gd" style="margin-bottom:20px">
+    <strong>Bar legend:</strong> Pharm Hrs · Clinical Exp · Research · Community · Leadership — each bar shows relative emphasis that school places on that dimension compared to others. Schools with high bars for "Clinical" independently score your healthcare volunteering; schools with low bars for "Research" treat it as a nice-to-have.
+  </div>
+
+  <!-- UCSF -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#e8b84b"></div>
+      <div class="sc-name">UCSF<span class="sc-type">Tier 1 · Reach</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:85%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:95%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:95%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:100%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:75%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val">No stated minimum. Competitive applicants have <strong>200–500+ hrs</strong>. Quality over quantity — hospital/clinical hours weighted over retail. 200 retail hours is table stakes, not a differentiator.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val"><strong>Evaluated independently</strong> as its own dimension. UCSF wants evidence you've seen pharmacists in clinical team settings beyond the dispensing counter. 50–100 hrs at a genuine clinical site (ZSFG, UCSF Benioff) is the threshold.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val"><strong>Very heavily weighted.</strong> UCSF PharmD has a strong PharmD/PhD pipeline. Franz lab medicinal chemistry is directly relevant. Poster, abstract, or manuscript in preparation dramatically improves odds.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val"><strong>Explicit social mission — highest weight of any school.</strong> They recruit students who will serve underserved communities. Experience at ZSFG, SCVMC, or community health centers is not optional color — it directly addresses their supplemental essay.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val"><strong>MMI (Multiple Mini Interview).</strong> Scenario-based stations testing ethical reasoning, interpersonal communication, healthcare systems knowledge. Clinical volunteer experience gives concrete scenarios. Research background feeds "complex problem" stations.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. PharmCAS personal statement 4,500 chars. <strong>Supplemental essay focuses on underserved communities and UCSF's social mission</strong> — this is where ZSFG/SCVMC volunteer narrative pays off most concretely.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UCSD -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#3dd6c8"></div>
+      <div class="sc-name">UCSD<span class="sc-type">Tier 1 · Reach</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:80%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:80%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:90%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:75%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:70%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val">No stated minimum. Competitive applicants have <strong>200–400 hrs</strong>. UCSD's Skaggs School has a research focus — research-adjacent pharmacy experience (specialty, health system, oncology) is particularly relevant.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">Evaluated as a separate line item. UCSD wants to see you've been in clinical environments beyond dispensing. <strong>50–100 hrs hospital volunteering</strong> is sufficient to speak to credibly in their MMI.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val"><strong>Very important.</strong> Skaggs has a strong research mission. Franz lab medicinal chemistry is directly relevant to their pharmaceutical sciences curriculum. Poster or publication significantly improves odds — "walk me through your research" is essentially guaranteed in the interview.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">UCSD has explicit commitment to San Diego's underserved communities. <strong>Health equity experience is noticed</strong> — SCVMC or ZSFG experience maps onto their values. Less prescriptively emphasized than UCSF but clearly evaluated.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val"><strong>Virtual MMI format.</strong> Research experience is a frequent topic — know your Franz lab project well enough to explain to a non-scientist. Know the lab's broader goals, not just your specific task.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Standard PharmCAS essay. <strong>Supplemental essay varies by cycle</strong> — check current year's prompt. Research background gives you distinct content from pure clinical applicants.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- USC -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#e85a6a"></div>
+      <div class="sc-name">USC<span class="sc-type">Tier 2 · Match</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:75%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val"><strong>Minimum 100 hrs stated explicitly.</strong> Competitive applicants have 150–300 hrs. USC uses rolling admissions — submitting August 1 with 150 hrs is significantly better than submitting October with 200 hrs. Apply early.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">No stated separate minimum. Holistic review includes clinical exposure as positive context. Hospital volunteering strengthens the application but is not independently scored the way UCSF scores it.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val">Not required but <strong>noticed and differentiated.</strong> USC School of Pharmacy has a pharmaceutical sciences research program. Franz lab experience is a differentiator among otherwise similar applicants — especially relevant for USC's research track.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">USC is located in South Los Angeles. <strong>Community health and underserved population service resonates</strong> with their institutional context. Evaluated positively but not at UCSF weight.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val"><strong>Rolling admissions — respond to interview invitations immediately.</strong> Earlier interviewees historically have higher acceptance rates. Traditional + some MMI-style elements depending on cycle.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Rolling admissions means <strong>LOR writers should be lined up by June 2027 at latest</strong> — don't wait until July to ask. Supplemental essays vary by cycle.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UCI -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#5baee8"></div>
+      <div class="sc-name">UCI<span class="sc-type">Tier 2 · Match</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:70%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:55%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val"><strong>Minimum 100 hrs.</strong> Competitive applicants 150–250 hrs. Meeting the minimum threshold is more important here than narrative quality — holistic but more volume-aware than UCSF.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">UCI has a community health orientation. Clinical volunteering is noticed and adds positive context. <strong>50+ hrs is meaningful</strong> for interview content generation, even if not independently scored.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val">Not required. <strong>Franz lab is a differentiator</strong> among the applicant pool but not a prerequisite. Gives you distinct interview content and LOR quality that most UCI applicants lack.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">UCI serves a diverse Orange County population. <strong>Community engagement with underserved communities is positively evaluated.</strong> Less prescriptive than UCSF but clearly noticed in review.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val"><strong>Traditional format.</strong> More straightforward than UCSF MMI. Prepare specific answers to "Why pharmacy?" and "Why UCI?" with concrete examples from your pharmacy tech experience and research background.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Standard structure. Supplemental essays vary — do not recycle the PharmCAS personal statement verbatim. Each school's supplemental requires distinct answers addressing their specific mission.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UW -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#a87ce8"></div>
+      <div class="sc-name">UW<span class="sc-type">Tier 2 · OOS Match</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:70%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:80%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:75%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val">No stated minimum. Competitive OOS applicants have <strong>150–300 hrs.</strong> UW heavily favors WA state residents — OOS applicants need a stronger overall file to compensate. Health-system hours matter more than retail volume for OOS candidates.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">Washington state has a strong rural and underserved health focus. <strong>Any community health experience resonates</strong> even if gained in California — frame it through the lens of serving underserved populations, which maps onto UW's stated mission.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val"><strong>Important — UW School of Pharmacy has a strong research mission.</strong> Franz lab medicinal chemistry background is a meaningful advantage for OOS applicants competing against strong WA in-state candidates. Poster or publication is differentiating.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">UW explicitly evaluates commitment to underserved populations and <strong>rural health access</strong>. SCVMC or ZSFG experience maps onto their stated values. Frame community service in terms of access and equity when writing UW supplementals.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val">Traditional format. <strong>OOS applicants benefit from explicitly addressing why UW despite distance</strong> — have a specific, genuine answer about the program's strengths beyond "it's a good school." Research specific UW faculty or programs that align with your interests.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Personal statement should address commitment to populations UW serves. <strong>Supplemental should explain OOS interest specifically</strong> — admissions committees for resident-favored programs notice when OOS applicants give generic reasons.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OSU -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#f0a030"></div>
+      <div class="sc-name">OSU / OHSU<span class="sc-type">Tier 2 · OOS Match</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:55%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val">No stated minimum. Competitive OOS applicants: <strong>150–250 hrs.</strong> OSU also favors Oregon residents. Similar OOS dynamic to UW — research and community service matter more for OOS candidates than pure hour volume.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">Evaluated positively. Rural health and underserved community experience resonates in Oregon context. 50+ hrs at a genuine clinical setting provides adequate interview content.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val">OSU College of Pharmacy has a research focus. <strong>Franz lab background is a positive signal</strong> — especially relevant if any Franz lab projects touch on areas relevant to Oregon's public health priorities (rural medicine, pain management, infectious disease).</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">Similar to UW — rural health, underserved populations, community pharmacy service. Frame California experience in terms of access and health equity rather than geography-specific content.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val">Traditional format. <strong>Address OOS intent specifically</strong> — generic answers disadvantage OOS applicants. Research specific OSU faculty, partnerships, or clinical opportunities that genuinely interest you.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Standard structure. Supplemental OOS essay should be tailored — explain specific program attributes, not just "Oregon is beautiful."</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UOP -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#5ae89a"></div>
+      <div class="sc-name">UOP — Thomas J. Long<span class="sc-type">Tier 3 · Safety</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:40%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:35%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:40%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:45%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val"><strong>Minimum 100 hrs stated.</strong> Competitive applicants 150–200 hrs. UOP's admissions are more volume-and-GPA driven than holistic. Meeting the hour threshold matters more here than narrative quality of hours.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">Not independently evaluated at the weight UCSF applies. Positively received but not a primary differentiator. Standard clinical volunteering sufficient.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val">Not required. <strong>Franz lab is a positive differentiator</strong> but not heavily weighted — UOP is more GPA/volume-driven. Research matters most if applying to their 3+4 accelerated program track.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">Evaluated at baseline level. Any community engagement is positive. Not a primary selection criterion the way it is at UCSF.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val">Traditional format. <strong>More straightforward than UCSF or UCSD.</strong> Focus on clear articulation of why pharmacy and demonstrated commitment. UOP proximity to Stockton is sometimes a genuine reason — if so, use it.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Less analytically scrutinized than UCSF. Standard personal statement structure works — clear narrative arc from tech experience to PharmD goal. Supplemental if required is typically brief.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WesternU -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#7a9ab8"></div>
+      <div class="sc-name">WesternU<span class="sc-type">Tier 3 · Safety</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:60%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:40%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-d-val" style="display:none"></div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:30%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:45%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:45%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val"><strong>Minimum 100 hrs.</strong> WesternU is similar to UOP in admissions approach — volume-and-GPA driven, holistic review is less rigorous than UC programs. Meeting minimums and having a solid GPA is the primary filter.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">Not independently scored. Positively received. Standard volunteering sufficient for interview content generation.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val">Not required. Stands out positively but is not weighted in their primary selection criteria. Your research background will differentiate you at interview but won't move the initial file review significantly.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">Evaluated at baseline. WesternU has an osteopathic health system context — community health service is part of their institutional ethos but not as prescriptively evaluated as UCSF.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val"><strong>Traditional format.</strong> Focus on communication skills, clear reasoning, and demonstrating genuine commitment to pharmacy practice. Standard preparation is sufficient.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Standard personal statement. Supplemental if required is typically brief and practical. Focus on clarity over cleverness.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UA -->
+  <div class="sc-card">
+    <div class="sc-head" onclick="toggleSchool(this)">
+      <div class="sc-dot" style="background:#e8b84b"></div>
+      <div class="sc-name">University of Arizona<span class="sc-type">Tier 3 · Safety</span></div>
+      <div class="sc-bars">
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Pharm Hrs</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:55%;background:var(--gold)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Clinical</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:55%;background:var(--teal)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Research</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:55%;background:var(--rose)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Community</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:65%;background:var(--purple)"></div></div></div>
+        <div class="sc-bar-item"><div class="sc-bar-lbl">Leadership</div><div class="sc-bar-track"><div class="sc-bar-fill" style="width:55%;background:var(--sky)"></div></div></div>
+      </div>
+      <div class="sc-chevron">▼</div>
+    </div>
+    <div class="sc-body">
+      <div class="sc-detail-grid">
+        <div class="sc-detail"><div class="sc-d-title">Pharmacy Hours</div><div class="sc-d-val">No stated minimum. Competitive applicants <strong>100–200 hrs.</strong> UA is more open to non-traditional backgrounds and less rigid on hour thresholds than California programs. Quality of experience matters.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Clinical Exposure</div><div class="sc-d-val">Positively evaluated. UA serves Arizona's diverse populations. Clinical volunteering adds genuine value to your application beyond hour counting.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Research</div><div class="sc-d-val"><strong>UA has a legitimate research mission</strong> — Franz lab background is a positive signal. UA is more open to research-strong candidates than pure GPA maximizers. A differentiator at this tier.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Community Service</div><div class="sc-d-val">UA serves Arizona's diverse communities including <strong>large Native American populations</strong> and underserved rural communities. Community health experience is genuinely valued. Frame SCVMC or ZSFG experience in health equity and access terms.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">Interview Format</div><div class="sc-d-val">Traditional format. UA tends to have a more welcoming, less competitive atmosphere in interviews than UC programs. Be genuine and specific — they respond well to applicants with clear research and clinical narratives.</div></div>
+        <div class="sc-detail"><div class="sc-d-title">LOR / Essays</div><div class="sc-d-val">3 LORs. Standard structure. Personal statement should address interest in populations UA serves if genuine. Supplemental if required is typically brief.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══════════════════════════════
+     SECTION 6 — ALLOCATION
+     ══════════════════════════════ -->
+<section class="sec" id="allocation">
+  <div class="sec-eye">Section 06</div>
+  <div class="sec-title">Hour <em>Allocation</em></div>
+  <p class="sec-lead">Research, pharmacy tech hours, and clinical volunteering compete directly for the same time. The bars below show recommended weekly hour distributions across different periods. The hierarchy is fixed: GPA first, research second, pharmacy hours third, clinical volunteering fourth.</p>
+
+  <div class="ib rs" style="margin-bottom:22px">
+    <strong>The core rule:</strong> Never exceed 30 committed hours/week during a heavy academic quarter while carrying 16+ units of BCPM coursework. GPA erosion hurts the application more than any extra pharmacy shift helps it. Compress everything else before compressing study time.
+  </div>
+
+  <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:18px;font-family:var(--font-mono);font-size:10px;color:var(--muted)">
+    <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--gold),var(--amber))"></div>Research (Franz Lab)</div>
+    <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--sky))"></div>Pharmacy Tech</div>
+    <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--rose),var(--purple))"></div>Clinical Volunteer</div>
+    <div style="display:flex;align-items:center;gap:6px"><div style="width:28px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--green),var(--teal))"></div>Community Service</div>
+  </div>
+
+  <!-- Periods -->
+  <div class="w-period">
+    <div class="w-period-hd">
+      <div class="w-period-title">Academic Year — Light Quarter (Fall 2026, Spring 2027)</div>
+      <div class="w-period-total">~26–32 committed hrs/week total</div>
+    </div>
+    <div class="w-bars">
+      <div class="w-bar-row"><div class="w-bar-lbl">Research</div><div class="w-bar-track"><div class="w-bar-fill" style="width:48%;background:linear-gradient(90deg,var(--gold),var(--amber))"></div></div><div class="w-bar-val">10–12 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Pharmacy</div><div class="w-bar-track"><div class="w-bar-fill" style="width:46%;background:linear-gradient(90deg,var(--teal),var(--sky))"></div></div><div class="w-bar-val">10–12 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Clinical Vol</div><div class="w-bar-track"><div class="w-bar-fill" style="width:28%;background:linear-gradient(90deg,var(--rose),var(--purple))"></div></div><div class="w-bar-val">6–8 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Community</div><div class="w-bar-track"><div class="w-bar-fill" style="width:14%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div><div class="w-bar-val">0–2 hrs</div></div>
+    </div>
+    <div class="w-note">Light quarters allow fuller participation in all categories. Research gets 10–12 hrs to maintain lab presence and produce meaningful output. Pharmacy at 10–12 allows steady hour accumulation. Clinical at 6–8 sustains volunteering relationships.</div>
+  </div>
+
+  <div class="w-period">
+    <div class="w-period-hd">
+      <div class="w-period-title">Academic Year — Heavy Quarter (Winter 2026, Spring 2026)</div>
+      <div class="w-period-total">~22–26 committed hrs/week total</div>
+    </div>
+    <div class="w-bars">
+      <div class="w-bar-row"><div class="w-bar-lbl">Research</div><div class="w-bar-track"><div class="w-bar-fill" style="width:44%;background:linear-gradient(90deg,var(--gold),var(--amber))"></div></div><div class="w-bar-val">10 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Pharmacy</div><div class="w-bar-track"><div class="w-bar-fill" style="width:36%;background:linear-gradient(90deg,var(--teal),var(--sky))"></div></div><div class="w-bar-val">8 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Clinical Vol</div><div class="w-bar-track"><div class="w-bar-fill" style="width:18%;background:linear-gradient(90deg,var(--rose),var(--purple))"></div></div><div class="w-bar-val">4 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Community</div><div class="w-bar-track"><div class="w-bar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div><div class="w-bar-val">0 hrs</div></div>
+    </div>
+    <div class="w-note">Research holds at 10 minimum — below 8 hrs/week you lose meaningful lab contribution and risk PI relationship. Pharmacy reduces to 8. Clinical drops to one shift every 2 weeks. Community service pauses entirely during heavy quarters.</div>
+  </div>
+
+  <div class="w-period" style="border-color:var(--rose-dim)">
+    <div class="w-period-hd">
+      <div class="w-period-title">Winter 2027 — Hardest Academic Quarter (EXB 106, BIS 103, NPB 110C)</div>
+      <div class="w-period-total" style="color:var(--rose)">⚠ GPA Protection Mode — ~14–18 hrs/week only</div>
+    </div>
+    <div class="w-bars">
+      <div class="w-bar-row"><div class="w-bar-lbl">Research</div><div class="w-bar-track"><div class="w-bar-fill" style="width:36%;background:linear-gradient(90deg,var(--gold),var(--amber))"></div></div><div class="w-bar-val">8 hrs min</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Pharmacy</div><div class="w-bar-track"><div class="w-bar-fill" style="width:28%;background:linear-gradient(90deg,var(--teal),var(--sky))"></div></div><div class="w-bar-val">6–8 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Clinical Vol</div><div class="w-bar-track"><div class="w-bar-fill" style="width:4%;background:linear-gradient(90deg,var(--rose),var(--purple))"></div></div><div class="w-bar-val">0–2 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Community</div><div class="w-bar-track"><div class="w-bar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div><div class="w-bar-val">0 hrs</div></div>
+    </div>
+    <div class="w-note"><strong>EXB 106 (4 units) + BIS 103 (4 units) + NPB 110C (2–5 units)</strong> = the largest single-quarter BCPM opportunity in the entire plan. An A- vs B+ across these three courses is worth ~+0.08 science GPA. That differential matters more to UCSF than any additional pharmacy or volunteer hour this quarter. Research holds at 8 hrs minimum to maintain lab presence — below this you risk losing the position. Everything else pauses or reduces to minimum.</div>
+  </div>
+
+  <div class="w-period">
+    <div class="w-period-hd">
+      <div class="w-period-title">Summer 2026 — Fremont-Based (First Full Summer)</div>
+      <div class="w-period-total">~36–45 committed hrs/week total</div>
+    </div>
+    <div class="w-bars">
+      <div class="w-bar-row"><div class="w-bar-lbl">Research</div><div class="w-bar-track"><div class="w-bar-fill" style="width:48%;background:linear-gradient(90deg,var(--gold),var(--amber))"></div></div><div class="w-bar-val">10–12 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Pharmacy</div><div class="w-bar-track"><div class="w-bar-fill" style="width:96%;background:linear-gradient(90deg,var(--teal),var(--sky))"></div></div><div class="w-bar-val">20–25 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Clinical Vol</div><div class="w-bar-track"><div class="w-bar-fill" style="width:28%;background:linear-gradient(90deg,var(--rose),var(--purple))"></div></div><div class="w-bar-val">6–8 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Community</div><div class="w-bar-track"><div class="w-bar-fill" style="width:10%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div><div class="w-bar-val">2–4 hrs</div></div>
+    </div>
+    <div class="w-note">No coursework — full capacity available. Pharmacy at 20–25 hrs is the primary income-generating and hours-accumulating activity. Research at 10–12 still active — some Franz lab work can be done remotely (data analysis, literature review, writing). Confirm with Prof. Franz what can be remote during Fremont-based summer. Clinical volunteering at 6–8 builds toward 50–80 hour target. Community service at 2–4 hrs is one event or program per month — maintain the relationship without excessive time.</div>
+  </div>
+
+  <div class="w-period">
+    <div class="w-period-hd">
+      <div class="w-period-title">Summer 2027 — Application Summer</div>
+      <div class="w-period-total">~18–27 committed hrs/week + PharmCAS work</div>
+    </div>
+    <div class="w-bars">
+      <div class="w-bar-row"><div class="w-bar-lbl">Research</div><div class="w-bar-track"><div class="w-bar-fill" style="width:28%;background:linear-gradient(90deg,var(--gold),var(--amber))"></div></div><div class="w-bar-val">6–8 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Pharmacy</div><div class="w-bar-track"><div class="w-bar-fill" style="width:52%;background:linear-gradient(90deg,var(--teal),var(--sky))"></div></div><div class="w-bar-val">10–15 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Clinical Vol</div><div class="w-bar-track"><div class="w-bar-fill" style="width:10%;background:linear-gradient(90deg,var(--rose),var(--purple))"></div></div><div class="w-bar-val">2–4 hrs</div></div>
+      <div class="w-bar-row"><div class="w-bar-lbl">Community</div><div class="w-bar-track"><div class="w-bar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),var(--teal))"></div></div><div class="w-bar-val">0 hrs</div></div>
+    </div>
+    <div class="w-note">The PharmCAS application, personal statement, nine school-specific supplementals, LOR coordination, and transcript audit are a full-time project — easily 15–20 hrs/week in July. Research scales back to 6–8 hrs to maintain lab presence and keep the PI relationship warm for the LOR — you are not trying to publish during application summer. Pharmacy reduces but stays active for income and maintained hours. Clinical volunteering scales back — your 50–80 hrs are already complete from Summer 2026.</div>
+  </div>
+
+  <!-- Hierarchy reminder -->
+  <div style="margin-top:28px">
+    <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:12px">The Fixed Priority Hierarchy — When Everything Competes</div>
+    <div class="p-list">
+      <div class="p-row"><div class="p-num" style="color:var(--gold)">1</div><div><div class="p-title">GPA — upstream of everything, protect it first</div><div class="p-body">A B in NPB 101 or EXB 106 cannot be undone. Everything else is compressible. GPA is not.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--teal)">2</div><div><div class="p-title">Research (Franz lab) — non-negotiable minimum of 8 hrs/week</div><div class="p-body">Below 8 hrs/week you lose meaningful contribution and risk the PI relationship. Produces the LOR and CV line that differentiates you at UCSF/UCSD.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--sky)">3</div><div><div class="p-title">Pharmacy tech hours — flexible scheduling, accumulates steadily</div><div class="p-body">Most schedule-flexible of the paid activities. Compress first when quarter workload increases. Resume when it lightens.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--purple)">4</div><div><div class="p-title">Clinical volunteering — most pausable, easiest to restart</div><div class="p-body">Volunteer coordinators understand student schedules. Taking a quarter off and resuming does not damage the relationship. Pause during Winter 2027 entirely.</div></div></div>
+      <div class="p-row"><div class="p-num" style="color:var(--green)">5</div><div><div class="p-title">Community service — lowest minimum viable, easiest to do in bursts</div><div class="p-body">One health fair per quarter, one free clinic day per semester — this counts. Does not require weekly commitment. Fits around everything else.</div></div></div>
+    </div>
+  </div>
+
+  <!-- Full checklist -->
+  <div style="margin-top:32px">
+    <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:12px">The Complete Non-GPA Checklist — By Application</div>
+    <div class="g2">
+      <div>
+        <div style="font-family:var(--font-mono);font-size:9px;color:var(--rose);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px">Must Have — Every School</div>
+        <div class="ck-list">
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Pharmacy tech hours — 100 hrs minimum, 150–200 hrs competitive</div><div class="ck-sub">Health-system hours worth more than equivalent retail hours in interview narrative.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">CA pharmacy technician license — active and maintained</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">3 strong LORs — pharmacist supervisor, science faculty, research mentor (Franz PI)</div><div class="ck-sub">Ask all three 12 months before application. Give them time to write something specific.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">PharmCAS personal statement — 4,500 characters, coherent narrative arc</div><div class="ck-sub">Draft v1 in October 2026. Revise through Spring 2027. Final polish Summer 2027.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">All prerequisites complete with competitive science GPA</div><div class="ck-sub">Run PharmCAS GPA estimator with actual transfer grades to verify science GPA calculation.</div></div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--font-mono);font-size:9px;color:var(--gold);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px">Should Have — UCSF / UCSD</div>
+        <div class="ck-list">
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Clinical hospital volunteer hours — 50–100 hrs at health-system setting</div><div class="ck-sub">ZSFG, UCSF Benioff, or UC Davis Medical Center for strongest UCSF narrative.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Research experience with poster, abstract, or manuscript in preparation</div><div class="ck-sub">Franz lab + UC Davis Undergraduate Research Conference poster = minimum viable. ACS abstract = competitive.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Community service with underserved populations — 30–50 hrs at one consistent setting</div><div class="ck-sub">SCVMC, ZSFG, Asian Health Services Oakland, free clinic. One setting for 30+ hrs beats five scattered events.</div></div></div>
+          <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">One leadership role with depth — pre-pharmacy club officer or equivalent</div><div class="ck-sub">Start Spring 2026 or Fall 2026. 2–3 quarters of sustained involvement before application.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px">
+      <div style="font-family:var(--font-mono);font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:8px">Often Overlooked</div>
+      <div class="ck-list">
+        <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">PharmCAS GPA audit — run estimator at help.liaisonedu.com with actual transfer grades before July 2027 submission</div><div class="ck-sub">Transfer grades (Mission College + Ohlone) are the largest remaining uncertainty. Verify how PharmCAS classifies each course — BCPM vs non-BCPM misclassification is common.</div></div></div>
+        <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">PCAT policy — verify each school's current requirement before application cycle opens</div><div class="ck-sub">Most CA schools have dropped PCAT. Confirm current policy for each target school in Spring 2027 before investing prep time.</div></div></div>
+        <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">MMI interview preparation — practice scenario-based stations, not just talking points</div><div class="ck-sub">Generic "I want to help people" answers fail MMI. Specific stories from clinical volunteering and research are what work. Your shift journals are your prep material.</div></div></div>
+        <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Pharmacist shadowing — distinct from tech work, observing PharmD-level clinical decisions</div><div class="ck-sub">Ask your pharmacy supervisor if you can shadow a clinical pharmacist on rounds for 2–3 sessions. Even 8–10 shadow hours gives you content for "why PharmD and not just pharmacy tech" interview questions.</div></div></div>
+        <div class="ck-row" onclick="this.classList.toggle('done')"><div class="ck-box"></div><div style="flex:1"><div class="ck-text">Bilingual skills documentation — if applicable, note language proficiency in PharmCAS</div><div class="ck-sub">Bilingual ability is explicitly valued at UCSF and UCSD for patient communication in underserved communities. Mandarin, Spanish, Cantonese, Vietnamese — all highly relevant in CA and worth noting.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+</div><!-- end .main -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-note">PharmD Experience Strategy Guide · UC Davis NPB Option A · Updated Feb 2026 · Target: Fall 2028</div>
+  <div class="footer-note" style="color:var(--gold)">9 Schools · Wang → Franz Lab · Fremont + Davis</div>
+</div>
+
+<script>
+// TAB SWITCHING
+function switchTab(btn, group, panel) {
+  // deactivate all buttons in group
+  btn.closest('.tabs').querySelectorAll('.tab-btn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  // hide all panels in this section
+  const sec = btn.closest('.sec') || btn.closest('section') || document.body;
+  const allPanels = sec.querySelectorAll('.tab-panel');
+  allPanels.forEach(p => p.classList.remove('on'));
+  const target = document.getElementById(group + '-' + panel);
+  if (target) target.classList.add('on');
+}
+
+// SCHOOL ACCORDION
+function toggleSchool(head) {
+  const body = head.nextElementSibling;
+  const chev = head.querySelector('.sc-chevron');
+  const isOpen = body.classList.contains('open');
+  // close all
+  document.querySelectorAll('.sc-body').forEach(b => b.classList.remove('open'));
+  document.querySelectorAll('.sc-chevron').forEach(c => c.classList.remove('open'));
+  if (!isOpen) {
+    body.classList.add('open');
+    chev.classList.add('open');
+  }
+}
+
+// ACTIVE NAV HIGHLIGHTING
+const sections = document.querySelectorAll('section.sec');
+const navLinks = document.querySelectorAll('.nav-a');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => link.classList.remove('act'));
+      const id = entry.target.id;
+      const active = document.querySelector(`.nav-a[href="#${id}"]`);
+      if (active) active.classList.add('act');
+    }
+  });
+}, { rootMargin: '-20% 0px -60% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

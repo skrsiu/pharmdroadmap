@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Academic Pathway Strategic Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-primary: #0a0e17;
+    --bg-secondary: #111827;
+    --bg-tertiary: #1f2937;
+    --surface: #374151;
+    --accent-green: #34d399;
+    --accent-amber: #fbbf24;
+    --accent-blue: #60a5fa;
+    --accent-red: #f87171;
+    --accent-purple: #a78bfa;
+    --text-primary: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --border: #4b5563;
+    --shadow: rgba(0, 0, 0, 0.4);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    overflow-x: auto;
+  }
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* Header */
+  .header {
+    text-align: center;
+    margin-bottom: 60px;
+    position: relative;
+  }
+
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-green), transparent);
+  }
+
+  .header h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 300;
+  }
+
+  /* Status Board */
+  .status-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+
+  .status-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .status-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--accent-color);
+  }
+
+  .status-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px var(--shadow);
+  }
+
+  .status-card.primary::before { background: var(--accent-green); }
+  .status-card.secondary::before { background: var(--accent-amber); }
+  .status-card.research::before { background: var(--accent-blue); }
+  .status-card.transition::before { background: var(--accent-purple); }
+
+  .status-card h3 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .status-card .metric {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-green);
+    margin-bottom: 8px;
+  }
+
+  .status-card .label {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* Timeline */
+  .timeline-section {
+    margin-bottom: 60px;
+  }
+
+  .section-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    text-align: center;
+    color: var(--accent-blue);
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--accent-green), var(--accent-blue), var(--accent-purple));
+  }
+
+  .timeline-item {
+    position: relative;
+    margin: 50px 0;
+    opacity: 0;
+    animation: slideInTimeline 0.8s forwards;
+  }
+
+  .timeline-item:nth-child(even) .timeline-content {
+    margin-left: 50%;
+    padding-left: 30px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-content {
+    margin-right: 50%;
+    padding-right: 30px;
+    text-align: right;
+  }
+
+  .timeline-marker {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    background: var(--accent-green);
+    border: 4px solid var(--bg-primary);
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .timeline-content {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 10px 30px var(--shadow);
+  }
+
+  .timeline-content h4 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: var(--accent-amber);
+  }
+
+  .timeline-content .period {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    font-weight: 300;
+  }
+
+  .timeline-content ul {
+    list-style: none;
+  }
+
+  .timeline-content li {
+    margin: 8px 0;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .timeline-content li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+  }
+
+  /* Pathway Comparison */
+  .pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .pathway-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .pathway-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--pathway-color);
+  }
+
+  .pathway-card.pharmd::before { background: var(--accent-green); }
+  .pathway-card.research::before { background: var(--accent-blue); }
+  .pathway-card.alternative::before { background: var(--accent-purple); }
+
+  .pathway-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px var(--shadow);
+  }
+
+  .pathway-header {
+    margin-bottom: 24px;
+  }
+
+  .pathway-header h3 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+  }
+
+  .probability {
+    display: inline-block;
+    background: var(--accent-green);
+    color: var(--bg-primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .pathway-details {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .requirements {
+    margin-top: 20px;
+  }
+
+  .requirements h4 {
+    color: var(--accent-amber);
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+  }
+
+  .requirement-item {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    padding: 8px 12px;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    transition: background 0.2s ease;
+  }
+
+  .requirement-item:hover {
+    background: var(--surface);
+  }
+
+  .requirement-status {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  .requirement-status.complete { background: var(--accent-green); }
+  .requirement-status.progress { background: var(--accent-amber); }
+  .requirement-status.pending { background: var(--accent-red); }
+
+  /* Decision Matrix */
+  .decision-matrix {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .decision-matrix::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(52, 211, 153, 0.1), transparent);
+  }
+
+  .matrix-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 2.2rem;
+    text-align: center;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .recommendation-box {
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-blue));
+    padding: 2px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  }
+
+  .recommendation-content {
+    background: var(--bg-primary);
+    padding: 24px;
+    border-radius: 10px;
+  }
+
+  .recommendation-content h3 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.4rem;
+    margin-bottom: 16px;
+    color: var(--accent-green);
+  }
+
+  .key-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .action-item {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .action-item:hover {
+    border-color: var(--accent-green);
+    box-shadow: 0 8px 25px var(--shadow);
+  }
+
+  .action-item h4 {
+    color: var(--accent-amber);
+    margin-bottom: 12px;
+  }
+
+  .action-item .priority {
+    display: inline-block;
+    background: var(--accent-red);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+  }
+
+  /* Research Transition */
+  .research-transition {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 40px;
+  }
+
+  .transition-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+
+  .transition-arrow {
+    font-size: 2rem;
+    color: var(--accent-purple);
+    margin: 0 20px;
+  }
+
+  .lab-info {
+    flex: 1;
+    text-align: center;
+  }
+
+  .lab-info h3 {
+    font-family: 'Crimson Text', serif;
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+  }
+
+  .lab-info .focus {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  .skill-transfer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+  }
+
+  .skill-category {
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    padding: 20px;
+  }
+
+  .skill-category h4 {
+    color: var(--accent-blue);
+    margin-bottom: 12px;
+  }
+
+  .skill-category ul {
+    list-style: none;
+  }
+
+  .skill-category li {
+    margin: 6px 0;
+    padding-left: 16px;
+    position: relative;
+    font-size: 0.9rem;
+  }
+
+  .skill-category li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-green);
+  }
+
+  /* Animations */
+  @keyframes slideInTimeline {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+  .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+  .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+  .timeline-item:nth-child(4) { animation-delay: 0.4s; }
+  .timeline-item:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 20px 15px;
+    }
+    
+    .header h1 {
+      font-size: 2.2rem;
+    }
+    
+    .timeline::before {
+      left: 20px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content,
+    .timeline-item:nth-child(odd) .timeline-content {
+      margin-left: 50px;
+      margin-right: 0;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-align: left;
+    }
+    
+    .timeline-marker {
+      left: 20px;
+      transform: translateX(-50%);
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Academic Pathway Strategic Analysis</h1>
+      <p>UC Davis NPB Year 2 Student • Spring 2026 Decision Framework</p>
+    </div>
+
+    <!-- Current Status Board -->
+    <div class="status-board">
+      <div class="status-card primary">
+        <h3>PharmD Track</h3>
+        <div class="metric">75%</div>
+        <div class="label">Admission Probability</div>
+      </div>
+      <div class="status-card secondary">
+        <h3>PhD Research</h3>
+        <div class="metric">65%</div>
+        <div class="label">Admission Probability</div>
+      </div>
+      <div class="status-card research">
+        <h3>Research Experience</h3>
+        <div class="metric">2.5</div>
+        <div class="label">Years Projected</div>
+      </div>
+      <div class="status-card transition">
+        <h3>Lab Transition</h3>
+        <div class="metric">Q2</div>
+        <div class="label">Spring 2026</div>
+      </div>
+    </div>
+
+    <!-- Executive Recommendation -->
+    <div class="decision-matrix">
+      <h2 class="matrix-title">Executive Recommendation</h2>
+      <div class="recommendation-box">
+        <div class="recommendation-content">
+          <h3>Dual-Track Strategy: Keep All Doors Open</h3>
+          <p><strong>Stay in NPB. Execute the Franz Research Group opportunity with intensity. Add CHE 135 strategically. Do NOT take P-Chem. Build both pharmacy hours AND research outputs in parallel.</strong></p>
+          <p>This dual-track approach maximizes admission probability to both PharmD programs (70-80%) and pharmaceutical sciences PhD programs (60-70%) without forcing an early commitment to either path. The optionality is the point.</p>
+        </div>
+      </div>
+
+      <div class="key-actions">
+        <div class="action-item">
+          <div class="priority">IMMEDIATE</div>
+          <h4>Lock in Franz Research</h4>
+          <p>Confirm with Prof. Franz: start date, weekly hours (target 8-10 hrs/week), and project assignment</p>
+        </div>
+        <div class="action-item">
+          <div class="priority">THIS WEEK</div>
+          <h4>Pharmacy Tech License</h4>
+          <p>Start California Pharmacy Technician license application process</p>
+        </div>
+        <div class="action-item">
+          <div class="priority">SPRING 2026</div>
+          <h4>Add CHE 135</h4>
+          <p>Enroll in Medicinal Chemistry to strengthen both pathways</p>
+        </div>
+        <div class="action-item">
+          <div class="priority">ONGOING</div>
+          <h4>Maintain GPA</h4>
+          <p>Keep strong academic performance as foundation for both tracks</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Research Lab Transition -->
+    <div class="research-transition">
+      <h2 class="section-title">Research Experience Transition</h2>
+      <div class="transition-header">
+        <div class="lab-info">
+          <h3>Wang Lab (Current)</h3>
+          <div class="focus">Food Science & Analytical Chemistry</div>
+        </div>
+        <div class="transition-arrow">→</div>
+        <div class="lab-info">
+          <h3>Franz Lab (Spring 2026)</h3>
+          <div class="focus">Medicinal Chemistry & Drug Delivery</div>
+        </div>
+      </div>
+      
+      <div class="skill-transfer">
+        <div class="skill-category">
+          <h4>Analytical Skills (Transferring)</h4>
+          <ul>
+            <li>HPLC operation & analysis</li>
+            <li>Chemical extraction techniques</li>
+            <li>Chromatography principles</li>
+            <li>Method development</li>
+            <li>Data interpretation</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4>New Skills (Franz Lab)</h4>
+          <ul>
+            <li>Organic synthesis</li>
+            <li>NMR spectroscopy</li>
+            <li>Mass spectrometry</li>
+            <li>Medicinal chemistry</li>
+            <li>Drug-receptor studies</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h4>Career Impact</h4>
+          <ul>
+            <li>2+ years hands-on research</li>
+            <li>Likely 1-2 publications</li>
+            <li>Strong faculty letter</li>
+            <li>Industry-relevant skills</li>
+            <li>Differentiated profile</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline -->
+    <div class="timeline-section">
+      <h2 class="section-title">Strategic Timeline</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h4>Spring 2026 (NOW)</h4>
+            <div class="period">Current Quarter</div>
+            <ul>
+              <li>Lock in Franz Research Group role</li>
+              <li>Start California Pharmacy Tech license</li>
+              <li>Add CHE 135 (Medicinal Chemistry)</li>
+              <li>Transition from Wang Lab to Franz Lab</li>
+              <li>Maintain strong GPA in NPB core courses</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h4>Summer 2026</h4>
+            <div class="period">3 Months</div>
+            <ul>
+              <li>Complete Pharmacy Tech certification</li>
+              <li>Begin working at CVS/Walgreens (15-20 hrs/week)</li>
+              <li>Continue Franz lab research (10-15 hrs/week)</li>
+              <li>Gain hands-on pharmacy experience</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h4>Fall 2026 - Spring 2027</h4>
+            <div class="period">Year 3</div>
+            <ul>
+              <li>Continue dual track: pharmacy hours + research</li>
+              <li>Target 150-200 pharmacy hours by end of year</li>
+              <li>First research presentations/conferences</li>
+              <li>Begin PharmD application preparation</li>
+              <li>Maintain 3.7+ GPA</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h4>Fall 2027</h4>
+            <div class="period">Application Year</div>
+            <ul>
+              <li>Submit PharmD applications (primary strategy)</li>
+              <li>Continue research - aim for publication</li>
+              <li>Pharmacy experience: 200+ hours</li>
+              <li>Strong letters from Franz + pharmacy supervisors</li>
+              <li>Backup PhD applications if needed</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-marker"></div>
+          <div class="timeline-content">
+            <h4>Fall 2028</h4>
+            <div class="period">Decision Point</div>
+            <ul>
+              <li>PharmD program start (primary goal)</li>
+              <li>OR PhD program start (backup)</li>
+              <li>OR alternative pathway (MS Clinical Research)</li>
+              <li>Strong foundation for any chosen path</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pathway Comparison -->
+    <div class="pathway-grid">
+      <div class="pathway-card pharmd">
+        <div class="pathway-header">
+          <h3>PharmD Programs</h3>
+          <span class="probability">70-80% Success Rate</span>
+        </div>
+        <div class="pathway-details">
+          Primary strategy leveraging dual-track approach with strong research differentiation
+        </div>
+        <div class="requirements">
+          <h4>Key Requirements</h4>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>NPB major coursework</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status progress"></div>
+            <span>200+ pharmacy hours</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status progress"></div>
+            <span>Research experience (Franz lab)</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status pending"></div>
+            <span>CHE 135 (Medicinal Chemistry)</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>3.7+ GPA maintenance</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pathway-card research">
+        <div class="pathway-header">
+          <h3>PhD Research Programs</h3>
+          <span class="probability">60-70% Success Rate</span>
+        </div>
+        <div class="pathway-details">
+          Backup strategy with pharmaceutical sciences, cancer biology, or biomedical engineering focus
+        </div>
+        <div class="requirements">
+          <h4>Key Requirements</h4>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Strong research experience</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status progress"></div>
+            <span>Publications/presentations</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Technical lab skills</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status progress"></div>
+            <span>Strong faculty letters</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Analytical chemistry background</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="pathway-card alternative">
+        <div class="pathway-header">
+          <h3>Alternative Pathways</h3>
+          <span class="probability">80-90% Success Rate</span>
+        </div>
+        <div class="pathway-details">
+          MS Clinical Research, Industry positions, or specialized programs with minimal additional requirements
+        </div>
+        <div class="requirements">
+          <h4>Key Requirements</h4>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Current NPB coursework</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Research experience</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status pending"></div>
+            <span>Statistics course (optional)</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Clinical exposure (pharmacy)</span>
+          </div>
+          <div class="requirement-item">
+            <div class="requirement-status complete"></div>
+            <span>Technical skills</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Add some interactive animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Animate cards on scroll
+      const cards = document.querySelectorAll('.status-card, .pathway-card, .action-item');
+      
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+      
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+
+      // Add hover effects for pathway cards
+      document.querySelectorAll('.pathway-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-8px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(-8px) scale(1)';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
