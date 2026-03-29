@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C C:/d/claude/pharmdroadmap status)",
+      "WebFetch(domain:pharmacy-pathway.pages.dev)",
+      "Bash(gh repo:*)",
+      "WebFetch(domain:pharmdroadmap.pages.dev)",
+      "Bash(gh api:*)",
+      "Read(//c/d/claude/**)",
+      "Bash(git -C C:/d/claude/pharmdroadmap remote -v)",
+      "Bash(git -C C:/d/claude/pharmacy_cloudflare remote -v)",
+      "Bash(git -C C:/d/claude/pharmdroadmap fetch)",
+      "Bash(git -C C:/d/claude/pharmdroadmap diff origin/master --stat)",
+      "Bash(git -C C:/d/claude/pharmdroadmap log --oneline -5)",
+      "Bash(grep:*)",
+      "WebFetch(domain:pharmsci.uci.edu)",
+      "Bash(git:*)",
+      "Bash(ls -1 C:/d/claude/pharmdroadmap/*.html)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(for f:*)",
+      "Bash(do echo:*)",
+      "Read(//c/d/claude/pharmdroadmap/**)",
+      "Bash(done)",
+      "Bash(do)",
+      "Bash(sed -i 's|><body>#8592; Home</a>|>← Home</a>|g' \"$f\")",
+      "Bash(__NEW_LINE_4a2e38482143da81__ grep:*)"
+    ]
+  }
+}
