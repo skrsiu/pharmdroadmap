@@ -1,0 +1,36 @@
+/* ── Shared Stylesheet — PharmD Planning Portal ─────────────────────────────
+   Loaded before each page's own <style> block.
+   Page-level styles override anything here.
+   ────────────────────────────────────────────────────────────────────────── */
+
+/* Google Fonts — consolidated */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+/* Base reset */
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Default dark base — overridden by page :root / body declarations */
+:root {
+  --bg:      #0a0e14;
+  --surface: #111720;
+  --text:    #e6edf3;
+  --muted:   #8b949e;
+  --accent:  #4ecdc4;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--muted); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Selection */
+::selection { background: rgba(78, 205, 196, 0.25); color: inherit; }
