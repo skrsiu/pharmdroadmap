@@ -517,9 +517,130 @@
     display: flex;
     justify-content: space-between;
   }
+
+  /* ─── TOC ─── */
+  #toc-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  #toc-toggle:hover { background: var(--surface); border-color: var(--gold-dim); color: var(--text); }
+  #toc-panel {
+    position: fixed;
+    top: 56px;
+    right: 20px;
+    z-index: 99;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 0;
+    width: 290px;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  #toc-panel.open { display: block; }
+  #toc-panel a {
+    display: block;
+    padding: 6px 18px;
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.12s, background 0.12s;
+    line-height: 1.4;
+  }
+  #toc-panel a:hover { color: var(--text); background: var(--surface2); }
+  .toc-header {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    padding: 4px 18px 8px;
+  }
+
+  /* ─── MOBILE ─── */
+  @media (max-width: 700px) {
+    .header { padding: 28px 20px 20px; }
+    .header h1 { font-size: 32px; }
+    .main { padding: 0 16px 48px; }
+    .overview-cards { grid-template-columns: 1fr !important; }
+    .overview-card { grid-column: span 1 !important; }
+    .quarter { grid-template-columns: 72px 1fr !important; }
+    .quarter-label .qname { font-size: 12px; }
+    .quarter-label .qlabel { font-size: 13px; }
+    .timeline-spine { left: 72px; }
+    .checklist-grid { grid-template-columns: 1fr !important; }
+    .compare-row { grid-template-columns: 120px 1fr 1fr !important; }
+    .footer { padding: 16px 20px; flex-direction: column; gap: 6px; }
+    #toc-toggle, #toc-panel { display: none !important; }
+  }
+
+  /* ─── PRINT (checklist only) ─── */
+  @media print {
+    #toc-toggle, #toc-panel, .header::before,
+    .overview-cards, .timeline, .gpa-track,
+    .warnings-section, .comparison, .pill-legend,
+    .footer, #print-checklist-btn { display: none !important; }
+    body { background: white; color: black; font-size: 12px; }
+    .header { padding: 20px; border: none; background: none; }
+    .header h1 { color: black; font-size: 24px; }
+    .header em { color: #333; }
+    .header-label, .header p { color: #555; }
+    .vs-badge { border-color: #ccc; color: #555; background: none; }
+    .main { padding: 0 16px 20px; }
+    .section-title { color: black; font-size: 16px; break-after: avoid; }
+    .section-title::after { background: #ccc; }
+    .checklist-grid { display: block; }
+    .checklist-group { background: white; border: 1px solid #ccc; break-inside: avoid; margin-bottom: 12px; page-break-inside: avoid; }
+    .checklist-group h4 { color: black; }
+    .check-item { border-bottom-color: #eee; }
+    .check-box { border-color: #999; }
+    .check-text { color: black; font-size: 11px; }
+    .check-time { color: #666; }
+  }
 </style>
 </head>
 <body>
+
+<!-- TOC -->
+<button id="toc-toggle" onclick="document.getElementById('toc-panel').classList.toggle('open')">☰ Contents</button>
+<nav id="toc-panel">
+  <div class="toc-header">Contents</div>
+  <a href="#toc-exec">Executive Summary</a>
+  <a href="#toc-howtoread">How to Read This Document</a>
+  <a href="#toc-timeline">Quarter-by-Quarter Timeline</a>
+  <a href="#toc-gpa">How Schools Interpret GPA</a>
+  <a href="#toc-stress">GPA Stress Test</a>
+  <a href="#toc-logic">Prerequisite Logic</a>
+  <a href="#toc-checklist">Master Checklist</a>
+  <a href="#toc-volunteer">Clinical Volunteering Strategy</a>
+  <a href="#toc-riskrank">Warning Risk Ranking</a>
+  <a href="#toc-warnings">Warnings &amp; Verification</a>
+  <a href="#toc-alternatives">If You Don't Get In</a>
+  <a href="#toc-prereqs">Prerequisite Satisfaction</a>
+  <a href="#toc-gonogo">Spring 2027 Go / No-Go</a>
+  <a href="#toc-ps">Personal Statement</a>
+  <a href="#toc-lors">Letters of Recommendation</a>
+  <a href="#toc-interview">Interview Preparation</a>
+  <a href="#toc-financial">Financial Comparison</a>
+  <a href="#toc-sprint">30-Day Action Sprint</a>
+  <a href="#toc-glossary">Glossary</a>
+</nav>
 
 <!-- HEADER -->
 <div class="header">
@@ -571,6 +692,7 @@
         </div>
       </div>
       <div style="font-size:14px;color:var(--muted);margin-top:6px;text-align:center;">Portfolio probability (≥1 acceptance from full 9-school list): ~95%</div>
+      <div style="font-size:12px;color:var(--muted);opacity:0.6;margin-top:8px;text-align:center;font-family:var(--font-mono);">* Directional estimates based on published class profiles and admit rate ranges — not actuarial. Interview performance, essays, and annual cycle variation are not modeled. Verify current data at each school's admissions page before applying.</div>
     </div>
     <div class="overview-card">
       <div class="label">Clinical Volunteer Target</div>
@@ -589,7 +711,7 @@
     </div>
   </div>
 
-  <div class="section-title">Executive Summary</div>
+  <div class="section-title" id="toc-exec">Executive Summary</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <!-- Who this is for -->
@@ -653,7 +775,7 @@
   </div>
 
   <!-- HOW TO READ THIS DOCUMENT -->
-  <div class="section-title">How to Read This Document</div>
+  <div class="section-title" id="toc-howtoread">How to Read This Document</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <div style="font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:24px;">
@@ -731,7 +853,7 @@
 
   </div>
 
-  <div class="section-title">Quarter-by-Quarter Timeline</div>
+  <div class="section-title" id="toc-timeline">Quarter-by-Quarter Timeline</div>
 
   <!-- Pill Legend -->
   <div class="pill-legend">
@@ -906,7 +1028,7 @@
   </div>
 
   <!-- GPA INTERPRETATION & ADMISSION PROBABILITY SECTION -->
-  <div class="section-title">How Pharmacy Schools Interpret GPA — and Your Admission Odds</div>
+  <div class="section-title" id="toc-gpa">How Pharmacy Schools Interpret GPA — and Your Admission Odds</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <!-- ── Part 1: How GPA is read ── -->
@@ -1082,7 +1204,7 @@
   </div>
 
   <!-- GPA STRESS TEST SECTION -->
-  <div class="section-title">GPA Stress Test — What Happens If a Quarter Goes Wrong</div>
+  <div class="section-title" id="toc-stress">GPA Stress Test — What Happens If a Quarter Goes Wrong</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:20px;">
@@ -1164,7 +1286,7 @@
   </div>
 
   <!-- PREREQUISITE LOGIC SECTION -->
-  <div class="section-title">Why the Timeline Is Arranged This Way — Prerequisite Logic</div>
+  <div class="section-title" id="toc-logic">Why the Timeline Is Arranged This Way — Prerequisite Logic</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;">
@@ -1752,7 +1874,10 @@
   </div><!-- end timeline -->
 
   <!-- MASTER CHECKLIST -->
-  <div class="section-title">Master Checklist</div>
+  <div class="section-title" id="toc-checklist">Master Checklist</div>
+  <div style="margin-bottom:12px;margin-top:-8px;">
+    <button id="print-checklist-btn" onclick="window.print()" style="background:rgba(255,255,255,0.07);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-family:var(--font-mono);font-size:13px;color:var(--muted);cursor:pointer;">⎙ Print Checklist</button>
+  </div>
   <div class="checklist-grid">
 
     <div class="checklist-group">
@@ -1953,7 +2078,7 @@
   </div>
 
   <!-- CLINICAL VOLUNTEERING STRATEGY -->
-  <div class="section-title">Clinical Volunteering Strategy — Why, Where, and How Much</div>
+  <div class="section-title" id="toc-volunteer">Clinical Volunteering Strategy — Why, Where, and How Much</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <div style="font-family:var(--font-mono);font-size:13px;color:var(--teal);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:20px;">The Honest Framing First</div>
@@ -2045,7 +2170,7 @@
   </div>
 
   <!-- RISK RANKING PANEL -->
-  <div class="section-title">Warning Risk Ranking — Probability of Causing Application Failure</div>
+  <div class="section-title" id="toc-riskrank">Warning Risk Ranking — Probability of Causing Application Failure</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <div style="font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7;">
@@ -2200,7 +2325,7 @@
   </div>
 
   <!-- WARNINGS & FOOTNOTES -->
-  <div class="section-title">Warnings &amp; Verification Checklist</div>
+  <div class="section-title" id="toc-warnings">Warnings &amp; Verification Checklist</div>
   <div class="warnings-section">
 
     <div class="warning-card warn-red">
@@ -2310,7 +2435,7 @@
   </div>
 
   <!-- IF YOU DON'T GET IN SECTION -->
-  <div class="section-title">If You Don't Get In — Options, Alternatives &amp; CA School Tier Guide</div>
+  <div class="section-title" id="toc-alternatives">If You Don't Get In — Options, Alternatives &amp; CA School Tier Guide</div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
 
     <div style="font-size:14px;color:var(--muted);line-height:1.7;margin-bottom:24px;">
@@ -2915,7 +3040,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: PREREQ SATISFACTION TABLE
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 48px;">Prerequisite Satisfaction at Application Submission — All 9 Schools</div>
+<div class="section-title" id="toc-prereqs" style="padding: 0 48px; margin-top: 48px;">Prerequisite Satisfaction at Application Submission — All 9 Schools</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3219,7 +3344,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: SPRING 2027 GO/NO-GO FRAMEWORK
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 16px;">Spring 2027 Go / No-Go Decision Framework</div>
+<div class="section-title" id="toc-gonogo" style="padding: 0 48px; margin-top: 16px;">Spring 2027 Go / No-Go Decision Framework</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3312,7 +3437,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: PERSONAL STATEMENT ARCHITECTURE
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 16px;">Personal Statement Architecture Guide</div>
+<div class="section-title" id="toc-ps" style="padding: 0 48px; margin-top: 16px;">Personal Statement Architecture Guide</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3392,7 +3517,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: LETTER OF RECOMMENDATION STRATEGY
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 16px;">Letter of Recommendation Strategy</div>
+<div class="section-title" id="toc-lors" style="padding: 0 48px; margin-top: 16px;">Letter of Recommendation Strategy</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3509,7 +3634,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: INTERVIEW PREPARATION FRAMEWORK
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 16px;">Interview Preparation Framework</div>
+<div class="section-title" id="toc-interview" style="padding: 0 48px; margin-top: 16px;">Interview Preparation Framework</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3561,7 +3686,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: FINANCIAL COMPARISON
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 16px;">Financial Comparison — 4-Year Cost &amp; Debt-to-Income Analysis</div>
+<div class="section-title" id="toc-financial" style="padding: 0 48px; margin-top: 16px;">Financial Comparison — 4-Year Cost &amp; Debt-to-Income Analysis</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3699,7 +3824,7 @@
 <!-- ═══════════════════════════════════════════════════════════════
      SECTION: 30-DAY ACTION SPRINT
 ═══════════════════════════════════════════════════════════════ -->
-<div class="section-title" style="padding: 0 48px; margin-top: 16px;">What To Do Right Now — 30-Day Action Sprint</div>
+<div class="section-title" id="toc-sprint" style="padding: 0 48px; margin-top: 16px;">What To Do Right Now — 30-Day Action Sprint</div>
 <div style="padding: 0 48px 48px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3806,7 +3931,7 @@
 </div>
 
 
-<div class="section-title" style="padding: 0 48px; margin-top: 48px;">Glossary — Key Terms &amp; Concepts</div>
+<div class="section-title" id="toc-glossary" style="padding: 0 48px; margin-top: 48px;">Glossary — Key Terms &amp; Concepts</div>
 <div style="padding: 0 48px 64px;">
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:28px 32px;">
 
@@ -3967,5 +4092,21 @@
   <span>Updated February 2026 — v12 · Click any checklist item to mark complete</span>
 </div>
 
+<script>
+  // Close TOC when clicking outside
+  document.addEventListener('click', function(e) {
+    var panel = document.getElementById('toc-panel');
+    var toggle = document.getElementById('toc-toggle');
+    if (panel && toggle && !panel.contains(e.target) && !toggle.contains(e.target)) {
+      panel.classList.remove('open');
+    }
+  });
+  // Close TOC when a link is clicked
+  document.querySelectorAll('#toc-panel a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      document.getElementById('toc-panel').classList.remove('open');
+    });
+  });
+</script>
 </body>
 </html>

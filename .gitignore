@@ -1,1 +1,13 @@
-.claude/
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Cloudflare
+.wrangler/
+
+# Archives
+*.zip
